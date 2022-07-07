@@ -65,8 +65,8 @@
   ```
 
 ## 4. Make the Bot say "Hello, World!"
-* TODO Slides/Explanation: what are events - what is async and await (extension)
 * TODO Slides/Explanation: what are decorators?
+* TODO Slides/Explanation: what are events and callbacks - what is async and await (extension)
 
 💡 
 💭
@@ -81,7 +81,7 @@
 
 
 ## 6. Cogs
-* TODO Slides/Explanation: what and why of cogs
+* TODO Slides/Explanation: what and why of [cogs](https://discordpy.readthedocs.io/en/stable/ext/commands/cogs.html)
 
   ```python
   # ./main.py

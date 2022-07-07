@@ -1,5 +1,3 @@
-# basic bot without cogs
-
 import discord
 import os
 
