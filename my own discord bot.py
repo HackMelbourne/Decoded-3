@@ -1,9 +1,9 @@
-import discord 
-import os
 import asyncio
+
+import discord
 import youtube_dl
 
-token = 'OTk3MDIzNzcwNTM3NjI3Njgw.GllQUB.mfh3gJgPEoE6-tjK9FMiFGhyhkIGxoMaIQurq4'
+token = 'OTk3MDIzNzcwNTM3NjI3Njgw.GSbnw_.YwoZBo5S4L1MIdkM8-obEgxKoTB5c8kiW3qH1g'
 
 client = discord.Client()
 
@@ -34,26 +34,24 @@ ffmpeg_options = {'options': '-vn'}
 @client.event
 async def on_message(msg):
     if msg.content.startswith('?play'):
-
-        try: 
+        try:
             voice_client = await msg.author.voice.channel.connect()
             voice_clients[voice_client.guild.id] = voice_client
-        except:
-            print("error")
+        except Exception as ex:
+            raise ex
         # so that if the user dont put a space between the play and link
         try:
             url = msg.content.split()[1]
 
             loop = asyncio.get_event_loop()
             data = await loop.run_in_executor(None, lambda: ytdl.extract_info(url, download=False))
-        
-            song = data['url']
-            player = discord.FFmpegPCMAudio(song, **ffmpeg_options, executable="C:\ffmpeg\ffmpeg.exe")
-             
-            voice_clients[msg.guild.id].play(player)
 
-        except Exception as err:
-            print(err)
+            song = data['formats'][0]['url']
+            player = discord.FFmpegPCMAudio(song, **ffmpeg_options, executable="C:\\ffmpeg\\ffmpeg.exe")
+
+            voice_clients[msg.guild.id].play(player)
+        except Exception as ex:
+            raise ex
 
     if msg.content.startswith("?pause"):
         try:
