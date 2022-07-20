@@ -16,8 +16,6 @@
 - [3. Creating a Bot and Adding it to your server](#3-creating-a-bot-and-adding-it-to-your-server)
   - [Environment Variables](#environment-variables)
 - [4. Make the Bot say "Hello, World!"](#4-make-the-bot-say-hello-world)
-    - [❓ What are events?](#-what-are-events)
-    - [❓ What is `async` and `await`?](#-what-is-async-and-await)
 - [5. Adding Commands](#5-adding-commands)
 - [6. Cogs](#6-cogs)
 - [6. Host your bot on repl.it](#6-host-your-bot-on-replit)
@@ -63,22 +61,62 @@
   load_dotenv()
   TOKEN = os.getenv('TOKEN')
   ```
+* ✅ Create a `.env` and 
 
+* TODO adding it to your server
 ## 4. Make the Bot say "Hello, World!"
 * TODO Slides/Explanation: what are decorators?
 * TODO Slides/Explanation: what are events and callbacks - what is async and await (extension)
+  ```python
+  # 
 
-💡 
-💭
-💬
-❗
+  ```
+* ✅ 
 
-#### ❓ What are events?
+<details>
+<summary><b>❓ What are events?</b></summary>
 
-#### ❓ What is `async` and `await`?
+Events are exactly as you would think, stuff that happens that we want to know about. Examples would be someone joining a server, sending a message, or reacting to something.
+
+To 'hook' onto an event, we use a decorator on a function call:
+```python
+@client.event
+async def on_message(message):
+  ...
+```
+The function name tells discord.py what event we're listening to (in this case, messages).
+
+</details>
+
+<details>
+<summary><b>❓ What is <code>async</code> and <code>await</code>?</b></summary>
+
+  Often in coding, you will need to perform a task, and wait for the response before you can do anything. An example would be Gmail, the website needs to wait for the mail to send, before telling you it's sent.
+  Using `async` on a function lets Python know that this task involves waiting for something:
+  ```python
+  async def send_mail():
+    await login()
+    await send()
+  ```
+  and `await` tells Python to wait for an `async` function to finish before proceeding:
+  ```python
+  await send_mail()
+  print("Your mail was sent!")
+  # As opposed to
+  send_mail()
+  print("This will be printed immediately")
+  ```
+  In the context of discord.py, we can use `async` on our functions to tell discord.py it's going to do a long-running task, and `await` to do that task:
+  ```python
+  async def on_join(self, ctx):
+    await ctx.send("Welcome to the server!")
+  ```
+
+</details>
+
 
 ## 5. Adding Commands
-
+* 
 
 ## 6. Cogs
 * TODO Slides/Explanation: what and why of [cogs](https://discordpy.readthedocs.io/en/stable/ext/commands/cogs.html)
@@ -127,4 +165,4 @@
 
 ## Related Links:
 * [Creating a Bot Account | discord.py](https://discordpy.readthedocs.io/en/stable/discord.html)
-
+* [Python Discord Bot Tutorial – Code a Discord Bot And Host it for Free](https://www.freecodecamp.org/news/create-a-discord-bot-with-python/)

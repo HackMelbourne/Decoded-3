@@ -15,7 +15,7 @@
 - [About DecodED](#about-decoded)
   - [Dates](#dates)
 - [About this repository](#about-this-repository)
-- [Workshop 0 - Python Refresher and Setup?](#workshop-0---python-refresher-and-setup)
+- [Pre-workshop - Python Refresher and Setup?](#pre-workshop---python-refresher-and-setup)
 - [Workshop 1 - Introduction to Discord.py](#workshop-1---introduction-to-discordpy)
 - [Workshop 2 - Tic Tac Toe](#workshop-2---tic-tac-toe)
 - [Workshop 3 - Polling Bot](#workshop-3---polling-bot)
@@ -34,7 +34,7 @@ TODO we can have the Zoom links and stuff here as well
 |Workshop|Date|
 |--|--|
 |(internal deadline) MVP of Bots and Draft of Workbooks|Wed, 03 August 2022|
-|Workshop 0||
+|Pre-workshop||
 |Workshop 1||
 |Workshop 2||
 |Workshop 3||
@@ -53,17 +53,16 @@ TODO we can have the Zoom links and stuff here as well
   * Workshop Recordings
   * Code for the Discord Bot being created
 
-## Workshop 0 - Python Refresher and Setup?
+## Pre-workshop - Python Refresher and Setup?
 > TODO ? Python Refresher (review of Python, learnt in COMP10001), Setting Up your Python Environment
-* Ryan
 * [📔Participant Workbook](w0-participant-workbook.md)
 * [🐍Python Cheatsheet](python-cheatsheet.md)
 * [Slides] TODO (if any)
 * [Workshop Recording] TODO
 
 ## Workshop 1 - Introduction to Discord.py
-> Covers basics of Discord.py, create a basic bot that says "Hello, World!" and add it to a server (Extensions: deployment with repl.it)
-* Xin Yu
+> About DecodED3, Covers basics of Discord.py, create a basic bot that says "Hello, World!" and add it to a server (Extensions: deployment with repl.it)
+* Ryan, Xin Yu
 * [📔Participant Workbook](w1-participant-workbook.md)
 * [👾Discord.py Cheatsheet] TODO (opt.)
 * [🔗Discord.py Documentation](https://discordpy.readthedocs.io/en/stable/index.html)

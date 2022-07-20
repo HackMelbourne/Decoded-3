@@ -1,4 +1,5 @@
 <h1 align="center">Xin Yu's COMP10001 Python Notes</h1>
+
 > You don't need to know everything in this document to create the Discord Bot - just skim through the document to remmind yourself of Python's Syntax
 
 ---
