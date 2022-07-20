@@ -1,30 +1,14 @@
-from typing import List
 from discord.ext import commands
 import discord
 from discord import app_commands
 
-from dotenv import load_dotenv
-import os
 
-load_dotenv()
-TOKEN = os.getenv("TOKEN")
-
-client = commands.Bot(command_prefix="!", intents=discord.Intents.all())
-
-
-@client.event
-async def on_ready():
-    print("ready...")
-
-
-class TicTacToeButton(discord.ui.Button['TicTacToe']):
+class TicTacToeButton(discord.ui.Button):
     def __init__(self, x: int, y: int):
         super().__init__(style=discord.ButtonStyle.secondary, label='\u200b', row=y)
         self.x = x
         self.y = y
 
-    # This function is called whenever this particular button is pressed
-    # This is part of the "meat" of the game logic
     async def callback(self, interaction: discord.Interaction):
 
         global player1
@@ -75,11 +59,7 @@ class TicTacToeButton(discord.ui.Button['TicTacToe']):
         await interaction.response.edit_message(content=content, view=view)
 
 
-# This is our actual board View
 class TicTacToe(discord.ui.View):
-    # This tells the IDE or linter that all our children will be TicTacToeButtons
-    # This is not required
-    children: List[TicTacToeButton]
     X = -1
     O = 1
     Tie = 2
@@ -93,14 +73,10 @@ class TicTacToe(discord.ui.View):
             [0, 0, 0],
         ]
 
-        # Our board is made up of 3 by 3 TicTacToeButtons
-        # The TicTacToeButton maintains the callbacks and helps steer
-        # the actual game.
         for x in range(3):
             for y in range(3):
                 self.add_item(TicTacToeButton(x, y))
 
-    # This method checks for the board winner -- it is used by the TicTacToeButton
     def check_board_winner(self):
         for across in self.board:
             value = sum(across)
@@ -109,7 +85,6 @@ class TicTacToe(discord.ui.View):
             elif value == -3:
                 return self.X
 
-        # Check vertical
         for line in range(3):
             value = self.board[0][line] + self.board[1][line] + self.board[2][line]
             if value == 3:
@@ -117,7 +92,6 @@ class TicTacToe(discord.ui.View):
             elif value == -3:
                 return self.X
 
-        # Check diagonals
         diag = self.board[0][2] + self.board[1][1] + self.board[2][0]
         if diag == 3:
             return self.O
@@ -130,46 +104,32 @@ class TicTacToe(discord.ui.View):
         elif diag == -3:
             return self.X
 
-        # If we're here, we need to check if a tie was made
         if all(i != 0 for row in self.board for i in row):
             return self.Tie
 
         return None
 
 
-# class tictactoe(commands.Cog):
-#     def __init__(self, client):
-#         self.client = client
-#
-#     @app_commands.command(
-#         name="tictactoe",
-#         description="play tictactoe"
-#     )
-#     async def tictactoe(self, interaction: discord.Interaction, enemy: discord.Member):
-#         await interaction.response.send_message('Tic Tac Toe: X goes first', view=TicTacToe())
-#
-#         global player1
-#         global player2
-#
-#         player1 = interaction.user
-#         player2 = enemy
+class tictactoe(commands.Cog):
+    def __init__(self, client):
+        self.client = client
+
+    @app_commands.command(
+        name="tictactoe",
+        description="play tictactoe"
+    )
+    async def tictactoe(self, interaction: discord.Interaction, enemy: discord.Member):
+        await interaction.response.send_message('asdasd', view=TicTacToe())
+
+        global player1
+        global player2
+
+        player1 = interaction.user
+        player2 = enemy
 
 
-@client.command()
-async def tictactoe(ctx):
-    await ctx.send(view=TicTacToe())
-
-    global player1
-    global player2
-
-    player1 = ctx.author
-    player2 = ctx.author
-
-client.run(TOKEN)
-#
-# async def setup(client: commands.Bot):
-#     await client.add_cog(tictactoe(client))
-
-
-if __name__ == '__main__':
-    pass
+async def setup(bot):
+    await bot.add_cog(
+        tictactoe(bot),
+        guild=discord.Object(id=996259796426698752)
+    )
