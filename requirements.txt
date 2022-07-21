@@ -7,5 +7,6 @@ discord.py @ git+https://github.com/Rapptz/discord.py@87bc79e6e311da60b024ae61a2
 frozenlist==1.3.0
 idna==3.3
 multidict==6.0.2
+numpy==1.23.1
 python-dotenv==0.20.0
 yarl==1.7.2
