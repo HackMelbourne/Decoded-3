@@ -2,134 +2,119 @@ from discord.ext import commands
 import discord
 from discord import app_commands
 
+import numpy as np
+
+SIZE = 3
+
 
 class TicTacToeButton(discord.ui.Button):
-    def __init__(self, x: int, y: int):
-        super().__init__(style=discord.ButtonStyle.secondary, label='\u200b', row=y)
-        self.x = x
-        self.y = y
+    def __init__(self, row, col):
+        super().__init__(style=discord.ButtonStyle.secondary, label=" ", row=row)
+        self.row = row
+        self.col = col
 
-    async def callback(self, interaction: discord.Interaction):
-
-        global player1
-        global player2
-
-        assert self.view is not None
-        view: TicTacToe = self.view
-        state = view.board[self.y][self.x]
-        if state in (view.X, view.O):
-            return
-
-        if view.current_player == view.X:
-            if interaction.user != player1:
+    async def callback(self, interaction):
+        if self.view.current_player == self.view.player1:
+            if interaction.user != self.view.player1:
                 await interaction.response.send_message("Its not your Turn!", ephemeral=True)
+                return
             else:
                 self.style = discord.ButtonStyle.danger
                 self.label = 'X'
                 self.disabled = True
-                view.board[self.y][self.x] = view.X
-                view.current_player = view.O
-                content = "It is now O's turn"
+                self.view.board[self.row][self.col] = 1
+                self.view.current_player = self.view.player2
+                content = f"{self.view.player2.mention}, select your move:"
 
         else:
-            if interaction.user != player2:
+            if interaction.user != self.view.player2:
                 await interaction.response.send_message("Its not your Turn!", ephemeral=True)
+                return
             else:
                 self.style = discord.ButtonStyle.success
                 self.label = 'O'
                 self.disabled = True
-                view.board[self.y][self.x] = view.O
-                view.current_player = view.X
-                content = "It is now X's turn"
+                self.view.board[self.row][self.col] = -1
+                self.view.current_player = self.view.player1
+                content = f"{self.view.player1.mention}, select your move:"
 
-        winner = view.check_board_winner()
-        if winner is not None:
-            if winner == view.X:
-                content = 'X won!'
-            elif winner == view.O:
-                content = 'O won!'
-            else:
-                content = "It's a tie!"
+        winner = self.view.check_winner()
+        if winner == self.view.player1:
+            content = 'player1 won!'
+        elif winner == self.view.player2:
+            content = 'player2 won!'
+        elif winner == "tie":
+            content = "It's a tie!"
 
-            for child in view.children:
-                child.disabled = True
+        # for child in self.view.children:
+        #     child.disabled = True
+        #
+        #     self.view.stop()
 
-            view.stop()
-
-        await interaction.response.edit_message(content=content, view=view)
+        await interaction.response.edit_message(content=content, view=self.view)
 
 
 class TicTacToe(discord.ui.View):
-    X = -1
-    O = 1
-    Tie = 2
-
-    def __init__(self):
+    def __init__(self, player1, player2):
         super().__init__()
-        self.current_player = self.X
-        self.board = [
-            [0, 0, 0],
-            [0, 0, 0],
-            [0, 0, 0],
-        ]
+        self.player1 = player1
+        self.player2 = player2
+        self.current_player = self.player1
+        self.board = np.zeros((SIZE, SIZE))
 
-        for x in range(3):
-            for y in range(3):
-                self.add_item(TicTacToeButton(x, y))
+        for row in range(SIZE):
+            for col in range(SIZE):
+                self.add_item(TicTacToeButton(row, col))
 
-    def check_board_winner(self):
-        for across in self.board:
-            value = sum(across)
-            if value == 3:
-                return self.O
-            elif value == -3:
-                return self.X
+    def check_winner(self):
+        col_sums = np.sum(self.board, axis=1)
+        for col_sum in col_sums:
+            if col_sum == SIZE:
+                return self.player1
+            elif col_sum == -SIZE:
+                return self.player2
 
-        for line in range(3):
-            value = self.board[0][line] + self.board[1][line] + self.board[2][line]
-            if value == 3:
-                return self.O
-            elif value == -3:
-                return self.X
+        row_sums = np.sum(self.board, axis=0)
+        for row_sum in row_sums:
+            if row_sum == SIZE:
+                return self.player1
+            elif row_sum == -SIZE:
+                return self.player2
 
-        diag = self.board[0][2] + self.board[1][1] + self.board[2][0]
-        if diag == 3:
-            return self.O
-        elif diag == -3:
-            return self.X
+        diag_sum = self.board[0, 0] + self.board[1, 1] + self.board[2, 2]
+        if diag_sum == SIZE:
+            return self.player1
+        elif diag_sum == -SIZE:
+            return self.player2
 
-        diag = self.board[0][0] + self.board[1][1] + self.board[2][2]
-        if diag == 3:
-            return self.O
-        elif diag == -3:
-            return self.X
+        diag_sum = self.board[0, 2] + self.board[1, 1] + self.board[2, 0]
+        if diag_sum == SIZE:
+            return self.player1
+        elif diag_sum == -SIZE:
+            return self.player2
 
-        if all(i != 0 for row in self.board for i in row):
-            return self.Tie
-
-        return None
+        if np.all(self.board):
+            return "tie"
 
 
-class tictactoe(commands.Cog):
-    def __init__(self, client):
-        self.client = client
+class Commands(commands.Cog):
+    def __init__(self, bot):
+        self.bot = bot
 
     @app_commands.command(
         name="tictactoe",
-        description="play tictactoe"
+        description="Play a game of TicTacToe"
     )
-    async def tictactoe(self, interaction: discord.Interaction, enemy: discord.Member):
-        await interaction.response.send_message('asdasd', view=TicTacToe())
-
-        global player1
-        global player2
-
+    async def tictactoe(self, interaction, opponent: discord.Member):
         player1 = interaction.user
-        player2 = enemy
+        player2 = opponent
+
+        await interaction.response.send_message(f"{player1.mention} **VS** {player2.mention}",
+                                                view=TicTacToe(player1, player2))
 
 
 async def setup(bot):
     await bot.add_cog(
-        tictactoe(bot),
-        guild=discord.Object(id=996259796426698752)
+        Commands(bot),
+        guilds=bot.GUILDS
     )
