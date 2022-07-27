@@ -46,14 +46,13 @@
     ```
 * Install these following modules with the same command: os, selenium, emoji, asyncio, matplotlib, numpy
 * Let us know if you run into any errors during installation!
-## 3. Creating a Bot and Adding it to your server
+## 3. Web Automation using Selenium
 
-### Environment Variables
+### Selenium 
 <details>
-<summary><b>❓ What are environment variables?</b></summary>
-
-When a program is run, it may need information from the operating system to configure its behaviour. This might include the operating system, current running folder, or more important things like passwords to various services (Discord here!). Basically, environment variables are variables/information about the environment its running on. They are a useful tool in providing information to your program, which is separate from your code. Developers commonly use `.env` files to specify these variables.
-
+<summary><b>❓Why do we need to do web automation for this tutorial?</b></summary>
+  Image a user wants to make a poll by typing this command on the already set up discord server - $p "what is your most favourite food?" 10 pasta pizza burger with 10 is the time limit for the poll. The discord bot will create a poll and it needs to generate emojis 1️⃣ 2️⃣ 3️⃣ for members to react to vote. However, fixed generated emojis like 1️⃣ 2️⃣ 3️⃣ look too boring and they do not always suit the context; in this case, we are asking for food, so our poll will look much more appealing with those 3 emojis 🍝 🍕 🍔. When we change the poll question, our bot should return emojis dynamically based on the context. For example, "which animal do you like most?" monkey cat tiger--> 🐒 🐈 🐅 should be returned. 
+  SELENIUM WILL HELP US FETCH EMOJIS AUTOMATICALLY + DYNAMICALLY 
 </details>
 
 * `.env` have several advantages:
@@ -73,8 +72,3 @@ Then in your code file:
   load_dotenv()
   TOKEN = os.getenv('TOKEN')
   ```
-Try changing the content of your `.env` file and doing `print(TOKEN)`, what happens?
-#### **💡 Challenge**
-Can you try defining your own environment variable (besides `TOKEN`), and printing it to the console? How about printing the current operating system using only environment variables? (Will need some googling!)
-
-Now that we have the token for our bot, let's add it to our server. Do do this, we will use the official [Discord Applications Page.](https://discord.com/developers/applications)
