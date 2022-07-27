@@ -30,6 +30,13 @@
 ## 1. Create an Application
 * [Applications Page](https://discord.com/developers/applications)
 
+## Installing Google Chrome Beta (version 104) and Chrome Web Driver version 104
+* Because to use selenium, it is compulsory to have a web driver + a browser. Since version 103 has too many troubles that I detected while building this application on my own, I strongly recommend that you install Google Chrome Beta (version 104) and Chrome Web Driver version 104. 
+* Here are the links: https://www.google.com/intl/en_au/chrome/beta/ , https://chromedriver.chromium.org/downloads  
+## Set a new Path Variable ON MacOS: 
+ * On MacOS, open the terminal and type "sudo nano /etc/paths", then add a default path to the chromedriver to a new line "/usr/local/bin/chromedriver". <img width="697" alt="Screen Shot 2022-07-27 at 8 57 50 pm" src="https://user-images.githubusercontent.com/80389972/181231088-94c5b6fa-cfc0-4911-9b64-92d1a209f6ac.png">
+
+ 
 ## 2. Installing modules: 
 * Before we begin creating the bot, we have to install a few modules
 * Install `discord.py`
@@ -55,7 +62,7 @@
   SELENIUM WILL HELP US FETCH EMOJIS AUTOMATICALLY + DYNAMICALLY 
 </details>
 
-* `.env` have several advantages:
+* 
 1. They help different developers to keep their passwords separate from each other.
 1. When using a VCS (GitHub), you can prevent your `.env` file from being uploaded to the internet, thus protecting all of your passwords.
 
