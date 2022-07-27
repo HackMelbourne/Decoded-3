@@ -38,7 +38,7 @@
 ## 2. Installing Modules: `discord.py` and `python-dotenv`
   * Before we begin creating the bot, we have to install a few modules
   * Install `discord.py`
-    * discord.py is a modern, easy to use, feature-rich, and async ready API wrapper for Discord - basically, this is what allows us to connects our code with Discord (TODO someone can rephrase what an API is lol)
+    * discord.py is basically a set of tools which will allow us to control our bot with simple function calls.
     * to install it, type this into your terminal:
       ```
       pip install -U discord.py
@@ -54,16 +54,35 @@
 ## 3. Creating a Bot and Adding it to your server
 
 ### Environment Variables
-* TODO Why we need environment variables: danger of leaving your keys around
+<details>
+<summary><b>❓ What are environment variables?</b></summary>
+
+When a program is run, it may need information from the operating system to configure its behaviour. This might include the operating system, current running folder, or more important things like passwords to various services (Discord here!). Basically, environment variables are variables/information about the environment its running on. They are a useful tool in providing information to your program, which is separate from your code. Developers commonly use `.env` files to specify these variables.
+
+</details>
+
+* `.env` have several advantages:
+1. They help different developers to keep their passwords separate from each other.
+1. When using a VCS (GitHub), you can prevent your `.env` file from being uploaded to the internet, thus protecting all of your passwords.
+
+To use a .env file, first make a `.env` file in the same folder as your code:
+```python
+# File name: .env
+# Add comments with '#'
+TOKEN=example.token.abc123
+```
+Then in your code file:
   ```python
   # ./main.py (after the other imports)
   from dotenv import load_dotenv
   load_dotenv()
   TOKEN = os.getenv('TOKEN')
   ```
-* ✅ Create a `.env` and 
+Try changing the content of your `.env` file and doing `print(TOKEN)`, what happens?
+#### **💡 Challenge**
+Can you try defining your own environment variable (besides `TOKEN`), and printing it to the console? How about printing the current operating system using only environment variables? (Will need some googling!)
 
-* TODO adding it to your server
+Now that we have the token for our bot, let's add it to our server. Do do this, we will use the official [Discord Applications Page.](https://discord.com/developers/applications)
 ## 4. Make the Bot say "Hello, World!"
 * TODO Slides/Explanation: what are decorators?
 * TODO Slides/Explanation: what are events and callbacks - what is async and await (extension)
