@@ -28,6 +28,9 @@ class MusicBot(commands.Cog):
     @commands.command()
     async def join(self, ctx):
         global voice_clients
+        if not ctx.message.author.voice:
+            await ctx.send('You are not in a voice channel')
+            return
         channel = ctx.message.author.voice.channel
         voice_clients[ctx.guild.id] = await channel.connect()
         await ctx.send(f'Joined {channel}')
