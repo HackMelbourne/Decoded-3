@@ -1,6 +1,10 @@
-<h1 align="center">[Participant's Workbook] Introduction to Discord.py</h1>
+<h1 align="center">DecodED 3</h1>
 
-> Related Pages: [DecodED 3](./README.md)
+> 👋 Hello and welcome to DecodED 3! Over the next 6 weeks, we will be creating a discord bot with [Discord.py](https://discordpy.readthedocs.io/en/stable/index.html)
+
+<h2>Demo</h2>
+
+* TODO add gif/screenshot of Discord bot in action
 
 ---
 
@@ -8,180 +12,74 @@
 <details>
 <summary>Table of Contents</summary>
 
-- [0. Create a Discord Account and Discord Server](#0-create-a-discord-account-and-discord-server)
-  - [Create a Discord Account](#create-a-discord-account)
-  - [Create a Discord Server](#create-a-discord-server)
-- [1. Create an Application](#1-create-an-application)
-- [2. Installing Modules: `discord.py` and `python-dotenv`](#2-installing-modules-discordpy-and-python-dotenv)
-- [3. Creating a Bot and Adding it to your server](#3-creating-a-bot-and-adding-it-to-your-server)
-  - [Environment Variables](#environment-variables)
-- [4. Make the Bot say "Hello, World!"](#4-make-the-bot-say-hello-world)
-- [5. Adding Commands](#5-adding-commands)
-- [6. Cogs](#6-cogs)
-- [6. Host your bot on repl.it](#6-host-your-bot-on-replit)
-- [Related Links:](#related-links)
+- [About DecodED](#about-decoded)
+  - [Dates](#dates)
+- [About this repository](#about-this-repository)
+- [Pre-workshop - Python Refresher and Setup?](#pre-workshop---python-refresher-and-setup)
+- [Workshop 1 - Introduction to Discord.py](#workshop-1---introduction-to-discordpy)
+- [Workshop 2 - Tic Tac Toe](#workshop-2---tic-tac-toe)
+- [Workshop 3 - Polling Bot](#workshop-3---polling-bot)
+- [Workshop 4 - Meme Bot](#workshop-4---meme-bot)
+- [Workshop 5 - Music Bot](#workshop-5---music-bot)
 
 </details>
 
 ---
 
-## 0. Create a Discord Account and Discord Server
-* Before creating our bot, please make sure you create a Discord Account (it's free!) and a Discord Server to test your bot in
-### Create a Discord Account
+## About DecodED
+* DecodED is a series of workshops run every year by HackMelbourne to help students/teach students with introductory programming background to/how to... TODO
+* This year we are trying a new teaching style with DecodED so let us know if you like it TODO add a feedback link
+### Dates
+TODO we can have the Zoom links and stuff here as well
+|Workshop|Date|
+|--|--|
+|(internal deadline) MVP of Bots and Draft of Workbooks|Wed, 03 August 2022|
+|Pre-workshop||
+|Workshop 1||
+|Workshop 2||
+|Workshop 3||
+|Workshop 4||
+|Workshop 5||
 
-### Create a Discord Server
-> 📝 NOTE: Discord servers are sometimes refered to as **'guilds'** in some documentation (because some people confuse the word 'server' with computer servers 🗄️ XD)
+## About this repository
+* This repository contains:
+  * Participant Workbook
+    * each workbook is made up of multiple Parts which are then made up of multiple **✅ Tasks** that the participant should complete, with **🧩 Hints** that help guide them in completing the Task, and **💡 Extensions** that are optional tasks that can be done if the participant has completed the Task ahead of schedule
+    * The flow:
+      1. host presents/teaches about Part 1
+      2. participants follow the workbook to complete the ✅ Tasks in Part 1 of the workbook - participants who are ahead of the tasks can start do the 💡 Extensions and participants who are behind can use the 🧩 Hints or ask for help
+      3. once most of the participants are done with Part 1, host starts presenting/teaching Part 2 and the cycle continues
+  * Slides (if any)
+  * Workshop Recordings
+  * Code for the Discord Bot being created
 
-## 1. Create an Application
-* [Applications Page](https://discord.com/developers/applications)
+## Pre-workshop - Python Refresher and Setup?
+> TODO ? Python Refresher (review of Python, learnt in COMP10001), Setting Up your Python Environment
+* [📔Participant Workbook](w0-participant-workbook.md)
+* [🐍Python Cheatsheet](python-cheatsheet.md)
+* [Slides] TODO (if any)
+* [Workshop Recording] TODO
 
-## 2. Installing Modules: `discord.py` and `python-dotenv`
-  * Before we begin creating the bot, we have to install a few modules
-  * Install `discord.py`
-    * discord.py is basically a set of tools which will allow us to control our bot with simple function calls.
-    * to install it, type this into your terminal:
-      ```
-      pip install -U discord.py
-      ```
-  * Install `python-dotenv`
-    * `python-dotenv` is used to access our secret Discord token, which we will store in a `.env` file
-    * to install it, type this into your terminal:
-      ```
-      pip install -U python-dotenv
-      ```
-  * Let us know if you run into any errors during installation!
+## Workshop 1 - Introduction to Discord.py
+> About DecodED3, Covers basics of Discord.py, create a basic bot that says "Hello, World!" and add it to a server (Extensions: deployment with repl.it)
+* Ryan, Xin Yu
+* [📔Participant Workbook](w1-participant-workbook.md)
+* [👾Discord.py Cheatsheet] TODO (opt.)
+* [🔗Discord.py Documentation](https://discordpy.readthedocs.io/en/stable/index.html)
+* [Workshop Recording] TODO
 
-## 3. Creating a Bot and Adding it to your server
+## Workshop 2 - Tic Tac Toe
+> TODO ...
+* Warren and Weng Jae (Daniel)
 
-### Environment Variables
-<details>
-<summary><b>❓ What are environment variables?</b></summary>
+## Workshop 3 - Polling Bot
+> TODO ...
+* Jerry and Hoan
 
-When a program is run, it may need information from the operating system to configure its behaviour. This might include the operating system, current running folder, or more important things like passwords to various services (Discord here!). Basically, environment variables are variables/information about the environment its running on. They are a useful tool in providing information to your program, which is separate from your code. Developers commonly use `.env` files to specify these variables.
+## Workshop 4 - Meme Bot
+> TODO ...
+* Anh Minh
 
-</details>
-
-* `.env` have several advantages:
-1. They help different developers to keep their passwords separate from each other.
-1. When using a VCS (GitHub), you can prevent your `.env` file from being uploaded to the internet, thus protecting all of your passwords.
-
-To use a .env file, first make a `.env` file in the same folder as your code:
-```python
-# File name: .env
-# Add comments with '#'
-TOKEN=example.token.abc123
-```
-Then in your code file:
-  ```python
-  # ./main.py (after the other imports)
-  from dotenv import load_dotenv
-  load_dotenv()
-  TOKEN = os.getenv('TOKEN')
-  ```
-Try changing the content of your `.env` file and doing `print(TOKEN)`, what happens?
-#### **💡 Challenge**
-Can you try defining your own environment variable (besides `TOKEN`), and printing it to the console? How about printing the current operating system using only environment variables? (Will need some googling!)
-
-Now that we have the token for our bot, let's add it to our server. Do do this, we will use the official [Discord Applications Page.](https://discord.com/developers/applications)
-## 4. Make the Bot say "Hello, World!"
-* TODO Slides/Explanation: what are decorators?
-* TODO Slides/Explanation: what are events and callbacks - what is async and await (extension)
-  ```python
-  # 
-
-  ```
-* ✅ 
-
-<details>
-<summary><b>❓ What are events?</b></summary>
-
-Events are exactly as you would think, stuff that happens that we want to know about. Examples would be someone joining a server, sending a message, or reacting to something.
-
-To 'hook' onto an event, we use a decorator on a function call:
-```python
-@client.event
-async def on_message(message):
-  ...
-```
-The function name tells discord.py what event we're listening to (in this case, messages).
-
-</details>
-
-<details>
-<summary><b>❓ What is <code>async</code> and <code>await</code>?</b></summary>
-
-  Often in coding, you will need to perform a task, and wait for the response before you can do anything. An example would be Gmail, the website needs to wait for the mail to send, before telling you it's sent.
-  Using `async` on a function lets Python know that this task involves waiting for something:
-  ```python
-  async def send_mail():
-    await login()
-    await send()
-  ```
-  and `await` tells Python to wait for an `async` function to finish before proceeding:
-  ```python
-  await send_mail()
-  print("Your mail was sent!")
-  # As opposed to
-  send_mail()
-  print("This will be printed immediately")
-  ```
-  In the context of discord.py, we can use `async` on our functions to tell discord.py it's going to do a long-running task, and `await` to do that task:
-  ```python
-  async def on_join(self, ctx):
-    await ctx.send("Welcome to the server!")
-  ```
-
-</details>
-
-
-## 5. Adding Commands
-* 
-
-## 6. Cogs
-* TODO Slides/Explanation: what and why of [cogs](https://discordpy.readthedocs.io/en/stable/ext/commands/cogs.html)
-
-  ```python
-  # ./main.py
-  from discord.ext import commands
-  import os
-
-  client = commands.Bot(command_prefix = "!")
-
-  # Looks inside the /cogs/ folder and loads up all of our cogs
-  for filename in os.listdir("./cogs"):
-      if filename.endswith(".py"):
-          client.load_extension("cogs." + filename[:-3])
-
-  client.run(TOKEN)
-  ```
-
-  ```python
-  # ./cogs/test.py
-  from discord.ext import commands
-
-  class Test(commands.Cog):
-      def __init__(self, client):
-          self.client = client
-
-      @commands.Cog.listener() # this is a decorator for events/listeners
-      async def on_ready(self):
-          print(f'We have logged in as {self.client.user}')
-
-      @commands.command() # this is for making a command
-      async def hello(self, ctx): # a command that says Hello! (called using !hello)
-          await ctx.send(f'Hello!')
-
-      @commands.command() # this is for making a command
-      async def ping(self, ctx):
-          await ctx.send(f'Pong! {round(self.bot.latency * 1000)}')
-          
-  def setup(bot): # a extension must have a setup function
-      bot.add_cog(Test(bot)) # adding a cog
-  ```
-
-## 6. Host your bot on repl.it
-* 
-
-## Related Links:
-* [Creating a Bot Account | discord.py](https://discordpy.readthedocs.io/en/stable/discord.html)
-* [Python Discord Bot Tutorial – Code a Discord Bot And Host it for Free](https://www.freecodecamp.org/news/create-a-discord-bot-with-python/)
+## Workshop 5 - Music Bot
+> TODO ...
+* Aryan
