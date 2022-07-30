@@ -1,64 +1,99 @@
-import asyncio
+import os
 
 import discord
 import youtube_dl
+from discord.ext import commands
+from dotenv import load_dotenv
 
-token = 'OTkxOTg4MzIzNTQ1NTE4MTEw.GIV5Tz.zYeCLrHGFk0mQsgOEyrknbCT5HLgX1ceanmBG8'
+load_dotenv()
+TOKEN = os.getenv('TOKEN')
 
-client = discord.Client()
+client = commands.Bot(command_prefix='?')
 
 # music bot 
 voice_clients = {}
 
-#youtube best audio options
+# youtube best audio options
 yt_dl_opts = {'formats': 'beastaudio/best'}
 ytdl = youtube_dl.YoutubeDL(yt_dl_opts)
 
-#option for only audio and no video
+# option for only audio and no video
 ffmpeg_options = {'options': '-vn'}
 
-#main music bot
+
+class MusicBot(commands.Cog):
+    def __init__(self, client):
+        self.client = client
+
+    @commands.command()
+    async def join(self, ctx):
+        global voice_clients
+        channel = ctx.message.author.voice.channel
+        voice_clients[ctx.guild.id] = await channel.connect()
+        await ctx.send(f'Joined {channel}')
+
+    @commands.command()
+    async def leave(self, ctx):
+        global voice_clients
+        if ctx.guild.id in voice_clients:
+            voice_clients[ctx.guild.id].stop()
+            del voice_clients[ctx.guild.id]
+            await ctx.send('Left')
+
+    @commands.command()
+    async def play(self, ctx, url):
+        global voice_clients
+        if ctx.guild.id not in voice_clients:
+            # Join the user's voice channel
+            await self.join(ctx)
+        # Play the YouTube video audio
+        with youtube_dl.YoutubeDL(yt_dl_opts) as ydl:
+            info_dict = ydl.extract_info(url, download=False)
+        # Send the song to the voice channel
+        song = info_dict['formats'][0]['url']
+        voice_clients[ctx.guild.id].play(
+            discord.FFmpegPCMAudio(song, **ffmpeg_options, executable="C:\\ffmpeg\\ffmpeg.exe")
+        )
+        await ctx.send(f'Now playing {info_dict["title"]}')
+        await ctx.send(info_dict["thumbnails"][0]['url'])
+
+    @commands.command()
+    async def stop(self, ctx):
+        global voice_clients
+        if ctx.guild.id in voice_clients:
+            voice_clients[ctx.guild.id].stop()
+            await ctx.send('Stopped')
+        else:
+            await ctx.send('Not in a voice channel')
+
+    @commands.command()
+    async def pause(self, ctx):
+        global voice_clients
+        if ctx.guild.id in voice_clients:
+            voice_clients[ctx.guild.id].pause()
+            await ctx.send('Paused')
+        else:
+            await ctx.send('Not in a voice channel')
+
+    @commands.command()
+    async def resume(self, ctx):
+        global voice_clients
+        if ctx.guild.id in voice_clients:
+            voice_clients[ctx.guild.id].resume()
+            await ctx.send('Resumed')
+        else:
+            await ctx.send('Not in a voice channel')
+
+
+# Start the bot
 @client.event
-async def on_message(msg):
-    if msg.content.startswith('?play'):
-        try:
-            voice_client = await msg.author.voice.channel.connect()
-            voice_clients[voice_client.guild.id] = voice_client
-        except Exception as ex:
-            raise ex
-        # so that if the user dont put a space between the play and link
-        try:
-            url = msg.content.split()[1]
+async def on_ready():
+    print('Logged in as')
+    print(client.user.name)
+    print(client.user.id)
+    print('------')
 
-            loop = asyncio.get_event_loop()
-            data = await loop.run_in_executor(None, lambda: ytdl.extract_info(url, download=False))
 
-            song = data['formats'][0]['url']
-            player = discord.FFmpegPCMAudio(song, **ffmpeg_options, executable="C:\\ffmpeg\\ffmpeg.exe")
-
-            voice_clients[msg.guild.id].play(player)
-        except Exception as ex:
-            raise ex
-
-    if msg.content.startswith("?pause"):
-        try:
-            voice_clients[msg.guild.id].pause()
-        except Exception as err:
-                print(err)
-
-    if msg.content.startswith("?resume"):
-        try:
-            voice_clients[msg.guild.id].resume()
-        except Exception as err:
-                print(err)
-
-    if msg.content.startswith("?stop"):
-        try:
-            voice_clients[msg.guild.id].stop()
-            await voice_clients[msg.guild.id].disconnect()
-
-        except Exception as err:
-                print(err)
-
-client.run(token)
-
+# Run the bot
+client.add_cog(MusicBot(client))
+client.run(TOKEN)
