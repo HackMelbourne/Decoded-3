@@ -33,7 +33,6 @@ There are 3 important components needed to install: python3 + web automation + d
 
 # Lessons
 # 1. Discord bot without dynamic emojis 
-#  STEP BY STEPS: 
   # 1. Create Main.py
     STEP 1: import some already installed packages to your file (you will know why when we start using them). 
     <img width="627" alt="Screen Shot 2022-08-03 at 8 06 19 pm" src="https://user-images.githubusercontent.com/80389972/182582832-1443fd7a-d7da-4b57-8659-10c24505d685.png">
