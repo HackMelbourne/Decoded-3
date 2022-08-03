@@ -37,13 +37,13 @@ There are 3 important components needed to install: python3 + web automation + d
     STEP 1: import some already installed packages to your file (you will know why when we start using them). 
     <img width="627" alt="Screen Shot 2022-08-03 at 8 06 19 pm" src="https://user-images.githubusercontent.com/80389972/182582832-1443fd7a-d7da-4b57-8659-10c24505d685.png">
     STEP 2: create the discord bot. You can see we make use of commands module that we imported initially to create the discord bot here. You can put other string for the command prefix, for example, command_prefix = "." instead of "$". 
-<img width="627" alt="Screen Shot 2022-08-03 at 7 24 56 pm" src="https://user-images.githubusercontent.com/80389972/182574182-de000381-dddc-44f6-9734-53b5ed6c9e76.png">  
+   <img width="627" alt="Screen Shot 2022-08-03 at 7 24 56 pm" src="https://user-images.githubusercontent.com/80389972/182574182-de000381-dddc-44f6-9734-53b5ed6c9e76.png">  
     STEP 3: create an asynchronous event listener that let us knows when our bot is ready. "The bot is ready" will print out when our bot starts running later on. You can see we are making use of 
-<img width="627" alt="Screen Shot 2022-08-03 at 8 00 08 pm" src="https://user-images.githubusercontent.com/80389972/182581448-0fbab704-a3a6-4e03-981c-224d609345c3.png">
+  <img width="627" alt="Screen Shot 2022-08-03 at 8 00 08 pm" src="https://user-images.githubusercontent.com/80389972/182581448-0fbab704-a3a6-4e03-981c-224d609345c3.png">
   STEP 4: Finally, loading the token that generated in the "Set up discord bot" before.
   to run our bot: 
-<img width="627" alt="Screen Shot 2022-08-03 at 8 10 29 pm" src="https://user-images.githubusercontent.com/80389972/182583404-4dfece4e-fb96-4f13-9b7f-eb2569533baa.png">
-# 2. Create Poll.py
+  <img width="627" alt="Screen Shot 2022-08-03 at 8 10 29 pm" src="https://user-images.githubusercontent.com/80389972/182583404-4dfece4e-fb96-4f13-9b7f-eb2569533baa.png">
+ # 2. Create Poll.py
   STEP 1: again, import some installed packages to the file. 
    <img width="627" alt="Screen Shot 2022-08-03 at 8 39 51 pm" src="https://user-images.githubusercontent.com/80389972/182588850-16ac0bda-ad44-4dca-b25c-2af89186ba93.png">
   STEP 2: declare the subclass of commands.Cog.
