@@ -5,9 +5,6 @@ import poll
 from dotenv import load_dotenv
 
 load_dotenv()
-intents = discord.Intents.default()
-intents.members =   True
-intents.reactions = True
 #bot object
 bot = commands.Bot(command_prefix = "$", intents = intents)
 client = discord.Client()
