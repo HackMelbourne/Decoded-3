@@ -56,6 +56,30 @@ adding ffmpeg.
       ```
       pip install youtube_dl
       ```
+     * now you need to add some youtube_dl option in your code 
+       ```python
+       # youtube best audio options
+       yt_dl_opts = {'formats': 'beastaudio/best'}
+       ytdl = youtube_dl.YoutubeDL(yt_dl_opts)
+       ```
+## 2. Setting up the join and leave commands
+
+* We first need to make a client varible. It will help us intaract with the discord api.
+  ```python 
+  client = commands.Bot(command_prefix='?')
+  ``` 
+ 
+* We now need to make sure that when ever we run the code, we can see that our bot has successfully logged-in. For that we need to write a function on_ready.
+  ```python
+  # Start the bot
+    @client.event
+    async def on_ready():
+        print('Logged in as')
+        print(client.user.name)
+        print(client.user.id)
+        print('------')
+
+  ```
 
 ## 3. Creating a Bot and Adding it to your server
 
