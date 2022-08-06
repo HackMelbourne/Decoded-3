@@ -33,7 +33,7 @@
 TODO we can have the Zoom links and stuff here as well
 |Workshop|Date|
 |--|--|
-|(internal deadline) MVP of Bots and Draft of Workbooks|Wed, 03 August 2022|
+|(internal deadline) MVP of Bots and Draft of Workbooks|Wed, 08 August 2022|
 |Pre-workshop||
 |Workshop 1||
 |Workshop 2||
@@ -61,8 +61,8 @@ TODO we can have the Zoom links and stuff here as well
 * [Workshop Recording] TODO
 
 ## Workshop 1 - Introduction to Discord.py
-> About DecodED3, Covers basics of Discord.py, create a basic bot that says "Hello, World!" and add it to a server (Extensions: deployment with repl.it)
-* Ryan, Xin Yu
+> About DecodED3, Covers basics of Discord.py, create a basic bot that says "Hello, World!" and add it to a server
+* Xin Yu
 * [📔Participant Workbook](w1-participant-workbook.md)
 * [👾Discord.py Cheatsheet] TODO (opt.)
 * [🔗Discord.py Documentation](https://discordpy.readthedocs.io/en/stable/index.html)
@@ -82,4 +82,4 @@ TODO we can have the Zoom links and stuff here as well
 
 ## Workshop 5 - Music Bot
 > TODO ...
-* Aryan
+* Aryan and Ryan
