@@ -47,9 +47,11 @@ There are 3 important components needed to install: python3 + web automation + d
 # 2. Create Poll.py
   STEP 1: again, import some installed packages to the file. 
    <img width="627" alt="Screen Shot 2022-08-03 at 8 39 51 pm" src="https://user-images.githubusercontent.com/80389972/182588850-16ac0bda-ad44-4dca-b25c-2af89186ba93.png">
+   
   STEP 2: declare the subclass of commands.Cog.
    <img width="627" alt="Screen Shot 2022-08-03 at 8 41 31 pm" src="https://user-images.githubusercontent.com/80389972/182589158-977adf2f-297e-47bc-9990-26b768459a79.png">
     - You can see __int__ method is the constructor of our class to create the Poll object later on in the Main.py file. We will need to have pass the already created bot object in the Main.py file later so that why we have to add it as an argument here. 
+    
   STEP 3: Now, it is time for us to declare a function and that function is decorated by discord.ext.commands.command to transform into to be discord.ext.commands.Command. 
 <img width="933" alt="Screen Shot 2022-08-03 at 8 43 51 pm" src="https://user-images.githubusercontent.com/80389972/182589633-5fada6a8-e95e-4720-a66d-adaddec9eea0.png">
     - Inside the decorator, you can see we passed "p" as an argument for "aliases". "aliases" is an array of string and it is an attribute of discord.ext.commands.Command class. It allows us to have mutilple names for our commands. You can add another string, for example, "poll" into that array. 
