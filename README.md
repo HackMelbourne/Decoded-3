@@ -43,6 +43,7 @@ There are 3 important components needed to install: python3 + web automation + d
   STEP 4: Finally, loading the token that generated in the "Set up discord bot" before.
   to run our bot: 
   <img width="627" alt="Screen Shot 2022-08-03 at 8 10 29 pm" src="https://user-images.githubusercontent.com/80389972/182583404-4dfece4e-fb96-4f13-9b7f-eb2569533baa.png">
+  
 # 2. Create Poll.py
   STEP 1: again, import some installed packages to the file. 
    <img width="627" alt="Screen Shot 2022-08-03 at 8 39 51 pm" src="https://user-images.githubusercontent.com/80389972/182588850-16ac0bda-ad44-4dca-b25c-2af89186ba93.png">
