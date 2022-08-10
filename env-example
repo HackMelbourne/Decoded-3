@@ -1,0 +1,10 @@
+DISCORD_TOKEN = <bot_token>
+DISCORD_GUILD = <server_name>
+DISCORD_COMMAND_ROOT = ;;random
+DISCORD_COMMAND_SUBREDDIT = ;;random subreddit
+DISCORD_COMMAND_DB_SAVE = ;;random save
+DISCORD_COMMAND_DB_LOAD = ;;random load
+MEME_API_ROOT = https://meme-api.herokuapp.com/gimme/
+MONGODB_URI = mongodb+srv://<username>:<password>@cluster0.<region>.mongodb.net/test_discord_bot?retryWrites=true&w=majority
+DB = test_discord_bot
+COLLECTION = memes
