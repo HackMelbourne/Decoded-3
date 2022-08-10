@@ -33,7 +33,7 @@ There are 3 important components needed to install: python3 + web automation + d
 
 # Lessons
 # 1. Discord bot without dynamic emojis 
- # 1. Create Main.py
+# 1. Create Main.py
     STEP 1: import some already installed packages to your file (you will know why when we start using them). 
     <img width="627" alt="Screen Shot 2022-08-03 at 8 06 19 pm" src="https://user-images.githubusercontent.com/80389972/182582832-1443fd7a-d7da-4b57-8659-10c24505d685.png">
     STEP 2: create the discord bot. You can see we make use of commands module that we imported initially to create the discord bot here. You can put other string for the command prefix, for example, command_prefix = "." instead of "$". 
@@ -43,7 +43,7 @@ There are 3 important components needed to install: python3 + web automation + d
   STEP 4: Finally, loading the token that generated in the "Set up discord bot" before.
   to run our bot: 
   <img width="627" alt="Screen Shot 2022-08-03 at 8 10 29 pm" src="https://user-images.githubusercontent.com/80389972/182583404-4dfece4e-fb96-4f13-9b7f-eb2569533baa.png">
- # 2. Create Poll.py
+# 2. Create Poll.py
   STEP 1: again, import some installed packages to the file. 
    <img width="627" alt="Screen Shot 2022-08-03 at 8 39 51 pm" src="https://user-images.githubusercontent.com/80389972/182588850-16ac0bda-ad44-4dca-b25c-2af89186ba93.png">
   STEP 2: declare the subclass of commands.Cog.
