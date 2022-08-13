@@ -367,43 +367,44 @@ async def on_join(self, ctx):
 - Before we get started on any business logic, let's define a client event listener (i.e. user sends message in channel)
 
 ```python
-@client.event # This decorator turns this Pythonic-looking function into a Discord.py-defined event listener
-async def on_message(message): # on_message is a pre-defined event listener which takes a single parameter "message" referring to chat content
+@commands.command(name='new') # This decorator turns this Pythonic-looking function into a Discord.py-defined event listener, responding to commands starting with "new"
+async def _new(ctx, *args): # on_message is a pre-defined event listener which takes an arbitrary number of parameters extracted from chat content
 
-  # Recognize first command
+  # Recognize first variation of command (i.e. ;;random new)
     # Respond accordingly
 
-  # Recognize second command
+  # Recognize second variation of command (i.e. ;;random new 5)
     # Respond accordingly
 
   #...
 
-  return
+  pass
 ```
 
 - Let's define our first event listener - when a user messages `;;random`
 
-  - We would like to respond with a single meme
+  - `*args` takes in an arbitrary amount of parameters as a list
+  - By accessing how many parameters were extracted from a user's command invocation (i.e. `len(args)`), we can differentiate which variation of the command they were using
+  - We would like to respond with a single meme when the command is called without any additional parameter
 
   ```python
-  if (message.content == COMMAND):
+  if (len(arg) == 0):
     random_meme = get_random_memes(1)['memes'][0]
-    await message.channel.send(random_meme['url']) # Have bot send message to channel - i.e. "respond"
+    await ctx.send(random_meme['url']) # Have bot send message to channel - i.e. "respond"
   ```
 
   > 📝 Host your bot, message `;;random` into the chat, and see if it works!
 
 - A bit trickier, let's define our second event listener - when a user messages `;;random 3`
 
-  - We would like to extract the number of memes (in this case 3, but ideally from 1 to 9)
-    - Command starts with `COMMAND ` - including an extra trailing space character
-    - Entire command length would be `len(COMMAND) + 2` - i.e. a space + a single numeric digit
-    - The last character in the message string `message.content[-1]` is numeric
+  - We would like to extract the number of memes (in this case 3, but ideally any numeric value will do!)
+    - In this case, the number of passed parameters will be one (i.e. `len(args) == 1`)
+    - We extract this number via the first element of the `args` list (i.e. `args[0]`)
   - And respond with the correct number of memes
 
   ```python
-  if(message.content.startswith(COMMAND + ' ') and len(message.content) <= len(COMMAND) + 2 and message.content[-1].isnumeric()):
-    random_memes = get_random_memes(int(message.content[-1]))['memes']
+  if (len(args) > 0):
+    random_memes = get_random_memes(int(args[0]))['memes']
     random_memes_image_link = [e['url'] for e in random_memes] # Destructure response to get all memes' URLs
     for link in random_memes_image_link: # Iterate over all fetched URLs & respond
       await message.channel.send(link)
@@ -413,14 +414,22 @@ async def on_message(message): # on_message is a pre-defined event listener whic
 
 - Moving on to our third event listener - when a user messages `;;random subreddit wholesomememes`
 
-  - Command starts with `SUBREDDIT_COMMAND`
-  - We'd like to extract the subreddit's name, starting from <i>after</i> the space right after the pre-defined command & all the way to the end of the message string
+  - First, we need to rig this event listener to respond to the right command
 
   ```python
-  if(message.content.startswith(SUBREDDIT_COMMAND)):
-    subreddit = message.content[len(SUBREDDIT_COMMAND)+1:] # arr[start:] will splice the array from the "start" index to the end
-    random_meme = get_random_meme_from_subreddits(subreddit, 1)
-    await message.channel.send(random_meme_subreddit['url'])
+  @commands.command(name='subreddit')
+  async def _subreddit(ctx, arg1):
+    subreddit = arg1
+  ```
+
+  > 📝 Instead of passing in `*args`, we are now using `arg1`. See if you can reason about this particular change!
+  > Hint - notice the intented different behaviour between our two commands
+
+  - With the subreddit name extracted, we can now implement the functionality
+
+  ```python
+  random_meme = get_random_meme_from_subreddits(subreddit, 1)
+  await ctx.send(random_meme_subreddit['url'])
   ```
 
   #### **💡 Challenge**
@@ -428,10 +437,29 @@ async def on_message(message): # on_message is a pre-defined event listener whic
   Right now, our bot assumes the user would always want to fetch a single meme whenever they specify a subreddit name. Can you refactor the code to provide some additional flexibility - i.e. allow the user to specify how many memes to fetch <i>after</i> the subreddit name?
 
 - We have a few event listeners left to define regarding database, but with the knowledge we have right now we can define the command recognition straight away
+
   - An event listener to respond to `;;random save best_meme_ever` -> extract the user-defined name `best_meme_ever` for now; we'll work more on it later
   - `;;random load best_meme_ever` -> extract the name `best_meme_ever`
   - `;;random delete best_meme_ever` -> `best_meme_ever`
     > 📝 Hint: the name is all the way at the end of the string, so it's actually pretty similar to how we just extracted the subreddit name from our previous event listener
+
+- Different from the rest, our `save` event listener is a bit more quirky
+
+  - We'd like it to save a meme we replied to when calling the command `;;random save name_here`
+  - We need to rig this behaviour (and provide some fault tolerance while we're at it - i.e. user-friendly error message if broken)
+
+  ```python
+  @commands.command(name='save')
+  async def _subreddit(ctx, arg1):
+    try:
+        response = await ctx.channel.fetch_message(ctx.message.reference.message_id) # this reads the message that the command-caller was responding to
+        meme_url = response.content # this extracts the meme's URL from the original message
+    except print(0):
+        await ctx.send("You forgot to reply to a meme, or the meme you replied to wasn't saved in the right format")
+        pass
+  ```
+
+  - And from there on out, we can refer to the URL of the specified meme simply via the variable `meme_url`
 
 ## 11. Setup MongoDB account
 
@@ -440,13 +468,13 @@ async def on_message(message): # on_message is a pre-defined event listener whic
 <details>
 <summary><b>First, we need to create a MongoDB account & a test database</b></summary>
 
-* Click on “try for free”
-* Click on “build my first cluster”
-* Pick a cloud provider (let's go with AWS)
-* Pick the free-tier cluster that is the closest to us
-* Wait 7-10 minutes for memory allocation to happen on a physical machine
-* Create the database we will use today → click on “Cluster0” >> "Collections" tab >> "Add my own data"
-* Give the database a name & the collection a name -> “test_discord_bot”, “memes” → Click on "Create"
+- Click on “try for free”
+- Click on “build my first cluster”
+- Pick a cloud provider (let's go with AWS)
+- Pick the free-tier cluster that is the closest to us
+- Wait 7-10 minutes for memory allocation to happen on a physical machine
+- Create the database we will use today → click on “Cluster0” >> "Collections" tab >> "Add my own data"
+- Give the database a name & the collection a name -> “test_discord_bot”, “memes” → Click on "Create"
 
 </details>
 
@@ -455,12 +483,12 @@ async def on_message(message): # on_message is a pre-defined event listener whic
 <details>
 <summary><b>Now we need to provide our application with access rights</b></summary>
 
-* Click on "Project 0" >> "Connect" >> "Go back"
-* Click on “Whitelist IP address" → set the IP address that is allowed to access the database (for this example, let's make it so that everyone can access the database - 0.0.0.0)
-* Create a MongoDB user with username & password to login
-* Choose a connection method >> "Connect your application"
-* Choose "Python" - this will generate the connection string appropriate to use for a Python application >> "version 3.6 or later" >> Copy “connection string only”
-* Paste this under <code>MONGODB_URI</code> in <code>.env</code> and import it in our application
+- Click on "Project 0" >> "Connect" >> "Go back"
+- Click on “Whitelist IP address" → set the IP address that is allowed to access the database (for this example, let's make it so that everyone can access the database - 0.0.0.0)
+- Create a MongoDB user with username & password to login
+- Choose a connection method >> "Connect your application"
+- Choose "Python" - this will generate the connection string appropriate to use for a Python application >> "version 3.6 or later" >> Copy “connection string only”
+- Paste this under <code>MONGODB_URI</code> in <code>.env</code> and import it in our application
 
 </details>
 
@@ -506,7 +534,7 @@ collection.insert_one(meme1)
 
 With the knowledge you know have, can you fill in the `;;random save best_meme_ever` event listener we defined earlier to provide the intended functionality?
 
-> 📝 Hint: we would like it to save a meme with the specified name to the database
+> 📝 Hint: we would like it to save a meme with the specified name to the database - it should also be saved with the previously-extracted `meme_url`
 
 ### Find
 
@@ -641,9 +669,9 @@ except TypeError:
 <details>
 <summary><b>❓ Idempotence - what is it, and what has it got to do with the DELETE operation?</b></summary>
 
-* According to RESTful conventions & standard (rules to conform to when designing API), DELETE is IDEMPOTENT
-  * This means they have no side-effect when performed twice (i.e. they aren’t supposed to be aware of whether they achieved the desired effect → whether truly deleted an existing resource, or got brushed off from the database due to referencing a non-existent resource)
-  * Unfortunately, this means for work for us - we need to distinguish between a successful deletion operation & a “good try, I attempted” one
+- According to RESTful conventions & standard (rules to conform to when designing API), DELETE is IDEMPOTENT
+  - This means they have no side-effect when performed twice (i.e. they aren’t supposed to be aware of whether they achieved the desired effect → whether truly deleted an existing resource, or got brushed off from the database due to referencing a non-existent resource)
+  - Unfortunately, this means for work for us - we need to distinguish between a successful deletion operation & a “good try, I attempted” one
 
 </details>
 

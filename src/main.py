@@ -2,6 +2,7 @@ from pymongo import MongoClient
 import os
 from dotenv import load_dotenv
 import discord
+from discord.ext import commands
 import requests
 from requests.exceptions import HTTPError
 import json
@@ -12,24 +13,23 @@ load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 GUILD = os.getenv('DISCORD_GUILD')
 COMMAND = os.getenv('DISCORD_COMMAND_ROOT')
-SUBREDDIT_COMMAND = os.getenv('DISCORD_COMMAND_SUBREDDIT')
-DB_SAVE_COMMAND = os.getenv('DISCORD_COMMAND_DB_SAVE')
-DB_LOAD_COMMAND = os.getenv('DISCORD_COMMAND_DB_LOAD')
-DB_DELETE_COMMAND = os.getenv('DISCORD_COMMAND_DB_DELETE')
+BOTNAME = os.getenv('BOT_NAME')
 API_ROOT = os.getenv('MEME_API_ROOT')
 MONGODB_URI = os.getenv('MONGODB_URI')
 DB = os.getenv('DB')
 COLLECTION = os.getenv('COLLECTION')
-client = discord.Client()
 
 collection = MongoClient(MONGODB_URI)[DB][COLLECTION]
+
+# all commands that this bot will respond to will begin with ";;bot_name"
+bot = commands.Bot(command_prefix=COMMAND + BOTNAME, strip_after_prefix=True)
 
 
 def get_random_memes(count):
     try:
         response = requests.get(f"{API_ROOT}{count}")
     except HTTPError as error:
-        return error
+        raise error
     json_data = json.loads(response.text)
     return json_data
 
@@ -38,9 +38,9 @@ def get_random_meme_from_subreddits(subReddit, count):
     try:
         response = requests.get(f"{API_ROOT}{subReddit}/{count}")
     except HTTPError as error:
-        return error
-    if(response.status_code == 404):
-        return 'fail'
+        raise error
+    if(response.status_code == 404 or response.status_code == 400):
+        raise HTTPError(response.text)
     json_data = json.loads(response.text)
     return json_data
 
@@ -60,70 +60,98 @@ meme_schema = Schema({
     "url":  And(str, Regex("^(https:\/\/i.redd.it\/)\w+\.\w{3}$"))})
 
 
-@client.event
-async def on_message(message):
-    if (message.content == COMMAND):
+@commands.command(name='new')
+async def _new(ctx, *args):
+    # ;;random
+    if (len(args) == 0):
         random_meme = get_random_memes(1)['memes'][0]
         while(check_link_die(random_meme['url']) == False):
             random_meme = get_random_memes(1)['memes'][0]
-        await message.channel.send(random_meme['url'])
+        await ctx.send(random_meme['url'])
 
-    if(message.content.startswith(COMMAND + ' ') and len(message.content) <= len(COMMAND) + 2 and message.content[-1].isnumeric()):
-        random_memes = get_random_memes(int(message.content[-1]))['memes']
+    # ;;random 5
+    if (len(args) > 0):
+        try:
+            random_memes = get_random_memes(int(args[0]))['memes']
+        except:
+            await ctx.send("Unrecognized command. Pretty sure that wasn't a number :)")
+            pass
         random_memes_image_link = [e['url'] for e in random_memes]
         for link in random_memes_image_link:
             if(check_link_die(link) == False):
                 continue
             else:
-                await message.channel.send(link)
+                await ctx.send(link)
+    pass
+bot.add_command(_new)
 
-    if(message.content.startswith(SUBREDDIT_COMMAND)):
-        subreddit = message.content[len(SUBREDDIT_COMMAND)+1:]
+
+@commands.command(name='subreddit')
+async def _subreddit(ctx, arg1):
+    subreddit = arg1
+    try:
         random_meme = get_random_meme_from_subreddits(subreddit, 1)
-        try:
-            if(random_meme["code"] == 400):
-                await message.channel.send('Subreddit not found')
-                return
-        except KeyError:
+        random_meme_subreddit = random_meme['memes'][0]
+        while(check_link_die(random_meme_subreddit['url']) == False):
+            random_meme = get_random_meme_from_subreddits(subreddit, 1)
             random_meme_subreddit = random_meme['memes'][0]
-            while(check_link_die(random_meme_subreddit['url']) == False):
-                random_meme = get_random_meme_from_subreddits(subreddit, 1)
-                random_meme_subreddit = random_meme['memes'][0]
-            await message.channel.send(random_meme_subreddit['url'])
+        await ctx.send(random_meme_subreddit['url'])
+    except HTTPError as err:
+        await ctx.send('Subreddit not found')
+        pass
+    pass
+bot.add_command(_subreddit)
 
-    # TODO: error handling for ineligible meme to save
-    if(message.content.startswith(DB_SAVE_COMMAND)):
-        saved_name = message.content[len(DB_SAVE_COMMAND)+1:]
-        saved_meme = {
-            "name": saved_name,
-            # TODO: extract previous message sent by bot & extract meme url (for now hardcode eligible url)
-            "url": "https://i.redd.it/jfmjabdkj4g91.jpg",
-        }
-        try:
-            meme_schema.validate(saved_meme)
-        except SchemaError as err:
-            await message.channel.send(err)
-            return
-        collection.insert_one(saved_meme)
-        await message.channel.send("Saved to database!")
 
-    if(message.content.startswith(DB_LOAD_COMMAND)):
-        lookup_name = message.content[len(DB_LOAD_COMMAND)+1:]
-        try:
-            found_meme = collection.find_one({"name": lookup_name})
-            await message.channel.send(found_meme["url"])
-        except TypeError:
-            await message.channel.send("Meme not found in database!")
+@commands.command(name='save')
+async def _save(ctx, arg1):
+    try:
+        response = await ctx.channel.fetch_message(ctx.message.reference.message_id)
+        meme_url = response.content
+    except print(0):
+        await ctx.send("You forgot to reply to a meme, or the meme you replied to wasn't saved in the right format")
+        pass
+    saved_name = arg1
+    saved_meme = {
+        "name": saved_name,
+        "url": meme_url,
+    }
+    try:
+        meme_schema.validate(saved_meme)
+    except SchemaError as err:
+        await ctx.send(err)
+        pass
+    collection.insert_one(saved_meme)
+    await ctx.send("Saved to database!")
+    pass
+bot.add_command(_save)
 
-    if(message.content.startswith(DB_DELETE_COMMAND)):
-        lookup_name = message.content[len(DB_DELETE_COMMAND)+1:]
-        try:
-            found_meme = collection.find_one({"name": lookup_name})
-            found_meme["url"]
-        except TypeError:
-            await message.channel.send("Meme not found in database!")
-            return
-        collection.delete_one(found_meme)
-        await message.channel.send("Meme was deleted from database!")
 
-client.run(TOKEN)
+@commands.command(name='load')
+async def _load(ctx, arg1):
+    lookup_name = arg1
+    try:
+        found_meme = collection.find_one({"name": lookup_name})
+        await ctx.send(found_meme["url"])
+    except TypeError:
+        await ctx.send("Meme not found in database!")
+        pass
+    pass
+bot.add_command(_load)
+
+
+@commands.command(name='delete')
+async def _delete(ctx, arg1):
+    lookup_name = arg1
+    try:
+        found_meme = collection.find_one({"name": lookup_name})
+        found_meme["url"]
+    except TypeError:
+        await ctx.send("Meme not found in database!")
+        pass
+    collection.delete_one(found_meme)
+    await ctx.send("Meme was deleted from database!")
+    pass
+bot.add_command(_delete)
+
+bot.run(TOKEN)
