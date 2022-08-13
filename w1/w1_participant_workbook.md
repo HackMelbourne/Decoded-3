@@ -159,7 +159,7 @@
 * Try changing the content of your `.env` file and doing `print(TOKEN)`, what happens?
 
 > **💡 Challenge** <br>
-> Can you try **defining your own environment variable** (besides `TOKEN`), and **printing it** to the console? How about **printing the current operating system** using only environment variables? (Will need some googling!)
+> Can you try **defining your own environment variable** (besides `TOKEN`), and **printing it** to the console? How about **printing the current user** using only environment variables? (Hint: Try printing all environment variables with `print(os.environ)`)
 
 ---
 
