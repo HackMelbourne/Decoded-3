@@ -15,7 +15,6 @@
 - [About DecodED](#about-decoded)
   - [Dates](#dates)
 - [About this repository](#about-this-repository)
-- [Pre-workshop - Python Refresher and Setup?](#pre-workshop---python-refresher-and-setup)
 - [Workshop 1 - Introduction to Discord.py](#workshop-1---introduction-to-discordpy)
 - [Workshop 2 - Tic Tac Toe](#workshop-2---tic-tac-toe)
 - [Workshop 3 - Polling Bot](#workshop-3---polling-bot)
@@ -33,8 +32,6 @@
 TODO we can have the Zoom links and stuff here as well
 |Workshop|Date|
 |--|--|
-|(internal deadline) MVP of Bots and Draft of Workbooks|Wed, 08 August 2022|
-|Pre-workshop||
 |Workshop 1||
 |Workshop 2||
 |Workshop 3||
@@ -53,18 +50,12 @@ TODO we can have the Zoom links and stuff here as well
   * Workshop Recordings
   * Code for the Discord Bot being created
 
-## Pre-workshop - Python Refresher and Setup?
-> TODO ? Python Refresher (review of Python, learnt in COMP10001), Setting Up your Python Environment
-* [📔Participant Workbook](w0-participant-workbook.md)
-* [🐍Python Cheatsheet](python-cheatsheet.md)
-* [Slides] TODO (if any)
-* [Workshop Recording] TODO
-
 ## Workshop 1 - Introduction to Discord.py
-> About DecodED3, Covers basics of Discord.py, create a basic bot that says "Hello, World!" and add it to a server
-* Xin Yu
-* [📔Participant Workbook](w1-participant-workbook.md)
-* [👾Discord.py Cheatsheet] TODO (opt.)
+> About DecodED3, Covers basics of Discord.py, create a basic bot that says "Hello, World!", learn about the basic structure of bots, 
+* [📔Participant Workbook](/w1/w1_participant_workbook.md)
+* [🐍Python Cheatsheet](/w1/python_cheatsheet.md)
+* [🐍Python Setup](/w1/python_setup.md)
+* [👾Discord.py Cheatsheet](/w1/discord_py_cheatsheet.md)
 * [🔗Discord.py Documentation](https://discordpy.readthedocs.io/en/stable/index.html)
 * [Workshop Recording] TODO
 
