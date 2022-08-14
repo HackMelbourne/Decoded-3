@@ -4,236 +4,55 @@
 
 ---
 
-<h1 align="center">Section A - general recap</h1>
+<h1 align="center">Making a meme bot with MongoDB and an external API</h1>
 <h2>Table of Contents</h2>
 <details>
 <summary>Table of Contents</summary>
 
-- [0. Create a Discord Account and Discord Server](#0-create-a-discord-account-and-discord-server)
-  - [Create a Discord Account](#create-a-discord-account)
-  - [Create a Discord Server](#create-a-discord-server)
-- [1. Create an Application](#1-create-an-application)
-- [2. Installing Modules: `discord.py` and `python-dotenv`](#2-installing-modules-discordpy-and-python-dotenv)
-- [3. Creating a Bot and Adding it to your server](#3-creating-a-bot-and-adding-it-to-your-server)
-  - [Environment Variables](#environment-variables)
-- [4. Make the Bot say "Hello, World!"](#4-make-the-bot-say-hello-world)
-- [5. Adding Commands](#5-adding-commands)
-- [6. Cogs](#6-cogs)
-- [6. Host your bot on repl.it](#6-host-your-bot-on-replit)
-- [Related Links:](#related-links)
+- [0. Host your bot on repl.it & Flask](#0-host-your-bot-on-replit-&-flask)
+  - [Repl.it](#replit)
+  - [Flask](#flask)
+- [1. Basic knowledge](#1-basic-knowledge)
+  - [API & HTTP requests](#api-&-http-requests)
+  - [Database](#database)
+- [2. Install necessary modules](#2-install-necessary-modules)
+  - [requests](#requests)
+  - [pymongo](#pymongo)
+  - [schema](#schema)
+- [3. Making HTTP requests to API](#3-making-http-requests-to-api)
+  - [Get](#get)
+- [4. Bind event listeners to command](#4-bind-event-listeners-to-command)
+  - [Command recognition](#command-recognition)
+- [5. Setup MongoDB account](#5-setup-mongodb-account)
+  - [MongoDB Atlas](#mongodb-atlas)
+  - [MongoDB URI](#mongodb-uri)
+- [6. Programmatically connect application to database](#6-programmatically-connect-application-to-database)
+  - [Insert](#insert)
+  - [Find](#find)
+  - [Delete](#delete)
+- [7. Defensive programming & error handling](#7-defensive-programming-&-error-handling)
+  - [404 Not Found](#404-not-found)
+  - [Validation schema](#validation-schema)
+  - [DB-lookup non-existent resource](#db-lookup-non-existent-resource)
+  - [Error-proof delete](#error-proof-delete)
 
 </details>
 
 ---
 
-## 0. Create a Discord Account and Discord Server
+## 0. Host your bot on repl.it & Flask
 
-- Before creating our bot, please make sure you create a Discord Account (it's free!) and a Discord Server to test your bot in
-
-### Create a Discord Account
-
-### Create a Discord Server
-
-> 📝 NOTE: Discord servers are sometimes refered to as **'guilds'** in some documentation (because some people confuse the word 'server' with computer servers 🗄️ XD)
-
-## 1. Create an Application
-
-- [Applications Page](https://discord.com/developers/applications)
-
-## 2. Installing Modules: `discord.py` and `python-dotenv`
-
-- Before we begin creating the bot, we have to install a few modules
-- Install `discord.py`
-  - discord.py is basically a set of tools which will allow us to control our bot with simple function calls.
-  - to install it, type this into your terminal:
-    ```
-    pip install -U discord.py
-    ```
-- Install `python-dotenv`
-  - `python-dotenv` is used to access our secret Discord token, which we will store in a `.env` file
-  - to install it, type this into your terminal:
-    ```
-    pip install -U python-dotenv
-    ```
-- Let us know if you run into any errors during installation!
-
-## 3. Creating a Bot and Adding it to your server
-
-### Environment Variables
-
-<details>
-<summary><b>❓ What are environment variables?</b></summary>
-
-When a program is run, it may need information from the operating system to configure its behaviour. This might include the operating system, current running folder, or more important things like passwords to various services (Discord here!). Basically, environment variables are variables/information about the environment its running on. They are a useful tool in providing information to your program, which is separate from your code. Developers commonly use `.env` files to specify these variables.
-
-</details>
-
-- `.env` have several advantages:
-
-1. They help different developers to keep their passwords separate from each other.
-1. When using a VCS (GitHub), you can prevent your `.env` file from being uploaded to the internet, thus protecting all of your passwords.
-
-To use a .env file, first make a `.env` file in the same folder as your code:
-
-```python
-# File name: .env
-# Add comments with '#'
-TOKEN=example.token.abc123
-```
-
-Then in your code file:
-
-```python
-# ./main.py (after the other imports)
-from dotenv import load_dotenv
-load_dotenv()
-TOKEN = os.getenv('TOKEN')
-```
-
-Try changing the content of your `.env` file and doing `print(TOKEN)`, what happens?
-
-#### **💡 Challenge**
-
-Can you try defining your own environment variable (besides `TOKEN`), and printing it to the console? How about printing the current operating system using only environment variables? (Will need some googling!)
-
-Now that we have the token for our bot, let's add it to our server. Do do this, we will use the official [Discord Applications Page.](https://discord.com/developers/applications)
-
-## 4. Make the Bot say "Hello, World!"
-
-- This is the very first thing programmers often do when we start a brand new project
-- Though simple, this is oftentimes the most surefire way to ensure things are working properly as intended
-
-  ```python
-  # ./main.py (after the other imports)
-  import discord
-  import dotenv
-  import os
-  from discord.ext import commands
-
-  dotenv.load_dotenv()
-
-  TOKEN = os.getenv('DISCORD_TOKEN')
-  DISCORD_COMMAND_PREFIX = os.getenv('DISCORD_COMMAND_PREFIX')
-  bot = commands.Bot(command_prefix=DISCORD_COMMAND_PREFIX)
-
-  @commands.command('hello')
-  async def _hello_world(ctx):
-      await ctx.send("hello world")
-  bot.add_command(_hello_world)
-
-  bot.run(TOKEN)
-  ```
-
-<details>
-<summary><b>❓ What are events?</b></summary>
-
-Events are exactly as you would think, stuff that happens that we want to know about. Examples would be someone joining a server, sending a message, or reacting to something.
-
-To 'hook' onto an event, we use a decorator on a function call:
-
-```python
-@client.event
-async def on_message(message):
-  ...
-```
-
-The function name tells discord.py what event we're listening to (in this case, messages).
-
-</details>
-
-<details>
-<summary><b>❓ What is <code>async</code> and <code>await</code>?</b></summary>
-
-Often in coding, you will need to perform a task, and wait for the response before you can do anything. An example would be Gmail, the website needs to wait for the mail to send, before telling you it's sent.
-Using `async` on a function lets Python know that this task involves waiting for something:
-
-```python
-async def send_mail():
-  await login()
-  await send()
-```
-
-and `await` tells Python to wait for an `async` function to finish before proceeding:
-
-```python
-await send_mail()
-print("Your mail was sent!")
-# As opposed to
-send_mail()
-print("This will be printed immediately")
-```
-
-In the context of discord.py, we can use `async` on our functions to tell discord.py it's going to do a long-running task, and `await` to do that task:
-
-```python
-async def on_join(self, ctx):
-  await ctx.send("Welcome to the server!")
-```
-
-</details>
-
-## 5. Adding Commands
-
-- Let's add our very first command: we'd like the bot to send a message with the content "hello world"
-
-  ```python
-  @commands.command('hello') # This decorator turns this Pythonic-looking function into a Discord.py-defined event listener, responding to commands starting with "hello"
-  async def _hello_world(ctx): # ctx - context; where the chat message came from (i.e. which guild)
-    await ctx.send("hello world")
-  bot.add_command(_hello_world)
-  ```
-
-## 6. Cogs
-
-- TODO Slides/Explanation: what and why of [cogs](https://discordpy.readthedocs.io/en/stable/ext/commands/cogs.html)
-
-  ```python
-  # ./main.py
-  from discord.ext import commands
-  import os
-
-  client = commands.Bot(command_prefix = "!")
-
-  # Looks inside the /cogs/ folder and loads up all of our cogs
-  for filename in os.listdir("./cogs"):
-      if filename.endswith(".py"):
-          client.load_extension("cogs." + filename[:-3])
-
-  client.run(TOKEN)
-  ```
-
-  ```python
-  # ./cogs/test.py
-  from discord.ext import commands
-
-  class Test(commands.Cog):
-      def __init__(self, client):
-          self.client = client
-
-      @commands.Cog.listener() # this is a decorator for events/listeners
-      async def on_ready(self):
-          print(f'We have logged in as {self.client.user}')
-
-      @commands.command() # this is for making a command
-      async def hello(self, ctx): # a command that says Hello! (called using !hello)
-          await ctx.send(f'Hello!')
-
-      @commands.command() # this is for making a command
-      async def ping(self, ctx):
-          await ctx.send(f'Pong! {round(self.bot.latency * 1000)}')
-
-  def setup(bot): # a extension must have a setup function
-      bot.add_cog(Test(bot)) # adding a cog
-  ```
-
-## 6. Host your bot on repl.it
+### [Repl.it](https://replit.com/~)
 
 -[Host discord bot using repl.it](https://www.codementor.io/@garethdwyer/building-a-discord-bot-with-python-and-repl-it-miblcwejz)
 
-Use [Flask](https://www.fullstackpython.com/flask.html) framework.
-=> To create a server keep the bot alive for couple of hours before it die due to long period of time not touching server in repl.it
+### [Flask](https://flask.palletsprojects.com/en/2.2.x/)
 
-Code for deployment => Creating server purpose
+Using the [Flask](https://www.fullstackpython.com/flask.html) framework.
+=> To create a server & keep the bot alive for a couple of hours (repl.it kills your hosted bot if not interacted with for a few hours)
+
+- Code for deployment => creating the server
+
 ```python
 # ./keep_alive.py
 from flask import Flask
@@ -253,7 +72,8 @@ def keep_alive():
     t.start()
 ```
 
-Adding two lines of these in main.py. (Put that before setting up the TOKEN)
+Adding these lines in main.py (before setting up the `TOKEN`)
+
 ```python
 # ./main.py
 from keep_alive import keep_alive
@@ -261,47 +81,7 @@ keep_alive()
 TOKEN = os.environ.get("DISCORD_BOT_TOKEN")
 ```
 
-## Related Links:
-
-- [Creating a Bot Account | discord.py](https://discordpy.readthedocs.io/en/stable/discord.html)
-- [Python Discord Bot Tutorial – Code a Discord Bot And Host it for Free](https://www.freecodecamp.org/news/create-a-discord-bot-with-python/)
-
----
-
-<h1 align="center">Section B - making a meme bot with MongoDB and an external API</h1>
-<h2>Table of Contents</h2>
-<details>
-<summary>Table of Contents</summary>
-
-- [7. Basic knowledge](#7-basic-knowledge)
-  - [API & HTTP requests](#api-&-http-requests)
-  - [Database](#database)
-- [8. Install necessary modules](#8-install-necessary-modules)
-  - [requests](#requests)
-  - [pymongo](#pymongo)
-  - [schema](#schema)
-- [9. Making HTTP requests to API](#9-making-http-requests-to-api)
-  - [Get](#get)
-- [10. Bind event listeners to command](#10-bind-event-listeners-to-command)
-  - [Command recognition](#command-recognition)
-- [11. Setup MongoDB account](#11-setup-mongodb-account)
-  - [MongoDB Atlas](#mongodb-atlas)
-  - [MongoDB URI](#mongodb-uri)
-- [12. Programmatically connect application to database](#12-programmatically-connect-application-to-database)
-  - [Insert](#insert)
-  - [Find](#find)
-  - [Delete](#delete)
-- [13. Defensive programming & error handling](#13-defensive-programming-&-error-handling)
-  - [404 Not Found](#404-not-found)
-  - [Validation schema](#validation-schema)
-  - [DB-lookup non-existent resource](#db-lookup-non-existent-resource)
-  - [Error-proof delete](#error-proof-delete)
-
-</details>
-
----
-
-## 7. Basic knowledge
+## 1. Basic knowledge
 
 > 📝 Before we dive in head-first into the world of wonderful tech, let's get to know the basics first!
 
@@ -344,7 +124,7 @@ TOKEN = os.environ.get("DISCORD_BOT_TOKEN")
 
   </details>
 
-## 8. Install necessary modules
+## 2. Install necessary modules
 
 ### [`requests`](https://requests.readthedocs.io/en/latest)
 
@@ -369,7 +149,7 @@ TOKEN = os.environ.get("DISCORD_BOT_TOKEN")
 
 > 📝 Let us know if you run into any errors during installation!
 
-## 9. Making HTTP requests to API
+## 3. Making HTTP requests to API
 
 ### Get
 
@@ -412,7 +192,7 @@ TOKEN = os.environ.get("DISCORD_BOT_TOKEN")
   - And same goes to invoking this function...
     > 📝 Let us know if you need a hint!
 
-## 10. Bind event listeners to command
+## 4. Bind event listeners to command
 
 ### Command recognition
 
@@ -422,10 +202,10 @@ TOKEN = os.environ.get("DISCORD_BOT_TOKEN")
 @commands.command(name='new')
 async def _new(ctx, *args):
 
-  # Recognize first variation of command (i.e. ;;random new)
+  # Recognize first variation of command (i.e. ;;new)
     # Respond accordingly
 
-  # Recognize second variation of command (i.e. ;;random new 5)
+  # Recognize second variation of command (i.e. ;;new 5)
     # Respond accordingly
 
   #...
@@ -433,7 +213,7 @@ async def _new(ctx, *args):
   pass
 ```
 
-- Let's define our first event listener - when a user messages `;;random`
+- Let's define our first event listener - when a user messages `;;new`
 
   - `*args` takes in an arbitrary amount of parameters as a list
   - By accessing how many parameters were extracted from a user's command invocation (i.e. `len(args)`), we can differentiate which variation of the command they were using
@@ -445,9 +225,9 @@ async def _new(ctx, *args):
     await ctx.send(random_meme['url']) # Have bot send message to channel - i.e. "respond"
   ```
 
-  > 📝 Host your bot, message `;;random` into the chat, and see if it works!
+  > 📝 Host your bot, message `;;new` into the chat, and see if it works!
 
-- A bit trickier, let's define our second event listener - when a user messages `;;random 3`
+- A bit trickier, let's define our second event listener - when a user messages `;;new 3`
 
   - We would like to extract the number of memes (in this case 3, but ideally any numeric value will do!)
     - In this case, the number of passed parameters will be one (i.e. `len(args) == 1`)
@@ -464,7 +244,7 @@ async def _new(ctx, *args):
 
   > 📝 `random_memes_image_link = [e['url'] for e in random_memes]` - this particular quirky syntax is Python's list comprehension - it's a really powerful tool to quickly reshape data structure to our use case, if leveraged properly. See if you can reason about this line!
 
-- Moving on to our third event listener - when a user messages `;;random subreddit wholesomememes`
+- Moving on to our third event listener - when a user messages `;;subreddit wholesomememes`
 
   - First, we need to rig this event listener to respond to the right command
 
@@ -490,14 +270,14 @@ async def _new(ctx, *args):
 
 - We have a few event listeners left to define regarding database, but with the knowledge we have right now we can define the command recognition straight away
 
-  - An event listener to respond to `;;random save best_meme_ever` -> extract the user-defined name `best_meme_ever` for now; we'll work more on it later
-  - `;;random load best_meme_ever` -> extract the name `best_meme_ever`
-  - `;;random delete best_meme_ever` -> `best_meme_ever`
+  - An event listener to respond to `;;save best_meme_ever` -> extract the user-defined name `best_meme_ever` for now; we'll work more on it later
+  - `;;load best_meme_ever` -> extract the name `best_meme_ever`
+  - `;;delete best_meme_ever` -> `best_meme_ever`
     > 📝 Hint: the name is all the way at the end of the string, so it's actually pretty similar to how we just extracted the subreddit name from our previous event listener
 
 - Different from the rest, our `save` event listener is a bit more quirky
 
-  - We'd like it to save a meme we replied to when calling the command `;;random save name_here`
+  - We'd like it to save a meme we replied to when calling the command `;;save name_here`
   - We need to rig this behaviour (and provide some fault tolerance while we're at it - i.e. user-friendly error message if broken)
 
   ```python
@@ -513,7 +293,7 @@ async def _new(ctx, *args):
 
   - And from there on out, we can refer to the URL of the specified meme simply via the variable `meme_url`
 
-## 11. Setup MongoDB account
+## 5. Setup MongoDB account
 
 ### [MongoDB Atlas](https://www.mongodb.com/atlas/database)
 
@@ -546,7 +326,7 @@ async def _new(ctx, *args):
 
 > 📝 Let us know if you run into any errors during the process!
 
-## 12. Programmatically connect application to database
+## 6. Programmatically connect application to database
 
 - First we need to create the connection to the database
   - We need to use MongoClient - it's an object that represents the client (us!)'s connection to the database
@@ -584,7 +364,7 @@ collection.insert_one(meme1)
 
 #### **💡 Challenge**
 
-With the knowledge you know have, can you fill in the `;;random save best_meme_ever` event listener we defined earlier to provide the intended functionality?
+With the knowledge you know have, can you fill in the `;;save best_meme_ever` event listener we defined earlier to provide the intended functionality?
 
 > 📝 Hint: we would like it to save a meme with the specified name to the database - it should also be saved with the previously-extracted `meme_url`
 
@@ -600,7 +380,7 @@ results = collection.find_one({"name": "Leo Dicaprio drinking"})
 
 #### **💡 Challenge**
 
-With the knowledge you know have, can you fill in the `;;random load best_meme_ever` event listener we defined earlier to provide the intended functionality?
+With the knowledge you know have, can you fill in the `;;load best_meme_ever` event listener we defined earlier to provide the intended functionality?
 
 > 📝 Hint: we would like it to load a meme with the specified name from the database
 
@@ -616,11 +396,11 @@ collection.delete_one({"name": "Leo Dicaprio drinking"})
 
 #### **💡 Challenge**
 
-With the knowledge you know have, can you fill in the `;;random delete best_meme_ever` event listener we defined earlier to provide the intended functionality?
+With the knowledge you know have, can you fill in the `;;delete best_meme_ever` event listener we defined earlier to provide the intended functionality?
 
 > 📝 Hint: we would like it to delete a meme with the specified name from the database
 
-## 13. Defensive programming & error handling
+## 7. Defensive programming & error handling
 
 - We don’t want anyone to see a nasty bug!
 - Bury them deep under our error handler & provide a user-friendly error message instead!
