@@ -18,27 +18,33 @@
 
 ### Class and Objects
 
-<img src="w5/images/class.png" width="500"/>
+<img src="images/class.png" width="500"/>
 <br /><br />
 
-A class is an abstract blueprint used to create more specific objects. On the other hand, an object is an instance derived from a class.
+A class is an abstract blueprint used to create more specific objects. On the other hand, an object is an instance
+derived from a class.
 
 ### Inheritance
 
-<img src="w5/images/inheritance.png" width="500"/>
+<img src="images/inheritance.png" width="500"/>
 <br /><br />
 
-Inheritance is one of the most important aspects of OOP. It allows classes to inherit features of other classes. Put another way, parent classes extend attributes and behaviors to child classes. Inheritance supports reusability.
+Inheritance is one of the most important aspects of OOP. It allows classes to inherit features of other classes. Put
+another way, parent classes extend attributes and behaviors to child classes. Inheritance supports reusability.
 
 ---
 
 ## 1. Create Bot Object
 
-To create our guild attribute and bot token, we first need to create an environment file (link) and within it, we need to include .
+To create our guild attribute and bot token, we first need to create an environment file (link) and within it, we need
+to include .
 
-discord slash commands take 1-2 hours to sync globally (since they are doing it for every guild). Therefore, we can pass in specific guilds where the commands we create will sync instantly.
+discord slash commands take 1-2 hours to sync globally (since they are doing it for every guild). Therefore, we can pass
+in specific guilds where the commands we create will sync instantly.
 
-First, we need to define a `Bot` class. The `Bot` class we define inherits methods and attributes defined by the `commands.Bot` class provided by the library. We then add our bot token and guilds to the class. We also need to define a `setup_hook()` method to intitialize the COG extension which contains the tictactoe game engine.
+First, we need to define a `Bot` class. The `Bot` class we define inherits methods and attributes defined by
+the `commands.Bot` class provided by the library. We then add our bot token and guilds to the class. We also need to
+define a `setup_hook()` method to intitialize the COG extension which contains the tictactoe game engine.
 
 ```Python
 class Bot(commands.Bot):
@@ -74,10 +80,11 @@ class Bot(commands.Bot):
 
 ## 2. Create TicTacToe Button
 
-We wil now create our `TicTacToeButton` class. The objects from this class will represent the clickable buttons of the TicTacToe board. The class will inherit the `discord.ui.Button` class from the discord.py library.
+We wil now create our `TicTacToeButton` class. The objects from this class will represent the clickable buttons of the
+TicTacToe board. The class will inherit the `discord.ui.Button` class from the discord.py library.
 
 We will first initialise the style and position of the button:
- 
+
 ```python
 def __init__(self, row, col):
     super().__init__(style=discord.ButtonStyle.secondary, label=" ", row=row)
@@ -85,18 +92,21 @@ def __init__(self, row, col):
     self.col = col
 ```
 
-The different styles of a discord button can be found [here](https://user-images.githubusercontent.com/88476243/141746269-aaea9f9b-8f8e-4c59-9b67-75ec6e19d878.png)
+The different styles of a discord button can be
+found [here](https://user-images.githubusercontent.com/88476243/141746269-aaea9f9b-8f8e-4c59-9b67-75ec6e19d878.png)
 
 ## 3. Create TicTacToe Board
 
-The `TicTacToe` class represents the TicTacToe board users play on. It inherits the `discord.ui.View` class from the discord.py library.
+The `TicTacToe` class represents the TicTacToe board users play on. It inherits the `discord.ui.View` class from the
+discord.py library.
 
 The TicTacToe board will need to store state of the board:
-1.  Player objects of current players
-2.  Specify current player (by default player1 starts first)
-3.  Create board
-    two-dimensional list initialized using numpy library
-4.  Fill board with tictactoe buttons defined earlier
+
+1. Player objects of current players
+2. Specify current player (by default player1 starts first)
+3. Create board
+   two-dimensional list initialized using numpy library
+4. Fill board with tictactoe buttons defined earlier
 
 Thus the initialisation for the Board:
 ```python
@@ -114,11 +124,14 @@ def __init__(self, player_1, player_2):
 
 ## 4. TicTacToe Buttons handle click
 
-The code for handling button clicks needs to be placed within this function (as per the docs) under the `TicTacToeButton` class:
+The code for handling button clicks needs to be placed within this function (as per the docs) under
+the `TicTacToeButton` class:
 ```Python
 async def callback(self, interaction):
 ```
-This function is called whenever the button is clicked. Here are some of the variables you might need to make the required changes for a button click:
+
+This function is called whenever the button is clicked. Here are some of the variables you might need to make the
+required changes for a button click:
 ```Python
 interaction.user  # The user that's clicking the button
 self.style        # The style of the current button
@@ -136,14 +149,16 @@ Here's what should be included within this function:
     - -1 if player2 clicked
 - Response to acknowledge click of button
 
-At the end of the function, you will need to update the board to reflect the latest changes. You can also include a message at the top the board by specifying a `content`. This is done like so:
+At the end of the function, you will need to update the board to reflect the latest changes. You can also include a
+message at the top the board by specifying a `content`. This is done like so:
 ```Python
 await interaction.response.edit_message(content=content, view=self.view)
 ```
 
 ## 5. Game Logic
 
-Create the tictactoe logic for deciding a winner within a function called `check_winner(self)` that's placed inside the `TicTacToe` class.
+Create the tictactoe logic for deciding a winner within a function called `check_winner(self)` that's placed inside
+the `TicTacToe` class.
 
 You can access the current state of the board by using `self.board`.
 
@@ -159,14 +174,17 @@ We also have to check for diagonal winners using list indexing
 
 ## 6. Create Slash Commands
 
-As a final step to bring our TicTacToe bot to life, we will use slash commands to interface with our bot. To create a slash command we will need to achive the following:
+As a final step to bring our TicTacToe bot to life, we will use slash commands to interface with our bot. To create a
+slash command we will need to achive the following:
 
 - define the command name and description
 - define user input (discord member)
 - define the user input description
 - acknowlege command by sending tictactoe board view
 
-We now create a Commands class which inherits methods and attributes from the `commands.Cog` class provided by the library. This allows us to store the TicTacToe game engine as a COG in its own file. We also need to create a function to run when a slash commands event is raised. 
+We now create a Commands class which inherits methods and attributes from the `commands.Cog` class provided by the
+library. This allows us to store the TicTacToe game engine as a COG in its own file. We also need to create a function
+to run when a slash commands event is raised.
 
 ```python
 class Commands(commands.Cog):
@@ -192,11 +210,11 @@ class Commands(commands.Cog):
               view=TicTacToe(player_1, player_2))
 ```
 
-
 sources
-- https://adrian-td96.medium.com/oop-for-dummies-3e6007c8e7f4#:~:text=Inheritance%20is%20one%20of%20the,Inheritance%20supports%20reusability.
+
+- https://adrian-td96.medium.com/oop-for-dummies-3e6007c8e7f4#:~:text=Inheritance%20is%20one%20of%20the,Inheritance%20supports%20reusability
+  .
 - https://www.programiz.com/cpp-programming/inheritance
 - https://javatutorial.net/java-oop/
-
 
 [docs](https://gist.github.com/lykn/bac99b06d45ff8eed34c2220d86b6bf4)

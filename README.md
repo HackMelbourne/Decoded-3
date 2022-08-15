@@ -1,202 +1,108 @@
-<h1 align="center">TicTacToe Bot</h1>
+<h1 align="center">DecodED 3</h1>
+
+> 👋 Hello and welcome to DecodED 3! Over the next 6 weeks, we will be creating a discord bot
+> with [Discord.py](https://discordpy.readthedocs.io/en/stable/index.html)
+
+<h2>Demo</h2>
+
+* TODO add gif/screenshot of Discord bot in action
 
 ---
 
 <h2>Table of Contents</h2>
+<details>
+<summary>Table of Contents</summary>
 
-- [Object Oriented Concepts](#object-oriented-concepts)
-  - [Class and Objects](#class-and-objects)
-  - [Inheritance](#inheritance)
-- [1. Create Bot Object](#1-create-bot-object)
-- [2. Create TicTacToe Button](#2-create-tictactoe-button)
-- [3. Create TicTacToe Board](#3-create-tictactoe-board)
-- [4. TicTacToe Buttons handle click](#4-tictactoe-buttons-handle-click)
-- [5. Game Logic](#5-game-logic)
-- [6. Create Slash Commands](#6-create-slash-commands)
+- [About DecodED](#about-decoded)
+  - [Dates](#dates)
+- [About this repository](#about-this-repository)
+- [Workshop 1 - Introduction to Discord.py](#workshop-1---introduction-to-discordpy)
+- [Workshop 2 - Tic Tac Toe](#workshop-2---tic-tac-toe)
+- [Workshop 3 - Polling Bot](#workshop-3---polling-bot)
+- [Workshop 4 - Meme Bot](#workshop-4---meme-bot)
+- [Workshop 5 - Music Bot](#workshop-5---music-bot)
 
-## Object Oriented Concepts
-
-### Class and Objects
-
-<img src="images/class.png" width="500"/>
-<br /><br />
-
-A class is an abstract blueprint used to create more specific objects. On the other hand, an object is an instance derived from a class.
-
-### Inheritance
-
-<img src="images/inheritance.png" width="500"/>
-<br /><br />
-
-Inheritance is one of the most important aspects of OOP. It allows classes to inherit features of other classes. Put another way, parent classes extend attributes and behaviors to child classes. Inheritance supports reusability.
+</details>
 
 ---
 
-## 1. Create Bot Object
+## About DecodED
 
-To create our guild attribute and bot token, we first need to create an environment file (link) and within it, we need to include .
+* DecodED is a series of workshops run every year by HackMelbourne to help students/teach students with introductory
+  programming background to/how to... TODO
+* This year we are trying a new teaching style with DecodED so let us know if you like it TODO add a feedback link
 
-discord slash commands take 1-2 hours to sync globally (since they are doing it for every guild). Therefore, we can pass in specific guilds where the commands we create will sync instantly.
+### Dates
 
-First, we need to define a `Bot` class. The `Bot` class we define inherits methods and attributes defined by the `commands.Bot` class provided by the library. We then add our bot token and guilds to the class. We also need to define a `setup_hook()` method to intitialize the COG extension which contains the tictactoe game engine.
+Lesson | Location | People | Date
+| -- | -- | -- | -- |
+Foundations (Basic) | Alan Gilbert 101 and Zoom | Xin Yu | 2pm, Wednesday 24th August
+Meme bot (easy) | Alan Gilbert G20 and Zoom | Aly, Minh | Wednesday 31st August
+Music bot | Alan Gilbert 121 (Theatre) and Zoom | Aryan, Ryan | Wednesday 7th September
+Poll | Alan Gilbert G20 and Zoom | Jerry, Hoan | Wednesday 14th September
+TicTacToe bot | Alan Gilbert 103 and Zoom | Warren, Daniel | 2pm, Wednesday 21st September
 
-```Python
-class Bot(commands.Bot):
-    def __init__(self):
-        super().__init__(command_prefix=" ",
-                        intents=discord.Intents.all())
-        self.GUILDS = GUILDS
-        self.TOKEN = TOKEN
+### Zoom Link: https://unimelb.zoom.us/j/88528442813?pwd=WlYrQ3pHcm5xMXpGQkZZSllZZTNvQT09
 
-    async def setup_hook(self):
-        await self.load_extension(f"tictactoe")
-        for guild in self.GUILDS:
-            await self.tree.sync(guild=guild)
+Password: 323737
 
-    async def on_ready(self):
-        print("ready...")
-```
+## About this repository
 
-<details>
-<summary>What is self?</summary>
+* This repository contains:
+  * Participant Workbook
+    * each workbook is made up of multiple Parts which are then made up of multiple **✅ Tasks** that the participant
+      should complete, with **🧩 Hints** that help guide them in completing the Task, and **💡 Extensions** that are
+      optional tasks that can be done if the participant has completed the Task ahead of schedule
+    * The flow:
+      1. host presents/teaches about Part 1
+      2. participants follow the workbook to complete the ✅ Tasks in Part 1 of the workbook - participants who are ahead
+         of the tasks can start do the 💡 Extensions and participants who are behind can use the 🧩 Hints or ask for
+         help
+      3. once most of the participants are done with Part 1, host starts presenting/teaching Part 2 and the cycle
+         continues
+  * Slides (if any)
+  * Workshop Recordings
+  * Code for the Discord Bot being created
 
-`self` is simply a keyword used to represent an instance (object) of the given class
+## Workshop 1 - Introduction to Discord.py
 
-</details>
+> About DecodED3, Covers basics of Discord.py, create a basic bot that says "Hello, World!", learn about the basic
+> structure of bots,
 
-<details>
-<summary>What is super()?</summary>
+* [📔Participant Workbook](/w1/README.md)
+* [🐍Python Cheatsheet](/w1/python_cheatsheet.md)
+* [🐍Python Setup](/w1/python_setup.md)
+* [👾Discord.py Cheatsheet](/w1/discord_py_cheatsheet.md)
+* [🔗Discord.py Documentation](https://discordpy.readthedocs.io/en/stable/index.html)
+* [Workshop Recording] TBD!
 
-`super()` is a reference to superclass (parent) objects
+## Workshop 2 - Meme Bot
 
-</details>
+> Who doesn’t love a good meme? Join us and create the functionality to meme on your friends so hard that they wished
+> they had their own meme bot.
 
+* Aly and Minh
 
-## 2. Create TicTacToe Button
+## Workshop 3 - Music Bot
 
-We wil now create our `TicTacToeButton` class. The objects from this class will represent the clickable buttons of the TicTacToe board. The class will inherit the `discord.ui.Button` class from the discord.py library.
+> Ever since YouTube banned music bots, discord servers have been desperately lacking some tunes. Impress your friends
+> by bringing them back by building your own bot with the ability to play music, plus additional music controls! Now you
+> can resume your lo-fi beat study sessions with your mates!
 
-We will first initialise the style and position of the button:
- 
-```python
-def __init__(self, row, col):
-    super().__init__(style=discord.ButtonStyle.secondary, label=" ", row=row)
-    self.row = row
-    self.col = col
-```
+* Aryan and Ryan
 
-The different styles of a discord button can be found [here](https://user-images.githubusercontent.com/88476243/141746269-aaea9f9b-8f8e-4c59-9b67-75ec6e19d878.png)
+## Workshop 4 - Polling Bot
 
-## 3. Create TicTacToe Board
+> Caught up in your server arguing why Minecraft is (definitively) the best game? Why not run a poll on your server and
+> prove your friends wrong? Learn to build your own polling bot to settle your arguments in style 😎
 
-The `TicTacToe` class represents the TicTacToe board users play on. It inherits the `discord.ui.View` class from the discord.py library.
+* Jerry and Hoan
 
-The TicTacToe board will need to store state of the board:
-1.  Player objects of current players
-2.  Specify current player (by default player1 starts first)
-3.  Create board
-    two-dimensional list initialized using numpy library
-4.  Fill board with tictactoe buttons defined earlier
+## Workshop 5 - Tic Tac Toe
 
-Thus the initialisation for the Board:
-```python
-def __init__(self, player_1, player_2):
-    super().__init__()
-    self.player_1 = player_1
-    self.player_2 = player_2
-    self.current_player = self.player_1
-    self.board = np.zeros((SIZE, SIZE))
+> Fancy a game, but don’t want to leave your friends in discord? In this lesson, you’ll learn to implement a tic tac toe
+> game within the Discord bot so you can vs your friends whenever you wish!
 
-    for row in range(SIZE):
-        for col in range(SIZE):
-            self.add_item(TicTacToeButton(row, col))
-```
-
-## 4. TicTacToe Buttons handle click
-
-The code for handling button clicks needs to be placed within this function (as per the docs) under the `TicTacToeButton` class:
-```Python
-async def callback(self, interaction):
-```
-This function is called whenever the button is clicked. Here are some of the variables you might need to make the required changes for a button click:
-```Python
-interaction.user  # The user that's clicking the button
-self.style        # The style of the current button
-self.label        # The text on the current button
-self.disabled     # Specifies whether the button is disabled: True / False
-self.view.board[self.row][self.col]   # The current state of the game board (as defined in Step 3)
-self.view.current_player  # The current player that's supposed to play
-```
-
-Here's what should be included within this function:
-- Update color and label of button to color of player that clicked
-- Disable the button to prevent further interaction
-- Update tictactoe board
-    - 1 if player1 clicked
-    - -1 if player2 clicked
-- Response to acknowledge click of button
-
-At the end of the function, you will need to update the board to reflect the latest changes. You can also include a message at the top the board by specifying a `content`. This is done like so:
-```Python
-await interaction.response.edit_message(content=content, view=self.view)
-```
-
-## 5. Game Logic
-
-Create the tictactoe logic for deciding a winner within a function called `check_winner(self)` that's placed inside the `TicTacToe` class.
-
-You can access the current state of the board by using `self.board`.
-
-<details>
-<summary>Hint #1</summary>
-Take the sum for a given row/column if its equal to size of the board then we know there is a winner
-</details>
-
-<details> 
-<summary>Hint #2</summary>
-We also have to check for diagonal winners using list indexing
-</details>
-
-## 6. Create Slash Commands
-
-As a final step to bring our TicTacToe bot to life, we will use slash commands to interface with our bot. To create a slash command we will need to achive the following:
-
-- define the command name and description
-- define user input (discord member)
-- define the user input description
-- acknowlege command by sending tictactoe board view
-
-We now create a Commands class which inherits methods and attributes from the `commands.Cog` class provided by the library. This allows us to store the TicTacToe game engine as a COG in its own file. We also need to create a function to run when a slash commands event is raised. 
-
-```python
-class Commands(commands.Cog):
-    def __init__(self, bot):
-    self.bot = bot
-
-    @app_commands.command(
-    name="tictactoe",                       # slash command name
-    description="Play a game of TicTacToe"  # slash command description
-    )
-    @app_commands.describe(
-    opponent="User you want to play with"   # user input description
-    )
-    async def tictactoe(self, interaction, opponent: discord.Member):
-      player_1 = interaction.user
-      player_2 = opponent 
-
-      if player_1 == player_2 or player_2.bot:
-          await interaction.response.send_message("you cannot challenge that user")
-      else:
-          await interaction.response.send_message(
-              f":game_die: `{player_1.display_name}` **VS** `{player_2.display_name}`\n\n{player_1.mention}, select your move:",
-              view=TicTacToe(player_1, player_2))
-```
+* Warren and Weng Jae (Daniel)
 
 
-sources
-- https://adrian-td96.medium.com/oop-for-dummies-3e6007c8e7f4#:~:text=Inheritance%20is%20one%20of%20the,Inheritance%20supports%20reusability.
-- https://www.programiz.com/cpp-programming/inheritance
-- https://javatutorial.net/java-oop/
-
-
-[docs](https://gist.github.com/lykn/bac99b06d45ff8eed34c2220d86b6bf4)
