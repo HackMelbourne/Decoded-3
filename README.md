@@ -55,7 +55,7 @@ Password: 323737
 
 ## Workshop 1 - Introduction to Discord.py
 > About DecodED3, Covers basics of Discord.py, create a basic bot that says "Hello, World!", learn about the basic structure of bots, 
-* [📔Participant Workbook](/w1/w1_participant_workbook.md)
+* [📔Participant Workbook](/w1/README.md)
 * [🐍Python Cheatsheet](/w1/python_cheatsheet.md)
 * [🐍Python Setup](/w1/python_setup.md)
 * [👾Discord.py Cheatsheet](/w1/discord_py_cheatsheet.md)
