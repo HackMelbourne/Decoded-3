@@ -66,7 +66,7 @@ class MusicBot(commands.Cog):
     @commands.command()
     async def stop(self, ctx):
         if ctx.guild.id in self.voice_clients:
-            self.voice_clients[ctx.guild.id].stop()
+            await self.voice_clients[ctx.guild.id].stop()
             await ctx.send('Stopped')
         else:
             await ctx.send('Not in a voice channel')
