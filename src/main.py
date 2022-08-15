@@ -1,3 +1,4 @@
+# TODO move to cogs folder
 from pymongo import MongoClient
 import os
 from dotenv import load_dotenv
