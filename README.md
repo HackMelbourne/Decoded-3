@@ -29,14 +29,17 @@
 * DecodED is a series of workshops run every year by HackMelbourne to help students/teach students with introductory programming background to/how to... TODO
 * This year we are trying a new teaching style with DecodED so let us know if you like it TODO add a feedback link
 ### Dates
-TODO we can have the Zoom links and stuff here as well
-|Workshop|Date|
-|--|--|
-|Workshop 1||
-|Workshop 2||
-|Workshop 3||
-|Workshop 4||
-|Workshop 5||
+
+Lesson | Location | People | Date
+| -- | -- | -- | -- |
+Foundations (Basic) | Alan Gilbert 101 and Zoom | Xin Yu | 2pm, Wednesday  24th August 
+Meme bot (easy) | Alan Gilbert G20 and Zoom | Aly, Minh | Wednesday 31st August
+Music bot | Alan Gilbert 121 (Theatre) and Zoom | Aryan, Ryan | Wednesday 7th September 
+Poll | Alan Gilbert G20 and Zoom | Jerry, Hoan | Wednesday 14th September
+TicTacToe bot | Alan Gilbert 103 and Zoom | Warren, Daniel | 2pm, Wednesday 21st September
+
+### Zoom Link: https://unimelb.zoom.us/j/88528442813?pwd=WlYrQ3pHcm5xMXpGQkZZSllZZTNvQT09
+Password: 323737
 
 ## About this repository
 * This repository contains:
