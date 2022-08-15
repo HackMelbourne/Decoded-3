@@ -46,7 +46,7 @@ Simply click on this link and ffmpeg will start downloading (https://evermeet.cx
 Un-zip the ffmpeg and than open the folder, open bin, from there copy the path of ffmpeg.exe which we will use while
 adding ffmpeg.
 
-## 1. Insatalling Modules: 'youtube_dl'
+## 1. Installing Modules: 'youtube_dl'
 
 * Before we begin creating the bot, we have to install a few modules
 * Install `youtube_dl`
