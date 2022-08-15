@@ -1,8 +1,7 @@
-from discord.ext import commands
 import discord
-from discord import app_commands
-
 import numpy as np
+from discord import app_commands
+from discord.ext import commands
 
 SIZE = 3
 
@@ -53,7 +52,7 @@ class TicTacToeButton(discord.ui.Button):
         await interaction.response.edit_message(content=content, view=self.view)
 
 
-class TicTacToe(discord.ui.View):
+class TicTacToeView(discord.ui.View):
     def __init__(self, player_1, player_2):
         super().__init__()
         self.player_1 = player_1
@@ -96,7 +95,7 @@ class TicTacToe(discord.ui.View):
             return "tie"
 
 
-class Commands(commands.Cog):
+class TicTacToe(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
@@ -116,11 +115,11 @@ class Commands(commands.Cog):
         else:
             await interaction.response.send_message(
                 f":game_die: `{player_1.display_name}` **VS** `{player_2.display_name}`\n\n{player_1.mention}, select your move:",
-                view=TicTacToe(player_1, player_2))
+                view=TicTacToeView(player_1, player_2))
 
 
 async def setup(bot):
     await bot.add_cog(
-        Commands(bot),
+        TicTacToe(bot),
         guilds=bot.GUILDS
     )
