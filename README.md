@@ -15,7 +15,6 @@
 - [About DecodED](#about-decoded)
   - [Dates](#dates)
 - [About this repository](#about-this-repository)
-- [Pre-workshop - Python Refresher and Setup?](#pre-workshop---python-refresher-and-setup)
 - [Workshop 1 - Introduction to Discord.py](#workshop-1---introduction-to-discordpy)
 - [Workshop 2 - Tic Tac Toe](#workshop-2---tic-tac-toe)
 - [Workshop 3 - Polling Bot](#workshop-3---polling-bot)
@@ -30,16 +29,17 @@
 * DecodED is a series of workshops run every year by HackMelbourne to help students/teach students with introductory programming background to/how to... TODO
 * This year we are trying a new teaching style with DecodED so let us know if you like it TODO add a feedback link
 ### Dates
-TODO we can have the Zoom links and stuff here as well
-|Workshop|Date|
-|--|--|
-|(internal deadline) MVP of Bots and Draft of Workbooks|Wed, 03 August 2022|
-|Pre-workshop||
-|Workshop 1||
-|Workshop 2||
-|Workshop 3||
-|Workshop 4||
-|Workshop 5||
+
+Lesson | Location | People | Date
+| -- | -- | -- | -- |
+Foundations (Basic) | Alan Gilbert 101 and Zoom | Xin Yu | 2pm, Wednesday  24th August 
+Meme bot (easy) | Alan Gilbert G20 and Zoom | Aly, Minh | Wednesday 31st August
+Music bot | Alan Gilbert 121 (Theatre) and Zoom | Aryan, Ryan | Wednesday 7th September 
+Poll | Alan Gilbert G20 and Zoom | Jerry, Hoan | Wednesday 14th September
+TicTacToe bot | Alan Gilbert 103 and Zoom | Warren, Daniel | 2pm, Wednesday 21st September
+
+### Zoom Link: https://unimelb.zoom.us/j/88528442813?pwd=WlYrQ3pHcm5xMXpGQkZZSllZZTNvQT09
+Password: 323737
 
 ## About this repository
 * This repository contains:
@@ -53,33 +53,32 @@ TODO we can have the Zoom links and stuff here as well
   * Workshop Recordings
   * Code for the Discord Bot being created
 
-## Pre-workshop - Python Refresher and Setup?
-> TODO ? Python Refresher (review of Python, learnt in COMP10001), Setting Up your Python Environment
-* [📔Participant Workbook](w0-participant-workbook.md)
-* [🐍Python Cheatsheet](python-cheatsheet.md)
-* [Slides] TODO (if any)
-* [Workshop Recording] TODO
-
 ## Workshop 1 - Introduction to Discord.py
-> About DecodED3, Covers basics of Discord.py, create a basic bot that says "Hello, World!" and add it to a server (Extensions: deployment with repl.it)
-* Ryan, Xin Yu
-* [📔Participant Workbook](w1-participant-workbook.md)
-* [👾Discord.py Cheatsheet] TODO (opt.)
+> About DecodED3, Covers basics of Discord.py, create a basic bot that says "Hello, World!", learn about the basic structure of bots, 
+* [📔Participant Workbook](/w1/README.md)
+* [🐍Python Cheatsheet](/w1/python_cheatsheet.md)
+* [🐍Python Setup](/w1/python_setup.md)
+* [👾Discord.py Cheatsheet](/w1/discord_py_cheatsheet.md)
 * [🔗Discord.py Documentation](https://discordpy.readthedocs.io/en/stable/index.html)
-* [Workshop Recording] TODO
+* [Workshop Recording] TBD!
 
-## Workshop 2 - Tic Tac Toe
-> TODO ...
-* Warren and Weng Jae (Daniel)
+## Workshop 2 - Meme Bot
+> Who doesn’t love a good meme? Join us and create the functionality to meme on your friends so hard that they wished they had their own meme bot.
+* Aly and Minh
 
-## Workshop 3 - Polling Bot
-> TODO ...
+## Workshop 3 - Music Bot
+> Ever since YouTube banned music bots, discord servers have been desperately lacking some tunes. Impress your friends by bringing them back by building your own bot with the ability to play music, plus additional music controls! Now you can resume your lo-fi beat study sessions with your mates! 
+
+* Aryan and Ryan
+
+## Workshop 4 - Polling Bot
+> Caught up in your server arguing why Minecraft is (definitively) the best game? Why not run a poll on your server and prove your friends wrong? Learn to build your own polling bot to settle your arguments in style 😎
+
 * Jerry and Hoan
 
-## Workshop 4 - Meme Bot
-> TODO ...
-* Anh Minh
+## Workshop 5 - Tic Tac Toe
+> Fancy a game, but don’t want to leave your friends in discord? In this lesson, you’ll learn to implement a tic tac toe game within the Discord bot so you can vs your friends whenever you wish!
 
-## Workshop 5 - Music Bot
-> TODO ...
-* Aryan
+* Warren and Weng Jae (Daniel)
+
+
