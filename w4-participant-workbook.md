@@ -1,4 +1,4 @@
-<h1 align="center">[Participant's Workbook] Week 4: Memebot</h1>
+<h1 align="center">[Participant's Workbook] Week 2: Memebot</h1>
 
 > Related Pages: [DecodED 3](./README.md)
 
