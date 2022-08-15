@@ -1,20 +1,26 @@
-import discord
 import os
-from discord.ext import commands
-import poll
+
+import discord
 from dotenv import load_dotenv
 
 load_dotenv()
-#bot object
-bot = commands.Bot(command_prefix = "$", intents = intents)
+TOKEN = os.getenv('TOKEN')
+
 client = discord.Client()
 
-# client gets ready 
-@bot.event
+
+@client.event
 async def on_ready():
-  print("The bot is ready.")
+    print(f'We have logged in as {client.user}')
 
-#add poll to the current bot
-bot.add_cog(poll.Poll(bot))
-bot.run(os.environ.get('TOKEN'))
 
+@client.event
+async def on_message(msg):
+    # print(msg.content)
+    if msg.author == client.user:
+        return
+    if msg.content.startswith('$hello'):
+        await msg.channel.send(f'Hello, {msg.author.name}!')
+
+
+client.run(TOKEN)
