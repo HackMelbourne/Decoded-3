@@ -5,14 +5,6 @@ import youtube_dl
 from discord.ext import commands
 from dotenv import load_dotenv
 
-load_dotenv()
-TOKEN = os.getenv('TOKEN')
-
-client = commands.Bot(command_prefix='?')
-
-# music bot 
-voice_clients = {}
-
 # youtube best audio options
 yt_dl_opts = {'formats': 'beastaudio/best'}
 ytdl = youtube_dl.YoutubeDL(yt_dl_opts)
@@ -22,31 +14,30 @@ ffmpeg_options = {'options': '-vn'}
 
 
 class MusicBot(commands.Cog):
+    voice_clients = {}
+
     def __init__(self, client):
         self.client = client
 
     @commands.command()
     async def join(self, ctx):
-        global voice_clients
         if not ctx.message.author.voice:
             await ctx.send('You are not in a voice channel')
             return
         channel = ctx.message.author.voice.channel
-        voice_clients[ctx.guild.id] = await channel.connect()
+        self.voice_clients[ctx.guild.id] = await channel.connect()
         await ctx.send(f'Joined {channel}')
 
     @commands.command()
     async def leave(self, ctx):
-        global voice_clients
-        if ctx.guild.id in voice_clients:
-            voice_clients[ctx.guild.id].stop()
-            del voice_clients[ctx.guild.id]
+        if ctx.guild.id in self.voice_clients:
+            self.voice_clients[ctx.guild.id].stop()
+            del self.voice_clients[ctx.guild.id]
             await ctx.send('Left')
 
     @commands.command()
     async def play(self, ctx, url):
-        global voice_clients
-        if ctx.guild.id not in voice_clients:
+        if ctx.guild.id not in self.voice_clients:
             # Join the user's voice channel
             await self.join(ctx)
         # Play the YouTube video audio
@@ -54,7 +45,7 @@ class MusicBot(commands.Cog):
             info_dict = ydl.extract_info(url, download=False)
         # Send the song to the voice channel
         song = info_dict['formats'][0]['url']
-        voice_clients[ctx.guild.id].play(
+        self.voice_clients[ctx.guild.id].play(
             discord.FFmpegPCMAudio(song, **ffmpeg_options, executable="C:\\ffmpeg\\ffmpeg.exe")
         )
         await ctx.send(f'Now playing {info_dict["title"]}')
@@ -62,41 +53,45 @@ class MusicBot(commands.Cog):
 
     @commands.command()
     async def stop(self, ctx):
-        global voice_clients
-        if ctx.guild.id in voice_clients:
-            voice_clients[ctx.guild.id].stop()
+        if ctx.guild.id in self.voice_clients:
+            self.voice_clients[ctx.guild.id].stop()
             await ctx.send('Stopped')
         else:
             await ctx.send('Not in a voice channel')
 
     @commands.command()
     async def pause(self, ctx):
-        global voice_clients
-        if ctx.guild.id in voice_clients:
-            voice_clients[ctx.guild.id].pause()
+        if ctx.guild.id in self.voice_clients:
+            self.voice_clients[ctx.guild.id].pause()
             await ctx.send('Paused')
         else:
             await ctx.send('Not in a voice channel')
 
     @commands.command()
     async def resume(self, ctx):
-        global voice_clients
-        if ctx.guild.id in voice_clients:
-            voice_clients[ctx.guild.id].resume()
+        if ctx.guild.id in self.voice_clients:
+            self.voice_clients[ctx.guild.id].resume()
             await ctx.send('Resumed')
         else:
             await ctx.send('Not in a voice channel')
 
+    # Start the bot
+    @commands.Cog.listener()
+    async def on_ready(self):
+        print('Logged in as')
+        print(self.client.user.name)
+        print(self.client.user.id)
+        print('------')
 
-# Start the bot
-@client.event
-async def on_ready():
-    print('Logged in as')
-    print(client.user.name)
-    print(client.user.id)
-    print('------')
+
+def setup(bot):
+    bot.add_cog(MusicBot(bot))
 
 
-# Run the bot
-client.add_cog(MusicBot(client))
-client.run(TOKEN)
+if __name__ == '__main__':
+    load_dotenv()
+    TOKEN = os.getenv('TOKEN')
+
+    client = commands.Bot(command_prefix='!')
+    client.add_cog(MusicBot(client))
+    client.run(TOKEN)
