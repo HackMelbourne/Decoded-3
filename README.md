@@ -60,20 +60,25 @@ Password: 323737
 * [🐍Python Setup](/w1/python_setup.md)
 * [👾Discord.py Cheatsheet](/w1/discord_py_cheatsheet.md)
 * [🔗Discord.py Documentation](https://discordpy.readthedocs.io/en/stable/index.html)
-* [Workshop Recording] TODO
+* [Workshop Recording] TBD!
 
-## Workshop 2 - Tic Tac Toe
-> TODO ...
-* Warren and Weng Jae (Daniel)
+## Workshop 2 - Meme Bot
+> Who doesn’t love a good meme? Join us and create the functionality to meme on your friends so hard that they wished they had their own meme bot.
+* Aly and Minh
 
-## Workshop 3 - Polling Bot
-> TODO ...
+## Workshop 3 - Music Bot
+> Ever since YouTube banned music bots, discord servers have been desperately lacking some tunes. Impress your friends by bringing them back by building your own bot with the ability to play music, plus additional music controls! Now you can resume your lo-fi beat study sessions with your mates! 
+
+* Aryan and Ryan
+
+## Workshop 4 - Polling Bot
+> Caught up in your server arguing why Minecraft is (definitively) the best game? Why not run a poll on your server and prove your friends wrong? Learn to build your own polling bot to settle your arguments in style 😎
+
 * Jerry and Hoan
 
-## Workshop 4 - Meme Bot
-> TODO ...
-* Anh Minh
+## Workshop 5 - Tic Tac Toe
+> Fancy a game, but don’t want to leave your friends in discord? In this lesson, you’ll learn to implement a tic tac toe game within the Discord bot so you can vs your friends whenever you wish!
 
-## Workshop 5 - Music Bot
-> TODO ...
-* Aryan and Ryan
+* Warren and Weng Jae (Daniel)
+
+
