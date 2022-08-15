@@ -1,21 +1,24 @@
-import selenium
 import emoji
+import selenium
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
+
 
 class EmojiCollection():
   def __init__(self):
-    
+
     options = Options()
-    options.binary_location = "/Applications/Google Chrome Beta.app/Contents/MacOS/Google Chrome Beta"
-    
+    # TODO this can't be OS specific
+    # options.binary_location = "/Applications/Google Chrome Beta.app/Contents/MacOS/Google Chrome Beta"
+    options.binary_location = "C:\Program Files\Google\Chrome\Application\chrome.exe"
+
     self.driver = webdriver.Chrome(options=options)
     self.driver.get("https://emojipedia.org")
-    #accepts cookies 
+    # accepts cookies
     acceptCookies = WebDriverWait(
       self.driver,
       30).until(EC.presence_of_element_located((By.ID, "onetrust-accept-btn-handler"))).click()
