@@ -1,6 +1,42 @@
 # discord-bot-poll-system
-<h1 align="center">[Participant's Workbook] Introduction to Discord.py</h1>
+<h1 align="center">[Participant's Workbook] Create polling using Discord.py</h1>
+---
 
+<h2>Table of Contents</h2>
+<details>
+<summary>Table of Contents</summary>
+
+- [0. Create a Discord Account and Discord Server](#0-create-a-discord-account-and-discord-server)
+    - [✅ Task: Create a Discord Account](#-task-create-a-discord-account)
+    - [✅ Task: Create a Discord Server](#-task-create-a-discord-server)
+- [1. Create an your Bot and Add it to your Server](#1-create-an-your-bot-and-add-it-to-your-server)
+    - [✅ Task: Create a Discord Application and Bot, and copy your Token](#-task-create-a-discord-application-and-bot-and-copy-your-token)
+    - [✅ Task: Invite your bot to your server](#-task-invite-your-bot-to-your-server)
+- [2. Installing Modules: `discord.py` and `python-dotenv`](#2-installing-modules-discordpy-and-python-dotenv)
+    - [✅ Task: Install `discord.py`](#-task-install-discordpy)
+    - [✅ Task: Install `python-dotenv`](#-task-install-python-dotenv)
+- [3. Creating a Bot and Adding it to your server](#3-creating-a-bot-and-adding-it-to-your-server)
+    - [✅ Task: Create 2 files: `main.py` and `.env`](#-task-create-2-files-mainpy-and-env)
+    - [Environment Variables](#environment-variables)
+- [4. Basic Bot](#4-basic-bot)
+    - [✅ Task: Bringing the bot to life](#-task-bringing-the-bot-to-life)
+    - [Events and Callbacks](#events-and-callbacks)
+    - [✅ Task: "Hello, World!"](#-task-hello-world)
+    - [💡 Challenge: `Client` attributes](#-challenge-client-attributes)
+    - [Receiving Messages](#receiving-messages)
+    - [Sending Messages](#sending-messages)
+    - [✅ Task: Respond to "!hello" with "Hello, {username}"](#-task-respond-to-hello-with-hello-username)
+- [5. Cogs](#5-cogs)
+    - [✅ Task: Refactor `main.py` to support Cogs (part 1)](#-task-refactor-mainpy-to-support-cogs-part-1)
+    - [✅ Task: Create a Hello Cog](#-task-create-a-hello-cog)
+    - [✅ Task: Refactor `main.py` to support Cogs (part 2)](#-task-refactor-mainpy-to-support-cogs-part-2)
+- [6. ✅ Task: Create a Cog for all your 'Goodbye' commands](#6--task-create-a-cog-for-all-your-goodbye-commands)
+- [7. [💡 Extension] Host your bot on Heroku](#7--extension-host-your-bot-on-heroku)
+- [Related Links:](#related-links)
+
+</details>
+
+---
 This is the discord bot built by using discord.py library and Selenium package to automate web browser interaction with Python. I also used Math plot library to visualize the voting results as a output. 
 What's special about this application is that when a poll maker creates a question and gives suggestions for other members to vote on the discord channel: there will be web site running automatically to search for corresponding emojis from this API: https://emojipedia.org and provide them to the bot. Hence, members can vote by the emoji. After a specific limit of time, the discord bot will close the poll and return the result. 
 # Example output: ![Screen Shot 2022-07-26 at 10 49 36 pm](https://user-images.githubusercontent.com/80389972/181009956-22d248ef-0a0a-49d9-859c-c146bacd66b1.png)
