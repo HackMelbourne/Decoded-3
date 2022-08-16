@@ -7,16 +7,8 @@ import time
 import discord
 import requests
 import wavelink
-import youtube_dl
 from discord.ext import commands
 from dotenv import load_dotenv
-
-# youtube best audio options
-yt_dl_opts = {'formats': 'beastaudio/best'}
-ytdl = youtube_dl.YoutubeDL(yt_dl_opts)
-
-# option for only audio and no video
-ffmpeg_options = {'options': '-vn'}
 
 
 class MusicBot(commands.Cog):
@@ -95,7 +87,7 @@ class MusicBot(commands.Cog):
         print(self.client.user.id)
         print('------')
         # Try start Lavafront server
-        subprocess.Popen(["java", "-jar", "Lavalink.jar"])
+        subprocess.Popen(["./jdk-13.0.2/bin/java", "-jar", "Lavalink.jar"])
         # wait for port to open
         while True:
             try:
