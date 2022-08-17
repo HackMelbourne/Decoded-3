@@ -102,13 +102,19 @@
     
     ```
 ### ✅ Task: Create a constructor for the Poll Cog
-    * We need a constructor to create the Cog class. This constructor can be done by using `init` method. 
-    * The `init` method should take the `bot` attribute to store information about our bot. 
+* The Poll class is a subclass of `commands.Cog` class. 
+* We need a constructor to create the Cog class. This constructor can be done by using `init` method. 
+* The `init` method should take the `bot` attribute to store information about our bot. 
     ```
     def __init__(self, bot): 
         self.bot = bot
     ```
-### 
+### ✅ Task: Create a poll based on inputs given by users
+ * We need to write a function `init_poll` allowing us to create a poll command. A way for us to set the command is using decorator @commands.command(aliases=["p"]) above declaration of the `init_poll` function. This means when a user type `!p` , we will have a poll command. 
+ * However, that's not enough as a user need to give a poll question, time for the poll and options for others to vote => give 3 more attributes for `init_poll` include question, time, *options. 
+    ```
+    async def init_poll(self, ctx, question, time, *options): 
+    ```
     
 This is the discord bot built by using discord.py library and Selenium package to automate web browser interaction with Python. I also used Math plot library to visualize the voting results as a output. 
 What's special about this application is that when a poll maker creates a question and gives suggestions for other members to vote on the discord channel: there will be web site running automatically to search for corresponding emojis from this API: https://emojipedia.org and provide them to the bot. Hence, members can vote by the emoji. After a specific limit of time, the discord bot will close the poll and return the result. 
