@@ -1,14 +1,12 @@
-from discord.ext import commands
 import discord
+from discord.ext import commands
 from dotenv import load_dotenv
-import os
-import json
 
 load_dotenv()
-TOKEN = os.getenv("TOKEN")
+TOKEN = 'NzM5MzkwNjI5NjIwMjE5OTg1.G6jXaM.am2j6rhR3c4enHoQIs0koWrDxnktighemgFL9M'
 
-GUILDS = os.getenv("GUILDS")
-GUILDS = json.loads(GUILDS)
+GUILDS = [739390096213803057]
+# GUILDS = json.loads(GUILDS)
 GUILDS = [discord.Object(id=guild) for guild in GUILDS]
 
 
@@ -20,7 +18,7 @@ class Bot(commands.Bot):
         self.TOKEN = TOKEN
 
     async def setup_hook(self):
-        await self.load_extension(f"tictactoe")
+        await self.load_extension(f"cogs.tictactoe")
         for guild in self.GUILDS:
             await self.tree.sync(guild=guild)
 
