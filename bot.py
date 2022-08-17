@@ -1,12 +1,14 @@
+import json
+import os
+
 import discord
 from discord.ext import commands
 from dotenv import load_dotenv
 
 load_dotenv()
-TOKEN = 'NzM5MzkwNjI5NjIwMjE5OTg1.G6jXaM.am2j6rhR3c4enHoQIs0koWrDxnktighemgFL9M'
-
-GUILDS = [739390096213803057]
-# GUILDS = json.loads(GUILDS)
+TOKEN = os.getenv("TOKEN")
+GUILDS = os.getenv("GUILDS")
+GUILDS = json.loads(GUILDS)
 GUILDS = [discord.Object(id=guild) for guild in GUILDS]
 
 
