@@ -117,6 +117,12 @@
     ```
  * You can see we also need to have `self` and `ctx`. We need `self` because it is a function declared inside the class. We need `ctx` because when user type their `!p` command, having the `ctx` attribute will allow us to have access to the `Context` object of the command. 
  * <img width="977" alt="Screen Shot 2022-08-17 at 8 14 25 pm" src="https://user-images.githubusercontent.com/80389972/185095123-422fab2b-f2b0-4aa8-be60-17b31d73e731.png">
+ * Next, we need apply a condition for our poll. You can customise how many options permitted for a poll. In this tutorial, there are maximum 4 options allowed. 
+    ```
+    if len(options) > 5:
+      await ctx.send("The number of options cannot exceed the allowed limit")
+    ```
+ * you can notice that we are making use of ctx attribute to send back a message to the server. The data type of what is returned from ctx.send(...) is discord.Message. Here is more information about discord.Message: https://discordpy.readthedocs.io/en/stable/api.html#discord.Message
 
     
 This is the discord bot built by using discord.py library and Selenium package to automate web browser interaction with Python. I also used Math plot library to visualize the voting results as a output. 
