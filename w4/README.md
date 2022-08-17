@@ -6,30 +6,15 @@
 <summary>Table of Contents</summary>
 
 ---
-- [0. Installing Modules: `discord.py` and `python-dotenv`, `asyncio`, `matplotlib`, `numpy`, `os`](#2-installing-modules-discordpy-and-python-dotenv)
+- [0. Installing Modules: `discord.py` and `python-dotenv`, `asyncio`, `matplotlib`, `numpy`, `os`](#0-installing-modules-discordpy-and-python-dotenv)
     - [✅ Task: Install `discord.py`](#-task-install-discordpy)
     - [✅ Task: Install `python-dotenv`](#-task-install-python-dotenv)
     - [✅ Task: Install `asyncio`](#-task-install-asyncio)
     - [✅ Task: Install `matplotlib`](#-task-install-matplotlib)
     - [✅ Task: Install `numpy`](#-task-install-numpy)
     - [✅ Task: Install `os`](#-task-install-os)
-- [3. Creating a Bot and Adding it to your server](#3-creating-a-bot-and-adding-it-to-your-server)
-    - [✅ Task: Create 2 files: `main.py` and `.env`](#-task-create-2-files-mainpy-and-env)
-    - [Environment Variables](#environment-variables)
-- [4. Basic Bot](#4-basic-bot)
-    - [✅ Task: Bringing the bot to life](#-task-bringing-the-bot-to-life)
-    - [Events and Callbacks](#events-and-callbacks)
-    - [✅ Task: "Hello, World!"](#-task-hello-world)
-    - [💡 Challenge: `Client` attributes](#-challenge-client-attributes)
-    - [Receiving Messages](#receiving-messages)
-    - [Sending Messages](#sending-messages)
-    - [✅ Task: Respond to "!hello" with "Hello, {username}"](#-task-respond-to-hello-with-hello-username)
-- [5. Cogs](#5-cogs)
-    - [✅ Task: Refactor `main.py` to support Cogs (part 1)](#-task-refactor-mainpy-to-support-cogs-part-1)
-    - [✅ Task: Create a Hello Cog](#-task-create-a-hello-cog)
-    - [✅ Task: Refactor `main.py` to support Cogs (part 2)](#-task-refactor-mainpy-to-support-cogs-part-2)
-- [6. ✅ Task: Create a Cog for all your 'Goodbye' commands](#6--task-create-a-cog-for-all-your-goodbye-commands)
-- [7. [💡 Extension] Host your bot on Heroku](#7--extension-host-your-bot-on-heroku)
+- [1. ✅ Task: Create a Cog for all your 'Poll' commands](#6--task-create-a-cog-for-all-your-poll-commands)
+- [2. [💡 Extension] implement web scrapping with Selenium to customise your poll](#2--extension-implement-web-scrapping-to-customise-your-poll)
 - [Related Links:](#related-links)
 
 </details>
