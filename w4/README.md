@@ -91,6 +91,16 @@
 ---
 
 ## 1. Create a cog for all your poll commands
+### ✅ Task: Inmport essential modules 
+ * `discord`, `asyncio`, `matplotlib`, `numpy` are modules we want to use to create a Poll Cog. So please import them: 
+    ```
+    import discord
+    import asyncio
+    import matplotlib.pyplot as plt
+    import numpy as np
+    from discord.ext import commands
+    
+    ```
 This is the discord bot built by using discord.py library and Selenium package to automate web browser interaction with Python. I also used Math plot library to visualize the voting results as a output. 
 What's special about this application is that when a poll maker creates a question and gives suggestions for other members to vote on the discord channel: there will be web site running automatically to search for corresponding emojis from this API: https://emojipedia.org and provide them to the bot. Hence, members can vote by the emoji. After a specific limit of time, the discord bot will close the poll and return the result. 
 # Example output: ![Screen Shot 2022-07-26 at 10 49 36 pm](https://user-images.githubusercontent.com/80389972/181009956-22d248ef-0a0a-49d9-859c-c146bacd66b1.png)
