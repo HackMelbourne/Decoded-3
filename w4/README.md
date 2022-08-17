@@ -6,14 +6,14 @@
 <summary>Table of Contents</summary>
 
 ---
-- [0. Installing Modules: `discord.py` and `python-dotenv`, `asyncio`, `matplotlib`, `numpy`, `os`](#0-installing-modules-discordpy-and-python-dotenv)
+- [0. Installing Modules: `discord.py` and `python-dotenv`, `asyncio`, `matplotlib`, `numpy`, `os`](#0-installing-modules)
     - [✅ Task: Install `discord.py`](#-task-install-discordpy)
     - [✅ Task: Install `python-dotenv`](#-task-install-python-dotenv)
     - [✅ Task: Install `asyncio`](#-task-install-asyncio)
     - [✅ Task: Install `matplotlib`](#-task-install-matplotlib)
     - [✅ Task: Install `numpy`](#-task-install-numpy)
     - [✅ Task: Install `os`](#-task-install-os)
-- [1. ✅ Task: Create a Cog for all your 'Poll' commands](#6--task-create-a-cog-for-all-your-poll-commands)
+- [1. ✅ Task: Create a Cog for all your 'Poll' commands](#6-task-create-a-cog-for-all-your-poll-commands)
 - [2. [💡 Extension] implement web scrapping with Selenium to customise your poll](#2--extension-implement-web-scrapping-to-customise-your-poll)
 - [Related Links:](#related-links)
 
@@ -21,7 +21,7 @@
 
 ---
 
-## 0. Installing Modules: `discord.py`, `python-dotenv`, `asyncio`, `matplotlib` and `os`
+## 0. Installing Modules
 
 > 📝 NOTE: You can skip this step if you're using **Replit** as it
 > can [automatically import](https://docs.replit.com/programming-ide/installing-packages#direct-imports) packages/modules
