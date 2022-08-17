@@ -26,7 +26,7 @@ class TicTacToeButton(discord.ui.Button):
             content = f":game_die: `{self.view.player_1.display_name}` **VS** `{self.view.player_2.display_name}`\n\n{self.view.player_2.mention}, select your move:"
 
         else:
-            if interaction.user != self.view.player2:
+            if interaction.user != self.view.player_2:
                 await interaction.response.send_message("Its not your Turn!", ephemeral=True)
                 return
 
@@ -40,7 +40,7 @@ class TicTacToeButton(discord.ui.Button):
         winner = self.view.check_winner()
         if winner == self.view.player_1:
             content = f":tada: {self.view.player_1.mention} has won the game!"
-        elif winner == self.view.player2:
+        elif winner == self.view.player_2:
             content = f":tada: {self.view.player_2.mention} has won the game!"
         elif winner == "tie":
             content = "No one won the game, it's a tie! Try again?"
