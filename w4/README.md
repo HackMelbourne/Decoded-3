@@ -5,15 +5,14 @@
 <details>
 <summary>Table of Contents</summary>
 
-- [0. Create a Discord Account and Discord Server](#0-create-a-discord-account-and-discord-server)
-    - [✅ Task: Create a Discord Account](#-task-create-a-discord-account)
-    - [✅ Task: Create a Discord Server](#-task-create-a-discord-server)
-- [1. Create an your Bot and Add it to your Server](#1-create-an-your-bot-and-add-it-to-your-server)
-    - [✅ Task: Create a Discord Application and Bot, and copy your Token](#-task-create-a-discord-application-and-bot-and-copy-your-token)
-    - [✅ Task: Invite your bot to your server](#-task-invite-your-bot-to-your-server)
-- [2. Installing Modules: `discord.py` and `python-dotenv`](#2-installing-modules-discordpy-and-python-dotenv)
+---
+- [0. Installing Modules: `discord.py` and `python-dotenv`, `asyncio`, `matplotlib`, `numpy`, `os`](#2-installing-modules-discordpy-and-python-dotenv)
     - [✅ Task: Install `discord.py`](#-task-install-discordpy)
     - [✅ Task: Install `python-dotenv`](#-task-install-python-dotenv)
+    - [✅ Task: Install `asyncio`](#-task-install-asyncio)
+    - [✅ Task: Install `matplotlib`](#-task-install-matplotlib)
+    - [✅ Task: Install `numpy`](#-task-install-numpy)
+    - [✅ Task: Install `os`](#-task-install-os)
 - [3. Creating a Bot and Adding it to your server](#3-creating-a-bot-and-adding-it-to-your-server)
     - [✅ Task: Create 2 files: `main.py` and `.env`](#-task-create-2-files-mainpy-and-env)
     - [Environment Variables](#environment-variables)
@@ -35,25 +34,78 @@
 
 </details>
 
+---
+
+## 0. Installing Modules: `discord.py` and `python-dotenv`
+
+> 📝 NOTE: You can skip this step if you're using **Replit** as it
+> can [automatically import](https://docs.replit.com/programming-ide/installing-packages#direct-imports) packages/modules
+> it for you
+
+* Now we're going to start writing the code for our bot!
+* Before we begin creating the bot, we have to install a few modules
+
+  <details>
+  <summary><b>🧩 Hint: Accessing the Terminal in VS Code</b></summary>
+
+* There are 2 ways to access the terminal in VS Code:
+    1. using the shortcut ```Ctrl + Shift + ` ```
+    2. Terminal > New Terminal
+
+    * ![](vscode_access_terminal.gif)
+
+  </details>
+
+### ✅ Task: Install `discord.py`
+
+* `discord.py` is basically a set of tools which will allow us to control our bot with simple function calls.
+* you can find the documentation for `discord.py` over [here](https://discordpy.readthedocs.io/en/stable/index.html#)
+* to install it, type this into your terminal:
+  ```
+  pip install -U discord.py
+  ```
+
+### ✅ Task: Install `python-dotenv`
+
+* `python-dotenv` is used to access our secret Discord token, which we will store in a `.env` file
+* you can find the documentation for it over [here](https://pypi.org/project/python-dotenv/)
+* to install it, type this into your terminal:
+  ```
+  pip install -U python-dotenv
+  ```
+  
+### ✅ Task: Install `asyncio`
+
+* `asyncio` is used to write asynchronous code. Asynchronous code lets you execute a block of code without stopping (or blocking) the entire thread where the action is being executed.  
+* you can find the documentation for it over [here](https://docs.python.org/3/library/asyncio.html)
+* to install it, type this into your terminal:
+  ```
+  pip install -U asyncio
+  ```
+  
+### ✅ Task: Install `matplotlib`
+
+* `matplotlib ` is a Python library used to create chart visualization[here](https://matplotlib.org/)
+* to install it, type this into your terminal:
+  ```
+  pip install -U matplotlib
+  ```
+  
+### ✅ Task: Install `os`
+
+* `os` is a module providing functions to interact with the operating system [here](https://docs.python.org/3/library/os.html)
+* to install it, type this into your terminal:
+  ```
+  pip install -U os
+  ```
+> 🙋 **Ask for help**: Let us know if you run into any errors during installation and we'll try to help you out!
+
+---
 This is the discord bot built by using discord.py library and Selenium package to automate web browser interaction with Python. I also used Math plot library to visualize the voting results as a output. 
 What's special about this application is that when a poll maker creates a question and gives suggestions for other members to vote on the discord channel: there will be web site running automatically to search for corresponding emojis from this API: https://emojipedia.org and provide them to the bot. Hence, members can vote by the emoji. After a specific limit of time, the discord bot will close the poll and return the result. 
 # Example output: ![Screen Shot 2022-07-26 at 10 49 36 pm](https://user-images.githubusercontent.com/80389972/181009956-22d248ef-0a0a-49d9-859c-c146bacd66b1.png)
 CLICK TO THIS LINK TO SEE THE VIDEO: https://www.youtube.com/watch?v=mFfwhWzvYGI
-# Set up discord bot
-0. Create an empty folder to store your code
-1. Sign in developer account: https://discord.com/developers/applications
-2. Create new application in the developer dashboard
-![Create Application](images/create-application.png)
-3. Name your application
-![Name Application form](images/name-application.png)
-4. Add a bot to the discord application
-![Add Bot](images/add-bot-1.png)
-5. Generate token for the bot, save the token in a `.env` file within your code folder
-![Generate Token](images/token-1.png)
-6. Generate url to invite the bot to your server and copy it
-![Generate URL](images/url-1.png)
-7. Open the link in your browser to authorize the bot to join your server
-![Join Server](images/authorize-1.png)
+
 # Installation 
 There are 3 important components needed to install: python3 + web automation + discord bot. 
 1. Python3: 
