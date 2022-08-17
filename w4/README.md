@@ -14,9 +14,9 @@
     - [✅ Task: Install `numpy`](#-task-install-numpy)
     - [✅ Task: Install `os`](#-task-install-os)
 - [1. ✅ Task: Create a Cog for all your 'Poll' commands](#1-create-a-cog-for-all-your-poll-commands)
-    - [✅ Task: Import essential modules](#-import-essential-modules)
-    - [✅ Task: Create a constructor for the Poll Cog](#-create-a-constructor-for-the-Poll-Cog)
-    - [✅ Task: Create a poll based on inputs given by users](#-create-a-poll-based-on-inputs-given-by-users)
+    - [✅ Task: Import essential modules](#-task-import-essential-modules)
+    - [✅ Task: Create a constructor for the Poll Cog](#-task-create-a-constructor-for-the-Poll-Cog)
+    - [✅ Task: Create a poll based on inputs given by users](#-task-create-a-poll-based-on-inputs-given-by-users)
 - [2. [💡 Extension] implement web scrapping with Selenium to customise your poll](#2--extension-implement-web-scrapping-to-customise-your-poll)
 - [Related Links:](#related-links)
 
@@ -115,6 +115,9 @@
     ```
     async def init_poll(self, ctx, question, time, *options): 
     ```
+ * You can see we also need to have `self` and `ctx`. We need `self` because it is a function declared inside the class. We need `ctx` because when user type their `!p` command, having the `ctx` attribute will allow us to have access to the `Context` object of the command. 
+ * <img width="977" alt="Screen Shot 2022-08-17 at 8 14 25 pm" src="https://user-images.githubusercontent.com/80389972/185095123-422fab2b-f2b0-4aa8-be60-17b31d73e731.png">
+
     
 This is the discord bot built by using discord.py library and Selenium package to automate web browser interaction with Python. I also used Math plot library to visualize the voting results as a output. 
 What's special about this application is that when a poll maker creates a question and gives suggestions for other members to vote on the discord channel: there will be web site running automatically to search for corresponding emojis from this API: https://emojipedia.org and provide them to the bot. Hence, members can vote by the emoji. After a specific limit of time, the discord bot will close the poll and return the result. 
