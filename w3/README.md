@@ -92,7 +92,8 @@ To do this, you can use the on_event functions:
 
 ## 4. Pausing and playing audio
 * Now we need our bot to pause and play the music. We can do that by the cogs me made and simply using this code.
-```python 
+```python
+  # to pause the music  
   @commands.command()
   async def pause(self, ctx):
       await ctx.voice_client.pause()
