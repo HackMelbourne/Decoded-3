@@ -36,7 +36,7 @@
 
 ---
 
-## 0. Installing Modules: `discord.py` and `python-dotenv`
+## 0. Installing Modules: `discord.py`, `python-dotenv`, `asyncio`, `matplotlib` and `os`
 
 > 📝 NOTE: You can skip this step if you're using **Replit** as it
 > can [automatically import](https://docs.replit.com/programming-ide/installing-packages#direct-imports) packages/modules
