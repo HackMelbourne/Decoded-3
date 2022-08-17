@@ -14,7 +14,7 @@
     - [✅ Task: Install `numpy`](#-task-install-numpy)
     - [✅ Task: Install `os`](#-task-install-os)
 - [1. ✅ Task: Create a Cog for all your 'Poll' commands](#1-create-a-cog-for-all-your-poll-commands)
-    - [✅ Task: Install essential modules](#-install-essential-modules)
+    - [✅ Task: Import essential modules](#-import-essential-modules)
     - [✅ Task: Create a constructor for the Poll Cog](#-create-a-constructor-for-the-Poll-Cog)
     - [✅ Task: Create a poll based on inputs given by users](#-create-a-poll-based-on-inputs-given-by-users)
 - [2. [💡 Extension] implement web scrapping with Selenium to customise your poll](#2--extension-implement-web-scrapping-to-customise-your-poll)
@@ -91,16 +91,25 @@
 ---
 
 ## 1. Create a cog for all your poll commands
-### ✅ Task: Inmport essential modules 
+### ✅ Task: Import essential modules 
  * `discord`, `asyncio`, `matplotlib`, `numpy` are modules we want to use to create a Poll Cog. So please import them: 
     ```
     import discord
     import asyncio
-    import matplotlib.pyplot as plt
+    import matplotlib.pyplot as plt 
     import numpy as np
     from discord.ext import commands
     
     ```
+### ✅ Task: Create a constructor for the Poll Cog
+    * We need a constructor to create the Cog class. This constructor can be done by using `init` method. 
+    * The `init` method should take the `bot` attribute to store information about our bot. 
+    ```
+    def __init__(self, bot): 
+        self.bot = bot
+    ```
+### 
+    
 This is the discord bot built by using discord.py library and Selenium package to automate web browser interaction with Python. I also used Math plot library to visualize the voting results as a output. 
 What's special about this application is that when a poll maker creates a question and gives suggestions for other members to vote on the discord channel: there will be web site running automatically to search for corresponding emojis from this API: https://emojipedia.org and provide them to the bot. Hence, members can vote by the emoji. After a specific limit of time, the discord bot will close the poll and return the result. 
 # Example output: ![Screen Shot 2022-07-26 at 10 49 36 pm](https://user-images.githubusercontent.com/80389972/181009956-22d248ef-0a0a-49d9-859c-c146bacd66b1.png)
