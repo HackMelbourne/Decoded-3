@@ -17,7 +17,7 @@
     - [✅ Task: Import essential modules](#-task-import-essential-modules)
     - [✅ Task: Create a constructor for the Poll Cog](#-task-create-a-constructor-for-the-Poll-Cog)
     - [✅ Task: Get inputs from users before sending back the poll](#-task-get-inputs-from-users-before-sending-back-the-poll)
-    - [✅ Task: Send back an Embed as a poll)(#-task-send-back-an-embed-as-a-poll)ee
+    - [✅ Task: Send back an Embed as a poll](#-task-send-back-an-embed-as-a-poll)
 - [2. [💡 Extension] implement web scrapping with Selenium to customise your poll](#2--extension-implement-web-scrapping-to-customise-your-poll)
 - [Related Links:](#related-links)
 
