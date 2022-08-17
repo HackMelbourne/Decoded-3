@@ -16,7 +16,8 @@
 - [1. ✅ Task: Create a Cog for all your 'Poll' commands](#1-create-a-cog-for-all-your-poll-commands)
     - [✅ Task: Import essential modules](#-task-import-essential-modules)
     - [✅ Task: Create a constructor for the Poll Cog](#-task-create-a-constructor-for-the-Poll-Cog)
-    - [✅ Task: Create a poll based on inputs given by users](#-task-create-a-poll-based-on-inputs-given-by-users)
+    - [✅ Task: Get inputs from users before sending back the poll](#-task-get-inputs-from-users-before-sending-back-the-poll)
+    - [✅ Task: Send back an Embed as a poll)(#-task-send-back-an-embed-as-a-poll)ee
 - [2. [💡 Extension] implement web scrapping with Selenium to customise your poll](#2--extension-implement-web-scrapping-to-customise-your-poll)
 - [Related Links:](#related-links)
 
@@ -109,7 +110,7 @@
     def __init__(self, bot): 
         self.bot = bot
     ```
-### ✅ Task: Create a poll based on inputs given by users
+### ✅ Task: Get inputs from users before sending back the poll
  * We need to write a function `init_poll` allowing us to create a poll command. A way for us to set the command is using decorator @commands.command(aliases=["p"]) above declaration of the `init_poll` function. This means when a user type `!p` , we will have a poll command. 
  * However, that's not enough as a user need to give a poll question, time for the poll and options for others to vote => give 3 more attributes for `init_poll` include question, time, *options. 
     ```
@@ -123,7 +124,14 @@
       await ctx.send("The number of options cannot exceed the allowed limit")
     ```
  * you can notice that we are making use of ctx attribute to send back a message to the server. The data type of what is returned from ctx.send(...) is discord.Message. Here is more information about discord.Message: https://discordpy.readthedocs.io/en/stable/api.html#discord.Message
-
+### ✅ Task: Send back an Embed as a poll
+ * The discord bot has to send back the message to the server through `ctx.send(embed = Embed)`. 
+ * A reason why we cannot send back a string like what we previous did is because our poll have a lot of information like time, question, given options. Hence, it is gonna messy if we put all of them into a string. 
+ * Instead, make use of `embed attribute`. To do that, we first need to create an Embed object as following: 
+    ```
+    embed = discord.Embed(title = question,
+                          description= f'Poll will end in {time} seconds :alarm_clock:. There are {len(options)} options:')
+    ```
     
 This is the discord bot built by using discord.py library and Selenium package to automate web browser interaction with Python. I also used Math plot library to visualize the voting results as a output. 
 What's special about this application is that when a poll maker creates a question and gives suggestions for other members to vote on the discord channel: there will be web site running automatically to search for corresponding emojis from this API: https://emojipedia.org and provide them to the bot. Hence, members can vote by the emoji. After a specific limit of time, the discord bot will close the poll and return the result. 
