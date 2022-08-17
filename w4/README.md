@@ -13,7 +13,7 @@
     - [✅ Task: Install `matplotlib`](#-task-install-matplotlib)
     - [✅ Task: Install `numpy`](#-task-install-numpy)
     - [✅ Task: Install `os`](#-task-install-os)
-- [1. ✅ Task: Create a Cog for all your 'Poll' commands](#1-task-create-a-cog-for-all-your-poll-commands)
+- [1. ✅ Task: Create a Cog for all your 'Poll' commands](#1-create-a-cog-for-all-your-poll-commands)
     - [✅ Task: Install essential modules](#-install-essential-modules)
     - [✅ Task: Create a constructor for the Poll Cog](#-create-a-constructor-for-the-Poll-Cog)
     - [✅ Task: Create a poll based on inputs given by users](#-create-a-poll-based-on-inputs-given-by-users)
@@ -89,6 +89,8 @@
 > 🙋 **Ask for help**: Let us know if you run into any errors during installation and we'll try to help you out!
 
 ---
+
+## 1. Create a cog for all your poll commands
 This is the discord bot built by using discord.py library and Selenium package to automate web browser interaction with Python. I also used Math plot library to visualize the voting results as a output. 
 What's special about this application is that when a poll maker creates a question and gives suggestions for other members to vote on the discord channel: there will be web site running automatically to search for corresponding emojis from this API: https://emojipedia.org and provide them to the bot. Hence, members can vote by the emoji. After a specific limit of time, the discord bot will close the poll and return the result. 
 # Example output: ![Screen Shot 2022-07-26 at 10 49 36 pm](https://user-images.githubusercontent.com/80389972/181009956-22d248ef-0a0a-49d9-859c-c146bacd66b1.png)
