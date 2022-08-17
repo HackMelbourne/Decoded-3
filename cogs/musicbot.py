@@ -43,6 +43,8 @@ class MusicBot(commands.Cog):
         if ctx.guild.id not in self.voice_clients:
             # Join the user's voice channel
             await self.join(ctx)
+        if ctx.guild.id not in self.voice_clients:
+            return
         voice = self.voice_clients[ctx.guild.id]
         await voice.play(search)
         embed = discord.Embed(
