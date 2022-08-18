@@ -15,6 +15,7 @@
     - [✅ Task: Install `os`](#-task-install-os)
     - [✅ Task: Install `emoji`](#-task-install-emoji)
 - [1. ✅ Task: Create a Cog for all your 'Poll' commands](#1-create-a-cog-for-all-your-poll-commands)
+    - [📚 Outcome: What are we building for this task?)(#-outcome-what-are-we-building-for-this-task)
     - [✅ Task: Import essential modules](#-task-import-essential-modules)
     - [✅ Task: Create a constructor for the Poll Cog](#-task-create-a-constructor-for-the-Poll-Cog)
     - [✅ Task: Get inputs from users before sending back the poll](#-task-get-inputs-from-users-before-sending-back-the-poll)
@@ -100,6 +101,7 @@
 ---
 
 ## 1. Create a cog for all your poll commands
+### 📚 Outcome: What are we building for this task?
 ### ✅ Task: Import essential modules 
  * `discord`, `asyncio`, `matplotlib`, `numpy` are modules we want to use to create a Poll Cog. So please import them: 
     ```
@@ -141,8 +143,10 @@
                           description= f'Poll will end in {time} seconds :alarm_clock:. There are {len(options)} options:')
     ```
 ### ✅ Task: Use emoji module to convert strings to emojis and add fields and footer
-  * To generate a list of 3 emojis: 1️⃣, 2️⃣, 3️⃣ , we need to generate a list of string and convert them to emojis 
+  * To generate a list of 3 emojis: 1️⃣, 2️⃣, 3️⃣ , we need to generate a list of string and convert them to emojis
     ```
     tmp = [':one:', ':two:', ':three:']
     emojis = [emoji.emojize(e, use_aliases=True) for e in tmp]
     ```
+  * Because 1️⃣, 2️⃣, 3️⃣ are recent emojis added to the emoji package. The old ones are usually faces: 😊, ☺️, etc . Hence DO NOT FORGET         `use_aliases=True` to convert strings to the package. 
+  * Next, we want to add 
