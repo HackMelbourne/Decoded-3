@@ -141,4 +141,8 @@
                           description= f'Poll will end in {time} seconds :alarm_clock:. There are {len(options)} options:')
     ```
 ### ✅ Task: Use emoji module to convert strings to emojis and add fields and footer
-  * 
+  * To generate a list of 3 emojis: 1️⃣, 2️⃣, 3️⃣ , we need to generate a list of string and convert them to emojis 
+    ```
+    tmp = [':one:', ':two:', ':three:']
+    emojis = [emoji.emojize(e, use_aliases=True) for e in tmp]
+    ```
