@@ -5,3 +5,6 @@
 *.pyc
 
 __pycache__/
+/logs/
+
+jdk-13.0.2/
