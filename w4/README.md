@@ -166,5 +166,6 @@
    ```
   * Finally, add footer by following instruction below: 
   <img width="686" alt="Screen Shot 2022-08-19 at 12 02 19 am" src="https://user-images.githubusercontent.com/80389972/185414356-f10ff468-3ed7-4a7f-8d57-f492f46b3250.png">
-### Task: Add emojis to complete the poll + set time for users to vote
+  
+### ✅ Task: Add emojis to complete the poll + set time for users to vote
    
