@@ -116,8 +116,8 @@ class MusicBot(commands.Cog):
         print(f'Connected to wavefront! ID: {node.identifier}')
 
 
-def setup(bot):
-    bot.add_cog(MusicBot(bot))
+async def setup(bot):
+    await bot.add_cog(MusicBot(bot))
 
 
 if __name__ == '__main__':
