@@ -15,7 +15,7 @@
     - [✅ Task: Install `os`](#-task-install-os)
     - [✅ Task: Install `emoji`](#-task-install-emoji)
 - [1. ✅ Task: Create a Cog for all your 'Poll' commands](#1-create-a-cog-for-all-your-poll-commands)
-    - [📚 Outcome: What are we building for this task?)(#-outcome-what-are-we-building-for-this-task)
+    - [📚 Outcome: What are we building for this task?](#-outcome-what-are-we-building-for-this-task)
     - [✅ Task: Import essential modules](#-task-import-essential-modules)
     - [✅ Task: Create a constructor for the Poll Cog](#-task-create-a-constructor-for-the-Poll-Cog)
     - [✅ Task: Get inputs from users before sending back the poll](#-task-get-inputs-from-users-before-sending-back-the-poll)
