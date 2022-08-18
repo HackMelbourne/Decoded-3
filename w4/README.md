@@ -6,7 +6,7 @@
 <summary>Table of Contents</summary>
 
 ---
-- [0. Installing Modules: `discord.py` and `python-dotenv`, `asyncio`, `matplotlib`, `numpy`, `os`](#0-installing-modules)
+- [0. Installing Modules: `discord.py` and `python-dotenv`, `asyncio`, `matplotlib`, `numpy`, `os`, `emoji`](#0-installing-modules)
     - [✅ Task: Install `discord.py`](#-task-install-discordpy)
     - [✅ Task: Install `python-dotenv`](#-task-install-python-dotenv)
     - [✅ Task: Install `asyncio`](#-task-install-asyncio)
@@ -18,6 +18,7 @@
     - [✅ Task: Create a constructor for the Poll Cog](#-task-create-a-constructor-for-the-Poll-Cog)
     - [✅ Task: Get inputs from users before sending back the poll](#-task-get-inputs-from-users-before-sending-back-the-poll)
     - [✅ Task: Send back an Embed as a poll](#-task-send-back-an-embed-as-a-poll)
+    - [✅ Task: Use emoji ](#-task-set-fields-and-footer)
 - [2. [💡 Extension] implement web scrapping with Selenium to customise your poll](#2--extension-implement-web-scrapping-to-customise-your-poll)
 - [Related Links:](#related-links)
 
@@ -87,6 +88,12 @@
   ```
   pip install -U os
   ```
+### ✅ Task: Install `emoji`
+* `emoji` is a library allowing us to convert string to emoji [here] https://pypi.org/project/emoji/
+* to install it, type this into your terminal:
+  ```
+  pip install -U emoji
+  ```
 > 🙋 **Ask for help**: Let us know if you run into any errors during installation and we'll try to help you out!
 
 ---
@@ -118,9 +125,9 @@
     ```
  * You can see we also need to have `self` and `ctx`. We need `self` because it is a function declared inside the class. We need `ctx` because when user type their `!p` command, having the `ctx` attribute will allow us to have access to the `Context` object of the command. 
  * <img width="977" alt="Screen Shot 2022-08-17 at 8 14 25 pm" src="https://user-images.githubusercontent.com/80389972/185095123-422fab2b-f2b0-4aa8-be60-17b31d73e731.png">
- * Next, we need apply a condition for our poll. You can customise how many options permitted for a poll. In this tutorial, there are maximum 4 options allowed. 
+ * Next, we need apply a condition for our poll. You can customise how many options permitted for a poll. In this tutorial, there are maximum 3 options allowed. 
     ```
-    if len(options) > 5:
+    if len(options) > 3:
       await ctx.send("The number of options cannot exceed the allowed limit")
     ```
  * you can notice that we are making use of ctx attribute to send back a message to the server. The data type of what is returned from ctx.send(...) is discord.Message. Here is more information about discord.Message: https://discordpy.readthedocs.io/en/stable/api.html#discord.Message
@@ -132,4 +139,5 @@
     embed = discord.Embed(title = question,
                           description= f'Poll will end in {time} seconds :alarm_clock:. There are {len(options)} options:')
     ```
-    
+### ✅ Task: Set fields and footer
+  * Set 
