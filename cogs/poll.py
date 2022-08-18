@@ -1,4 +1,5 @@
 
+from ast import alias
 import discord
 import asyncio
 import matplotlib.pyplot as plt
@@ -38,18 +39,17 @@ class Poll(commands.Cog):
       await ctx.send("The number of options cannot exceed the allowed limit")
     embed = discord.Embed(title = question,
                           description= f'Poll will end in {time} seconds :alarm_clock:. There are {len(options)} options:')
-    emojis = [':one:', ':two:', ':three:']
+    tmp = [':one:', ':two:', ':three:']
+    emojis = [emoji.emojize(e, use_aliases=True) for e in tmp]
     for i in range(len(options)):
-        emo = emoji.emojize(emojis[i])
+        emo = emojis[i]
         embed.add_field(name = emo, value = options[i], inline = True)
-        emojis.append(emo)
-
     embed.add_field(name="Instructions", value="React to cast a vote", inline=False)
     embed.set_footer(text = f'This poll is created by {ctx.author.name}')
     poll = await ctx.send(embed = embed)
     #add emojis as reactions to the poll
     for emo in emojis:
-      await poll.add_reaction(emoji.emojize(emo, use_aliases=True))
+      await poll.add_reaction(emo)
     await asyncio.sleep(int(time))
     #calculate the result of the poll 
     message = await ctx.fetch_message(poll.id)
