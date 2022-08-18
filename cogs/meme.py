@@ -1,4 +1,3 @@
-# TODO move to cogs folder
 import json
 import os
 
@@ -65,7 +64,7 @@ class Meme(commands.Cog):
         self.bot = bot
 
     @commands.command()
-    async def new(self, ctx, *args):
+    async def meme(self, ctx, *args):
         # ;;random
         if (len(args) == 0):
             random_meme = get_random_memes(1)['memes'][0]
@@ -89,7 +88,7 @@ class Meme(commands.Cog):
         pass
 
     @commands.command()
-    async def subreddit(self, ctx, arg1):
+    async def meme_subreddit(self, ctx, arg1):
         subreddit = arg1
         try:
             random_meme = get_random_meme_from_subreddits(subreddit, 1)
@@ -104,7 +103,7 @@ class Meme(commands.Cog):
         pass
 
     @commands.command()
-    async def save(self, ctx, arg1):
+    async def save_meme(self, ctx, arg1):
         try:
             response = await ctx.channel.fetch_message(ctx.message.reference.message_id)
             meme_url = response.content
@@ -126,7 +125,7 @@ class Meme(commands.Cog):
         pass
 
     @commands.command()
-    async def load(self, ctx, arg1):
+    async def load_meme(self, ctx, arg1):
         lookup_name = arg1
         try:
             found_meme = collection.find_one({"name": lookup_name})
@@ -137,7 +136,7 @@ class Meme(commands.Cog):
         pass
 
     @commands.command()
-    async def delete(self, ctx, arg1):
+    async def delete_meme(self, ctx, arg1):
         lookup_name = arg1
         try:
             found_meme = collection.find_one({"name": lookup_name})
