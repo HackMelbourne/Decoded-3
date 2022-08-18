@@ -15,7 +15,7 @@ client = commands.Bot(command_prefix="!", intents=discord.Intents.all())
 for filename in os.listdir("./cogs"):
 	if filename.endswith(".py"):
 		# run function synchronously using subprocess
-		asyncio.run(client.load_extension("cogs." + filename[:-3]))
+		asyncio.run(client.load_extension(f"cogs.{filename[:-3]}"))
 		print("Loaded COG {}".format(filename))
 
 client.run(TOKEN)
