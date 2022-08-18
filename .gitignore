@@ -7,3 +7,4 @@ __pycache__/
 
 jdk-13.0.2/
 .env
+.DS_Store
