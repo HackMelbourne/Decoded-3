@@ -152,4 +152,18 @@
     emojis = [emoji.emojize(e, use_aliases=True) for e in tmp]
     ```
   * Because 1️⃣, 2️⃣, 3️⃣ are recent emojis added to the emoji package. The old ones are usually faces: 😊, ☺️, etc . Hence DO NOT FORGET         `use_aliases=True` to convert strings to the package. 
-  * Next, we want to add 
+  * Next, we want to add option fields. Run a for loop for it: 
+    ```
+     for i in range(len(options)):
+        emo = emojis[i]
+        embed.add_field(name = emo, value = options[i], inline = True)
+    ```
+  * Our poll looks much nicer if 3 choices are horizontally aligned. Hence DO NOT FORGET `inline = True`. 
+  * Then, add another field for instruction: 
+   ```
+    embed.add_field(name="Instructions", value="React to cast a vote", inline=False)
+   ```
+  * Finally, add footer by following instruction below: 
+  <img width="686" alt="Screen Shot 2022-08-19 at 12 02 19 am" src="https://user-images.githubusercontent.com/80389972/185414356-f10ff468-3ed7-4a7f-8d57-f492f46b3250.png">
+   ```
+   
