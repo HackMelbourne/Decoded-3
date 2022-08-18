@@ -13,6 +13,7 @@
     - [✅ Task: Install `matplotlib`](#-task-install-matplotlib)
     - [✅ Task: Install `numpy`](#-task-install-numpy)
     - [✅ Task: Install `os`](#-task-install-os)
+    - [✅ Task: Install `emoji`](#-task-install-emoji)
 - [1. ✅ Task: Create a Cog for all your 'Poll' commands](#1-create-a-cog-for-all-your-poll-commands)
     - [✅ Task: Import essential modules](#-task-import-essential-modules)
     - [✅ Task: Create a constructor for the Poll Cog](#-task-create-a-constructor-for-the-Poll-Cog)
