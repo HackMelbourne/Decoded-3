@@ -21,7 +21,7 @@
     - [✅ Task: Get inputs from users before sending back the poll](#-task-get-inputs-from-users-before-sending-back-the-poll)
     - [✅ Task: Send back an Embed as a poll](#-task-send-back-an-embed-as-a-poll)
     - [✅ Task: Use emoji module to convert strings to emojis and add fields and footer](#-task-use-emoji-module-to-convert-strings-to-emojis-and-add-fields-and-footer)
-    - [✅ Task: Add emojis to complete the poll + set time for users to vote](#-task-add-emojis-to-complete-the-poll-+-set-time-for-users-to-vote)
+    - [✅ Task: Add emojis to complete the poll and set time for users to vote](#-task-add-emojis-to-complete-the-poll-and-set-time-for-users-to-vote)
 - [2. [💡 Extension] implement web scrapping with Selenium to customise your poll](#2--extension-implement-web-scrapping-to-customise-your-poll)
 - [Related Links:](#related-links)
 
@@ -167,5 +167,5 @@
   * Finally, add footer by following instruction below: 
   <img width="686" alt="Screen Shot 2022-08-19 at 12 02 19 am" src="https://user-images.githubusercontent.com/80389972/185414356-f10ff468-3ed7-4a7f-8d57-f492f46b3250.png">
   
-### ✅ Task: Add emojis to complete the poll + set time for users to vote
+### ✅ Task: Add emojis to complete the poll and set time for users to vote
    
