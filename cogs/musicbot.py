@@ -50,11 +50,10 @@ class MusicBot(commands.Cog):
         embed = discord.Embed(
             title=voice.source.title,
             url=voice.source.uri,
-            author=ctx.author,
             description=f"Playing {voice.source.title} in {voice.channel}"
-
         )
         embed.set_image(url=voice.source.thumbnail)
+        embed.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
         await ctx.send(embed=embed)
 
     @commands.command()
