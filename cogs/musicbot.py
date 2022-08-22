@@ -89,7 +89,7 @@ class MusicBot(commands.Cog):
         print(self.client.user.id)
         print('------')
         # Try start Lavafront server
-        subprocess.Popen(["./jdk-13.0.2/bin/java", "-jar", "Lavalink.jar"])
+        subprocess.Popen(["java", "-jar", "Lavalink.jar"])
         # wait for port to open
         while True:
             try:
