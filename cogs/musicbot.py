@@ -53,7 +53,7 @@ class MusicBot(commands.Cog):
             description=f"Playing {voice.source.title} in {voice.channel}"
         )
         embed.set_image(url=voice.source.thumbnail)
-        embed.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
+        embed.set_author(name=ctx.author.name, icon_url=ctx.author.avatar.url)
         await ctx.send(embed=embed)
 
     @commands.command()
