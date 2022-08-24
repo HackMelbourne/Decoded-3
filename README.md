@@ -194,6 +194,55 @@ When a program is run, it may need information from the operating system to conf
   * to register an event, we use a decorator, `@client.event` on the callback function's definition
 
   </details>
+  
+  ```python
+  # ./main.py, in between defining the client and running it
+  @client.event # 👈 this is a function decorator
+  def on_ready(): # 👈 on_ready() is a callback
+    # code in on_ready() will be run after the bot is done logging in and setting up
+  ```
+
+### ✅ Task: "Hello, World!"
+* Add some code into the `on_ready()` function to print "Hello, World!" when your bot is ready (note, this will appear in the terminal, not on Discord)
+> 🙋 Try doing this on your own but do let us know if you are stuck or need help understanding the idea of *events* and *callbacks* (we can try to explain it differently!)
+
+### 💡 Challenge: `Client` attributes
+> Try printing some information about your bot when it is ready. You can access information about your bot through the `client` variable you've created. You can find a list of attributes in for the `Client` class [here](https://discordpy.readthedocs.io/en/stable/api.html#discord.Client.users).
+> * for example, [`client.user`](https://discordpy.readthedocs.io/en/stable/api.html#discord.Client.user) represents the connected client (printing this will give us the bot's username and id).
+>   * `client.user` is of the [`ClientUser`](https://discordpy.readthedocs.io/en/stable/api.html#discord.ClientUser) class which has a bunch of attributes itself and you can access as well; for example:
+>     * `client.user.name`
+>     * `client.user.id`
+>     * try printing these `on_ready()`, what do these attributes store?
+
+### Receiving Messages
+* As said before, there are many events that we can register and 'listen' to. You can check out [Discord Docs > Event Reference](https://discordpy.readthedocs.io/en/stable/api.html#event-reference) for more events.
+* We'll introduce another important event in this workshop: [`on_message()`](https://discordpy.readthedocs.io/en/stable/api.html#discord.on_message), which is called whenever a message is sent
+* Here's an example of how to print every message's content into the console
+  ```python
+  # ./main.py, in between defining the client and running it
+  @client.event
+  def on_message(msg):
+    print(msg.content)
+  ```
+* The message being sent is stored in the `msg` variable, which is of the [Message](https://discordpy.readthedocs.io/en/stable/api.html#discord.Message) class. 
+  * This means that we can access the `msg`'s attributes as laid out in the [Message documentation]((https://discordpy.readthedocs.io/en/stable/api.html#discord.Message)).
+  * A few key attributes that you might want to use are:
+    * `msg.author`
+    * `msg.channel`
+    * `msg.content`
+    * `msg.reactions`
+    * ✅ Task: Try printing some of these attributes out within the `on_message()` function and sending some messages. What values do each of these attributes hold?
+
+### Sending Messages
+* To send messages, we can use the [.send()](https://discordpy.readthedocs.io/en/stable/api.html#discord.TextChannel.send) method on [TextChannels](https://discordpy.readthedocs.io/en/stable/api.html#discord.TextChannel)
+  ```python
+  # ./main.py, in between defining the client and running it
+  @client.event
+  async def on_message(msg):
+    if msg.author == client.user: # ❓ Question for participants: Why do you think we need this if statement?
+      return
+    await msg.channel.send("Good Morning!")
+  ```
   <details>
   <summary><b>🔍 What is <code>async</code> and <code>await</code>?</b></summary>
 
@@ -220,58 +269,6 @@ When a program is run, it may need information from the operating system to conf
     > 🔗 More about asynchronous programming: [Getting Started With Async Features in Python | Real Python](https://realpython.com/python-async-features/)
 
   </details>
-  
-  ```python
-  # ./main.py, in between defining the client and running it
-  @client.event # 👈 this is a function decorator
-  async def on_ready(): # 👈 on_ready() is a callback
-    # code in on_ready() will be run after the bot is done logging in and setting up
-
-    await message.channel.send("Hi")
-  ```
-
-### ✅ Task: "Hello, World!"
-* Add some code into the `on_ready()` function to print "Hello, World!" when your bot is ready (note, this will appear in the terminal, not on Discord)
-> 🙋 Try doing this on your own but do let us know if you are stuck or need help understanding the idea of *events* and *callbacks* (we can try to explain it differently!)
-
-### 💡 Challenge: `Client` attributes
-> Try printing some information about your bot when it is ready. You can access information about your bot through the `client` variable you've created. You can find a list of attributes in for the `Client` class [here](https://discordpy.readthedocs.io/en/stable/api.html#discord.Client.users).
-> * for example, [`client.user`](https://discordpy.readthedocs.io/en/stable/api.html#discord.Client.user) represents the connected client (printing this will give us the bot's username and id).
->   * `client.user` is of the [`ClientUser`](https://discordpy.readthedocs.io/en/stable/api.html#discord.ClientUser) class which has a bunch of attributes itself and you can access as well; for example:
->     * `client.user.name`
->     * `client.user.id`
->     * try printing these `on_ready()`, what do these attributes store?
-
-### Receiving Messages
-* As said before, there are many events that we can register and 'listen' to. You can check out [Discord Docs > Event Reference](https://discordpy.readthedocs.io/en/stable/api.html#event-reference) for more events.
-* We'll introduce another important event in this workshop: [`on_message()`](https://discordpy.readthedocs.io/en/stable/api.html#discord.on_message), which is called whenever a message is sent
-* Here's an example of how to print every message's content into the console
-  ```python
-  # ./main.py, in between defining the client and running it
-  @client.event
-  async def on_message(msg):
-    print(msg.content)
-  ```
-* The message being sent is stored in the `msg` variable, which is of the [Message](https://discordpy.readthedocs.io/en/stable/api.html#discord.Message) class. 
-  * This means that we can access the `msg`'s attributes as laid out in the [Message documentation]((https://discordpy.readthedocs.io/en/stable/api.html#discord.Message)).
-  * A few key attributes that you might want to use are:
-    * `msg.author`
-    * `msg.channel`
-    * `msg.content`
-    * `msg.reactions`
-    * ✅ Task: Try printing some of these attributes out within the `on_message()` function and sending some messages. What values do each of these attributes hold?
-
-### Sending Messages
-* To send messages, we can use the [.send()](https://discordpy.readthedocs.io/en/stable/api.html#discord.TextChannel.send) method on [TextChannels](https://discordpy.readthedocs.io/en/stable/api.html#discord.TextChannel)
-  ```python
-  # ./main.py, in between defining the client and running it
-  @client.event
-  async def on_message(msg):
-    if msg.author == client.user: # ❓ Question for participants: What is this if statement for?
-      return
-    await msg.channel.send("Good Morning!")
-  ```
-* ❓ Question for participants: What is the `if` statement doing? Why do we need it? What happens if we remove it?
 
 ### ✅ Task: Respond to "!hello" with "Hello, {username}"
 * Given that we know how to receive and send messages, try amending/adding some code in the `on_message()` to make your bot send "Hello, {username}" to anyone who sends messages starting with `$hello` (but replace {username} with the actual sender's username).
