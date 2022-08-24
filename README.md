@@ -57,11 +57,7 @@ Password: 323737
 > 
 > Hosted by Xin Yu
 
-* [📔Participant Workbook](/w1/)
-* [🐍Python Cheatsheet](/w1/python_cheatsheet.md)
-* [🐍Python Setup](/w1/python_setup.md)
-* [👾Discord.py Cheatsheet](/w1/discord_py_cheatsheet.md)
-* [🔗Discord.py Documentation](https://discordpy.readthedocs.io/en/stable/index.html)
+* [📔Participant Workbook](https://github.com/HackMelbourne/Decoded-3/tree/foundations-bot)
 * [Workshop Recording] Coming Soon!
 
 ## Workshop 2 - Meme Bot
@@ -71,7 +67,7 @@ Password: 323737
 > 
 > Hosted by Aly and Minh
 
-* [📔Participant Workbook](/w2/)
+* [📔Participant Workbook](https://github.com/HackMelbourne/Decoded-3/tree/meme_bot)
 * [Workshop Recording]
 
 ## Workshop 3 - Music Bot
@@ -82,7 +78,7 @@ Password: 323737
 > 
 > Hosted by Aryan and Ryan
 
-* [📔Participant Workbook](/w3/)
+* [📔Participant Workbook](https://github.com/HackMelbourne/Decoded-3/tree/music-bot)
 * [Workshop Recording]
 
 ## Workshop 4 - Polling Bot
@@ -92,7 +88,7 @@ Password: 323737
 > 
 > Jerry and Hoan
 
-* [📔Participant Workbook](/w4/)
+* [📔Participant Workbook](https://github.com/HackMelbourne/Decoded-3/tree/poll_system)
 * [Workshop Recording]
 
 ## Workshop 5 - Tic Tac Toe
@@ -102,5 +98,5 @@ Password: 323737
 > 
 > Warren and Weng Jae (Daniel)
 
-* [📔Participant Workbook](/w5/)
+* [📔Participant Workbook](https://github.com/HackMelbourne/Decoded-3/tree/tictactoe)
 * [Workshop Recording]
