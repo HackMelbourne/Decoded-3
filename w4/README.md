@@ -15,7 +15,7 @@
     - [✅ Task: Install `os`](#-task-install-os)
     - [✅ Task: Install `emoji`](#-task-install-emoji)
 - [0.2 Enable Privilege Gateway Intents](#-enable-privilege-gateway-intents)
-    - [✅ Task: Enable Privilege Gateway Intents`](#-enable-privilege-gateway-intents)
+    - [✅ Task: Enable Privilege Gateway Intents](#-enable-privilege-gateway-intents)
 - [1. ✅ Task: Create a Cog for all your 'Poll' commands](#1-create-a-cog-for-all-your-poll-commands)
     - [📚 Outcome: What are we building for this task?](#-outcome-what-are-we-building-for-this-task)
     - [✅ Task: Import essential modules](#-task-import-essential-modules)
@@ -31,7 +31,7 @@
 
 ---
 
-## 0. Installing Modules
+## 0.1. Installing Modules
 
 > 📝 NOTE: You can skip this step if you're using **Replit** as it
 > can [automatically import](https://docs.replit.com/programming-ide/installing-packages#direct-imports) packages/modules
@@ -102,6 +102,8 @@
 > 🙋 **Ask for help**: Let us know if you run into any errors during installation and we'll try to help you out!
 
 ---
+## 0.2. Enable Privilege Gateway Intents
+ * Click onto this link and enable all the Priviledged Gateway Intents [here]https://discord.com/developers/applications/994103517436465212/bot
 
 ## 1. Create a cog for all your poll commands
 ### 📚 Outcome: What are we building for this task?
