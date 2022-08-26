@@ -1,4 +1,3 @@
-
 from ast import alias
 import discord
 import asyncio
@@ -17,9 +16,9 @@ class Poll(commands.Cog):
     votes = []
     #calculate the number of votes for each option
     for reaction in reactions:
-      v = 0
+      v=0
       async for _ in reaction.users():
-        v += 1
+        v+=1
       totalVotes += v
       votes.append(v)
 
@@ -33,9 +32,9 @@ class Poll(commands.Cog):
     ax.set_xlabel('Votes (%)')
     ax.set_title(question)
     plt.savefig('chart.png')
-    
 
-  @commands.command(aliases=["p"])            
+
+  @commands.command(aliases=["p"])
   async def init_poll(self, ctx, question, time, *options):
     if len(options) > 3:
       await ctx.send("The number of options cannot exceed the allowed limit")
@@ -49,19 +48,19 @@ class Poll(commands.Cog):
     embed.add_field(name="Instructions", value="React to cast a vote", inline=False)
     embed.set_footer(text = f'This poll is created by {ctx.author.name}')
     poll = await ctx.send(embed = embed)
-    #add emojis as reactions to the poll
+    # add emojis as reactions to the poll
     for emo in emojis:
       await poll.add_reaction(emo)
     await asyncio.sleep(int(time))
-    #calculate the result of the poll 
+    #calculate the result of the poll
     message = await ctx.fetch_message(poll.id)
-    #create a bar chart as a result
+    # create a bar chart as a result
     await self.create_bar_chart(options, message.reactions, question)
     result = discord.Embed(title='Result', description = "Here are the vote results")
     file = discord.File("chart.png")
     result.set_image(url="attachment://chart.png")
     await ctx.send(file=file, embed = result)
 
-  
-  
-      
+
+async def setup(bot):
+    await bot.add_cog(Poll(bot))
