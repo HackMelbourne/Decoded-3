@@ -133,6 +133,8 @@
             print("Loaded COG {}".format(filename))
     client.run(TOKEN)
    ```
+  * https://discordpy.readthedocs.io/en/stable/ext/commands/api.html?highlight=load_extension#discord.ext.commands.Bot.load_extension
+  
 ## 3. Create a cog for all your poll commands
 ### 📚 Outcome: What are we building for this task?
     
@@ -181,9 +183,9 @@
   * To generate a list of 3 emojis: 1️⃣, 2️⃣, 3️⃣ , we need to generate a list of string and convert them to emojis
     ```
     tmp = [':one:', ':two:', ':three:']
-    emojis = [emoji.emojize(e, use_aliases=True) for e in tmp]
+    emojis = [emoji.emojize(e, language='alias') for e in tmp]
     ```
-  * Because 1️⃣, 2️⃣, 3️⃣ are recent emojis added to the emoji package. The old ones are usually faces: 😊, ☺️, etc . Hence DO NOT FORGET         `use_aliases=True` to convert strings to the package. 
+  * Because 1️⃣, 2️⃣, 3️⃣ are recent emojis added to the emoji package. The old ones are usually faces: 😊, ☺️, etc . Hence DO NOT FORGET         `language='alias'` to convert strings to the package. 
   * Next, we want to add option fields. Run a for loop for it: 
     ```
      for i in range(len(options)):
