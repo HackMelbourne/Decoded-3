@@ -6,7 +6,7 @@
 <summary>Table of Contents</summary>
 
 ---
-- [0.1. Installing Modules: `discord.py` and `python-dotenv`, `asyncio`, `matplotlib`, `numpy`, `os`, `emoji`](#0.1-installing-modules)
+- [1. Installing Modules: `discord.py` and `python-dotenv`, `asyncio`, `matplotlib`, `numpy`, `os`, `emoji`](#1-installing-modules)
     - [✅ Task: Install `discord.py 2.0 version`](#-task-install-discordpy)
     - [✅ Task: Install `python-dotenv`](#-task-install-python-dotenv)
     - [✅ Task: Install `asyncio`](#-task-install-asyncio)
@@ -14,9 +14,9 @@
     - [✅ Task: Install `numpy`](#-task-install-numpy)
     - [✅ Task: Install `os`](#-task-install-os)
     - [✅ Task: Install `emoji`](#-task-install-emoji)
-- [0.2 Enable Privilege Gateway Intents](#0.2-enable-privilege-gateway-intents)
+- [2. Enable Privilege Gateway Intents](#2-enable-privilege-gateway-intents)
     - [✅ Task: Enable Privilege Gateway Intents](#-enable-privilege-gateway-intents)
-- [1. ✅ Task: Create a Cog for all your 'Poll' commands](#1-create-a-cog-for-all-your-poll-commands)
+- [3. ✅ Task: Create a Cog for all your 'Poll' commands](#3-create-a-cog-for-all-your-poll-commands)
     - [📚 Outcome: What are we building for this task?](#-outcome-what-are-we-building-for-this-task)
     - [✅ Task: Import essential modules](#-task-import-essential-modules)
     - [✅ Task: Create a constructor for the Poll Cog](#-task-create-a-constructor-for-the-Poll-Cog)
@@ -31,7 +31,7 @@
 
 ---
 
-## 0.1. Installing Modules
+## 1. Installing Modules
 
 > 📝 NOTE: You can skip this step if you're using **Replit** as it
 > can [automatically import](https://docs.replit.com/programming-ide/installing-packages#direct-imports) packages/modules
@@ -102,10 +102,10 @@
 > 🙋 **Ask for help**: Let us know if you run into any errors during installation and we'll try to help you out!
 
 ---
-## 0.2. Enable Privilege Gateway Intents
+## 2. Enable Privilege Gateway Intents
  * Click onto this link and enable all the Priviledged Gateway Intents [here]https://discord.com/developers/applications/994103517436465212/bot
 
-## 1. Create a cog for all your poll commands
+## 3. Create a cog for all your poll commands
 ### 📚 Outcome: What are we building for this task?
     
    <img width="262" alt="Screen Shot 2022-08-18 at 11 41 38 pm" src="https://user-images.githubusercontent.com/80389972/185410733-fcaf554b-ad0f-42c4-ab50-1db2ac15dec6.png">
