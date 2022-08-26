@@ -6,7 +6,7 @@
 <summary>Table of Contents</summary>
 
 ---
-- [0.1. Installing Modules: `discord.py` and `python-dotenv`, `asyncio`, `matplotlib`, `numpy`, `os`, `emoji`](#0-installing-modules)
+- [0.1. Installing Modules: `discord.py` and `python-dotenv`, `asyncio`, `matplotlib`, `numpy`, `os`, `emoji`](#0.1-installing-modules)
     - [✅ Task: Install `discord.py 2.0 version`](#-task-install-discordpy)
     - [✅ Task: Install `python-dotenv`](#-task-install-python-dotenv)
     - [✅ Task: Install `asyncio`](#-task-install-asyncio)
@@ -14,7 +14,7 @@
     - [✅ Task: Install `numpy`](#-task-install-numpy)
     - [✅ Task: Install `os`](#-task-install-os)
     - [✅ Task: Install `emoji`](#-task-install-emoji)
-- [0.2 Enable Privilege Gateway Intents](#-enable-privilege-gateway-intents)
+- [0.2 Enable Privilege Gateway Intents](#0.2-enable-privilege-gateway-intents)
     - [✅ Task: Enable Privilege Gateway Intents](#-enable-privilege-gateway-intents)
 - [1. ✅ Task: Create a Cog for all your 'Poll' commands](#1-create-a-cog-for-all-your-poll-commands)
     - [📚 Outcome: What are we building for this task?](#-outcome-what-are-we-building-for-this-task)
