@@ -6,14 +6,16 @@
 <summary>Table of Contents</summary>
 
 ---
-- [0. Installing Modules: `discord.py` and `python-dotenv`, `asyncio`, `matplotlib`, `numpy`, `os`, `emoji`](#0-installing-modules)
-    - [✅ Task: Install `discord.py`](#-task-install-discordpy)
+- [0.1. Installing Modules: `discord.py` and `python-dotenv`, `asyncio`, `matplotlib`, `numpy`, `os`, `emoji`](#0-installing-modules)
+    - [✅ Task: Install `discord.py 2.0 version`](#-task-install-discordpy)
     - [✅ Task: Install `python-dotenv`](#-task-install-python-dotenv)
     - [✅ Task: Install `asyncio`](#-task-install-asyncio)
     - [✅ Task: Install `matplotlib`](#-task-install-matplotlib)
     - [✅ Task: Install `numpy`](#-task-install-numpy)
     - [✅ Task: Install `os`](#-task-install-os)
     - [✅ Task: Install `emoji`](#-task-install-emoji)
+- [0.2 Enable Privilege Gateway Intents](#-enable-privilege-gateway-intents)
+    - [✅ Task: Enable Privilege Gateway Intents`](#-enable-privilege-gateway-intents)
 - [1. ✅ Task: Create a Cog for all your 'Poll' commands](#1-create-a-cog-for-all-your-poll-commands)
     - [📚 Outcome: What are we building for this task?](#-outcome-what-are-we-building-for-this-task)
     - [✅ Task: Import essential modules](#-task-import-essential-modules)
@@ -49,7 +51,7 @@
 
   </details>
 
-### ✅ Task: Install `discord.py`
+### ✅ Task: Install `discord.py` 2.0 
 
 * `discord.py` is basically a set of tools which will allow us to control our bot with simple function calls.
 * you can find the documentation for `discord.py` over [here](https://discordpy.readthedocs.io/en/stable/index.html#)
