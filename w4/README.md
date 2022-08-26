@@ -222,10 +222,38 @@
         emo = emojis[i]
         embed.add_field(name = emo, value = options[i], inline = True)
     ```
+    ```
+    class Poll(commands.Cog):
+        def __init__(self, bot): 
+            self.bot = bot
+         @commands.command(aliases=["p"])
+         async def init_poll(self, ctx, question, time, *options): 
+            if len(options) > 3:
+              await ctx.send("The number of options cannot exceed the allowed limit")
+            embed = discord.Embed(title = question, description= f'Poll will end in {time} seconds :alarm_clock:. There are {len(options)} options:')
+            tmp = [':one:', ':two:', ':three:']
+            emojis = [emoji.emojize(e, language='alias') for e in tmp]
+            for i in range(len(options)):
+                emo = emojis[i]
+                embed.add_field(name = emo, value = options[i], inline = True)
+     ```
   * Our poll looks much nicer if 3 choices are horizontally aligned. Hence DO NOT FORGET `inline = True`. 
   * Then, add another field for instruction: 
    ```
-    embed.add_field(name="Instructions", value="React to cast a vote", inline=False)
+     class Poll(commands.Cog):
+        def __init__(self, bot): 
+            self.bot = bot
+         @commands.command(aliases=["p"])
+         async def init_poll(self, ctx, question, time, *options): 
+            if len(options) > 3:
+              await ctx.send("The number of options cannot exceed the allowed limit")
+            embed = discord.Embed(title = question, description= f'Poll will end in {time} seconds :alarm_clock:. There are {len(options)} options:')
+            tmp = [':one:', ':two:', ':three:']
+            emojis = [emoji.emojize(e, language='alias') for e in tmp]
+            for i in range(len(options)):
+                emo = emojis[i]
+                embed.add_field(name = emo, value = options[i], inline = True)
+            embed.add_field(name="Instructions", value="React to cast a vote", inline=False)
    ```
   * Finally, add footer by following instruction below: 
   <img width="686" alt="Screen Shot 2022-08-19 at 12 02 19 am" src="https://user-images.githubusercontent.com/80389972/185414356-f10ff468-3ed7-4a7f-8d57-f492f46b3250.png">
