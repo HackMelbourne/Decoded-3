@@ -17,10 +17,12 @@ class Poll(commands.Cog):
     votes = []
     #calculate the number of votes for each option
     for reaction in reactions:
-      v = await reaction.users().flatten()
-      totalVotes += len(v)
-      votes.append(len(v))
-    
+      v = 0
+      async for _ in reaction.users():
+        v += 1
+      totalVotes += v
+      votes.append(v)
+
     percentages = [round((vote/totalVotes)* 100, 2) for vote in votes]
     fig, ax = plt.subplots()
     y_pos = np.arange(len(options))
@@ -39,8 +41,8 @@ class Poll(commands.Cog):
       await ctx.send("The number of options cannot exceed the allowed limit")
     embed = discord.Embed(title = question,
                           description= f'Poll will end in {time} seconds :alarm_clock:. There are {len(options)} options:')
-    tmp = [':one:', ':two:', ':three:']
-    emojis = [emoji.emojize(e, use_aliases=True) for e in tmp]
+    tmp = [':one:', ':two:', ':three:'][:len(options)]
+    emojis = [emoji.emojize(e, language='alias') for e in tmp]
     for i in range(len(options)):
         emo = emojis[i]
         embed.add_field(name = emo, value = options[i], inline = True)
