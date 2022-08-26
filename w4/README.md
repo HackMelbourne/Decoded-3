@@ -137,6 +137,7 @@
 ### 📚 Outcome: What are we building for this task?
     
    <img width="262" alt="Screen Shot 2022-08-18 at 11 41 38 pm" src="https://user-images.githubusercontent.com/80389972/185410733-fcaf554b-ad0f-42c4-ab50-1db2ac15dec6.png">
+   
 ### ✅ Task: Import essential modules 
  * `discord`, `asyncio`, `matplotlib`, `numpy` are modules we want to use to create a Poll Cog. So please import them: 
     ```
