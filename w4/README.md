@@ -18,6 +18,7 @@
     - [✅ Task: Enable Privilege Gateway Intents](#-enable-privilege-gateway-intents)
 - [3. ✅ Task: Create a Cog for all your 'Poll' commands](#3-create-a-cog-for-all-your-poll-commands)
     - [📚 Outcome: What are we building for this task?](#-outcome-what-are-we-building-for-this-task)
+    - [✅ Task: Set up all the files](#-set-up-all-the-files)
     - [✅ Task: Import essential modules](#-task-import-essential-modules)
     - [✅ Task: Create a constructor for the Poll Cog](#-task-create-a-constructor-for-the-Poll-Cog)
     - [✅ Task: Get inputs from users before sending back the poll](#-task-get-inputs-from-users-before-sending-back-the-poll)
@@ -104,42 +105,82 @@
 ---
 ## 2. Enable Privilege Gateway Intents
  * Click onto this link and enable all the Priviledged Gateway Intents [here]https://discord.com/developers/applications/994103517436465212/bot
-
+## 3. Create a main2.py file 
+### ✅ Task: Create a main2.py file where we set up our bot. 
+ * Import all the modules: asyncio, os, discord, load_dotenv, commands
+   ```
+    import discord
+    import asyncio
+    import os
+    from discord.ext import commands
+    from dotenv import load_dotenv
+   ```
+ * get Token from our .env file
+   ```
+    load_dotenv()
+    TOKEN = os.getenv('TOKEN')
+ * set up your bot 
+   ```
+    client = commands.Bot(command_prefix="!", intents= discord.Intents.all())
+   ```
+   https://discordpy.readthedocs.io/en/stable/ext/commands/api.html?highlight=commands%20bot#bots
+   By having, discord.Intents.all() -> we let all bot knows that we enable all intent settings including: message_contents, members, presences
+ * read python files in the "cogs" folder. Later on, we will have python files in our cogs folder and we need to make our bot to be aware of them. 
+   ```
+    for filename in os.listdir('./cogs'):
+        if filename.endswith("py"):
+            asyncio.run(client.load_extension(f"cogs.{filename[:-3]}")
+            print("Loaded COG {}".format(filename))
+    client.run(TOKEN)
+   ```
+  * https://discordpy.readthedocs.io/en/stable/ext/commands/api.html?highlight=load_extension#discord.ext.commands.Bot.load_extension
+  
 ## 3. Create a cog for all your poll commands
 ### 📚 Outcome: What are we building for this task?
     
    <img width="262" alt="Screen Shot 2022-08-18 at 11 41 38 pm" src="https://user-images.githubusercontent.com/80389972/185410733-fcaf554b-ad0f-42c4-ab50-1db2ac15dec6.png">
-
+   
 ### ✅ Task: Import essential modules 
  * `discord`, `asyncio`, `matplotlib`, `numpy` are modules we want to use to create a Poll Cog. So please import them: 
     ```
-    import discord
-    import asyncio
-    import matplotlib.pyplot as plt 
-    import numpy as np
-    from discord.ext import commands
-    
+     import discord
+     import asyncio
+     import matplotlib.pyplot as plt 
+     import numpy as np
+     from discord.ext import commands
     ```
 ### ✅ Task: Create a constructor for the Poll Cog
 * The Poll class is a subclass of `commands.Cog` class. 
+  ```
+  class Poll(commands.Cog):
 * We need a constructor to create the Cog class. This constructor can be done by using `init` method. 
 * The `init` method should take the `bot` attribute to store information about our bot. 
     ```
-    def __init__(self, bot): 
-        self.bot = bot
+    class Poll(commands.Cog):
+        def __init__(self, bot): 
+            self.bot = bot
     ```
 ### ✅ Task: Get inputs from users before sending back the poll
- * We need to write a function `init_poll` allowing us to create a poll command. A way for us to set the command is using decorator @commands.command(aliases=["p"]) above declaration of the `init_poll` function. This means when a user type `!p` , we will have a poll command. 
+ * We need to write a function `init_poll` allowing us to create a poll command. A way for us to set the command is using decorator @commands.command(aliases=["p"]) above declaration of the `init_poll` function. This means when a user type `!p` or `!init_poll` , we will have a poll command. 
  * However, that's not enough as a user need to give a poll question, time for the poll and options for others to vote => give 3 more attributes for `init_poll` include question, time, *options. 
     ```
-    async def init_poll(self, ctx, question, time, *options): 
+    class Poll(commands.Cog):
+        def __init__(self, bot): 
+            self.bot = bot
+         @commands.command(aliases=["p"])
+         async def init_poll(self, ctx, question, time, *options): 
     ```
  * You can see we also need to have `self` and `ctx`. We need `self` because it is a function declared inside the class. We need `ctx` because when user type their `!p` command, having the `ctx` attribute will allow us to have access to the `Context` object of the command. 
  * <img width="977" alt="Screen Shot 2022-08-17 at 8 14 25 pm" src="https://user-images.githubusercontent.com/80389972/185095123-422fab2b-f2b0-4aa8-be60-17b31d73e731.png">
  * Next, we need apply a condition for our poll. You can customise how many options permitted for a poll. In this tutorial, there are maximum 3 options allowed. 
     ```
-    if len(options) > 3:
-      await ctx.send("The number of options cannot exceed the allowed limit")
+    class Poll(commands.Cog):
+        def __init__(self, bot): 
+            self.bot = bot
+         @commands.command(aliases=["p"])
+         async def init_poll(self, ctx, question, time, *options): 
+            if len(options) > 3:
+              await ctx.send("The number of options cannot exceed the allowed limit")
     ```
  * you can notice that we are making use of ctx attribute to send back a message to the server. The data type of what is returned from ctx.send(...) is discord.Message. Here is more information about discord.Message: https://discordpy.readthedocs.io/en/stable/api.html#discord.Message
 ### ✅ Task: Send back an Embed as a poll
@@ -147,26 +188,72 @@
  * A reason why we cannot send back a string like what we previous did is because our poll have a lot of information like time, question, given options. Hence, it is gonna messy if we put all of them into a string. 
  * Instead, make use of `embed attribute`. To do that, we first need to create an Embed object as following: 
     ```
-    embed = discord.Embed(title = question,
-                          description= f'Poll will end in {time} seconds :alarm_clock:. There are {len(options)} options:')
+     class Poll(commands.Cog):
+        def __init__(self, bot): 
+            self.bot = bot
+         @commands.command(aliases=["p"])
+         async def init_poll(self, ctx, question, time, *options): 
+            if len(options) > 3:
+              await ctx.send("The number of options cannot exceed the allowed limit")
+            embed = discord.Embed(title = question, description= f'Poll will end in {time} seconds :alarm_clock:. There are {len(options)} options:')
     ```
 ### ✅ Task: Use emoji module to convert strings to emojis and add fields and footer
   * To generate a list of 3 emojis: 1️⃣, 2️⃣, 3️⃣ , we need to generate a list of string and convert them to emojis
     ```
     tmp = [':one:', ':two:', ':three:']
-    emojis = [emoji.emojize(e, use_aliases=True) for e in tmp]
+    emojis = [emoji.emojize(e, language='alias') for e in tmp]
     ```
-  * Because 1️⃣, 2️⃣, 3️⃣ are recent emojis added to the emoji package. The old ones are usually faces: 😊, ☺️, etc . Hence DO NOT FORGET         `use_aliases=True` to convert strings to the package. 
+    ```
+     class Poll(commands.Cog):
+        def __init__(self, bot): 
+            self.bot = bot
+         @commands.command(aliases=["p"])
+         async def init_poll(self, ctx, question, time, *options): 
+            if len(options) > 3:
+              await ctx.send("The number of options cannot exceed the allowed limit")
+            embed = discord.Embed(title = question, description= f'Poll will end in {time} seconds :alarm_clock:. There are {len(options)} options:')
+            tmp = [':one:', ':two:', ':three:']
+            emojis = [emoji.emojize(e, language='alias') for e in tmp]
+      ```
+  * Because 1️⃣, 2️⃣, 3️⃣ are recent emojis added to the emoji package. The old ones are usually faces: 😊, ☺️, etc . Hence DO NOT FORGET         `language='alias'` to convert strings to the package. 
   * Next, we want to add option fields. Run a for loop for it: 
     ```
      for i in range(len(options)):
         emo = emojis[i]
         embed.add_field(name = emo, value = options[i], inline = True)
     ```
+    ```
+    class Poll(commands.Cog):
+        def __init__(self, bot): 
+            self.bot = bot
+         @commands.command(aliases=["p"])
+         async def init_poll(self, ctx, question, time, *options): 
+            if len(options) > 3:
+              await ctx.send("The number of options cannot exceed the allowed limit")
+            embed = discord.Embed(title = question, description= f'Poll will end in {time} seconds :alarm_clock:. There are {len(options)} options:')
+            tmp = [':one:', ':two:', ':three:']
+            emojis = [emoji.emojize(e, language='alias') for e in tmp]
+            for i in range(len(options)):
+                emo = emojis[i]
+                embed.add_field(name = emo, value = options[i], inline = True)
+     ```
   * Our poll looks much nicer if 3 choices are horizontally aligned. Hence DO NOT FORGET `inline = True`. 
   * Then, add another field for instruction: 
    ```
-    embed.add_field(name="Instructions", value="React to cast a vote", inline=False)
+     class Poll(commands.Cog):
+        def __init__(self, bot): 
+            self.bot = bot
+         @commands.command(aliases=["p"])
+         async def init_poll(self, ctx, question, time, *options): 
+            if len(options) > 3:
+              await ctx.send("The number of options cannot exceed the allowed limit")
+            embed = discord.Embed(title = question, description= f'Poll will end in {time} seconds :alarm_clock:. There are {len(options)} options:')
+            tmp = [':one:', ':two:', ':three:']
+            emojis = [emoji.emojize(e, language='alias') for e in tmp]
+            for i in range(len(options)):
+                emo = emojis[i]
+                embed.add_field(name = emo, value = options[i], inline = True)
+            embed.add_field(name="Instructions", value="React to cast a vote", inline=False)
    ```
   * Finally, add footer by following instruction below: 
   <img width="686" alt="Screen Shot 2022-08-19 at 12 02 19 am" src="https://user-images.githubusercontent.com/80389972/185414356-f10ff468-3ed7-4a7f-8d57-f492f46b3250.png">
