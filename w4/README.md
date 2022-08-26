@@ -121,11 +121,18 @@
     TOKEN = os.getenv('TOKEN')
  * set up your bot 
    ```
-    client = commands.Bot(command_prefix="!", intents= discord.Intents.all()
+    client = commands.Bot(command_prefix="!", intents= discord.Intents.all())
    ```
    https://discordpy.readthedocs.io/en/stable/ext/commands/api.html?highlight=commands%20bot#bots
-   By having, discord.Intents.all() -> we let all bot knows that we enable all intent settings including: message_contents, members, presences, 
-   
+   By having, discord.Intents.all() -> we let all bot knows that we enable all intent settings including: message_contents, members, presences
+ * read python files in the "cogs" folder. Later on, we will have python files in our cogs folder and we need to make our bot to be aware of them. 
+   ```
+    for filename in os.listdir('./cogs'):
+        if filename.endswith("py"):
+            asyncio.run(client.load_extension(f"cogs.{filename[:-3]}")
+            print("Loaded COG {}".format(filename))
+    client.run(TOKEN)
+   ```
 ## 3. Create a cog for all your poll commands
 ### 📚 Outcome: What are we building for this task?
     
