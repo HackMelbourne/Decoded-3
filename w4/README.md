@@ -173,8 +173,12 @@
  * <img width="977" alt="Screen Shot 2022-08-17 at 8 14 25 pm" src="https://user-images.githubusercontent.com/80389972/185095123-422fab2b-f2b0-4aa8-be60-17b31d73e731.png">
  * Next, we need apply a condition for our poll. You can customise how many options permitted for a poll. In this tutorial, there are maximum 3 options allowed. 
     ```
-    if len(options) > 3:
-      await ctx.send("The number of options cannot exceed the allowed limit")
+    class Poll(commands.Cog):
+        def __init__(self, bot): 
+            self.bot = bot
+         async def init_poll(self, ctx, question, time, *options): 
+            if len(options) > 3:
+              await ctx.send("The number of options cannot exceed the allowed limit")
     ```
  * you can notice that we are making use of ctx attribute to send back a message to the server. The data type of what is returned from ctx.send(...) is discord.Message. Here is more information about discord.Message: https://discordpy.readthedocs.io/en/stable/api.html#discord.Message
 ### ✅ Task: Send back an Embed as a poll
