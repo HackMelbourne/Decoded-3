@@ -146,7 +146,6 @@
      import numpy as np
      from discord.ext import commands
     ```
-### ✅ Task:
 ### ✅ Task: Create a constructor for the Poll Cog
 * The Poll class is a subclass of `commands.Cog` class. 
 * We need a constructor to create the Cog class. This constructor can be done by using `init` method. 
