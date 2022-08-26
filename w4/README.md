@@ -105,29 +105,41 @@
 ---
 ## 2. Enable Privilege Gateway Intents
  * Click onto this link and enable all the Priviledged Gateway Intents [here]https://discord.com/developers/applications/994103517436465212/bot
-
+## 3. Create a main2.py file 
+### ✅ Task: Create a main2.py file where we set up our bot. 
+ * Import all the modules: asyncio, os, discord, load_dotenv, commands
+   ```
+    import discord
+    import asyncio
+    import os
+    from discord.ext import commands
+    from dotenv import load_dotenv
+   ```
+ * get Token from our .env file
+   ```
+    load_dotenv()
+    TOKEN = os.getenv('TOKEN')
+ * set up your bot 
+   ```
+    client = commands.Bot(command_prefix="!", intents= discord.Intents.all()
+   ```
+   https://discordpy.readthedocs.io/en/stable/ext/commands/api.html?highlight=commands%20bot#bots
+   By having, discord.Intents.all() -> we let all bot knows that we enable all intent settings including: message_contents, members, presences, 
+   
 ## 3. Create a cog for all your poll commands
 ### 📚 Outcome: What are we building for this task?
     
    <img width="262" alt="Screen Shot 2022-08-18 at 11 41 38 pm" src="https://user-images.githubusercontent.com/80389972/185410733-fcaf554b-ad0f-42c4-ab50-1db2ac15dec6.png">
-### ✅ Task: Create a main2.py file where we set up our bot. 
- * Import all the modules: asyncio, os, discord. 
-   ```
-    import discord
-    import asyncio
-    from discord.ext import commands
-    from dotenv import load_dotenv
-   ```
 ### ✅ Task: Import essential modules 
  * `discord`, `asyncio`, `matplotlib`, `numpy` are modules we want to use to create a Poll Cog. So please import them: 
     ```
-    import discord
-    import asyncio
-    import matplotlib.pyplot as plt 
-    import numpy as np
-    from discord.ext import commands
-    
+     import discord
+     import asyncio
+     import matplotlib.pyplot as plt 
+     import numpy as np
+     from discord.ext import commands
     ```
+### ✅ Task:
 ### ✅ Task: Create a constructor for the Poll Cog
 * The Poll class is a subclass of `commands.Cog` class. 
 * We need a constructor to create the Cog class. This constructor can be done by using `init` method. 
