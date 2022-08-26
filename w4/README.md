@@ -161,12 +161,13 @@
             self.bot = bot
     ```
 ### ✅ Task: Get inputs from users before sending back the poll
- * We need to write a function `init_poll` allowing us to create a poll command. A way for us to set the command is using decorator @commands.command(aliases=["p"]) above declaration of the `init_poll` function. This means when a user type `!p` , we will have a poll command. 
+ * We need to write a function `init_poll` allowing us to create a poll command. A way for us to set the command is using decorator @commands.command(aliases=["p"]) above declaration of the `init_poll` function. This means when a user type `!p` or `!init_poll` , we will have a poll command. 
  * However, that's not enough as a user need to give a poll question, time for the poll and options for others to vote => give 3 more attributes for `init_poll` include question, time, *options. 
     ```
     class Poll(commands.Cog):
         def __init__(self, bot): 
             self.bot = bot
+         @commands.command(aliases=["p"])
          async def init_poll(self, ctx, question, time, *options): 
     ```
  * You can see we also need to have `self` and `ctx`. We need `self` because it is a function declared inside the class. We need `ctx` because when user type their `!p` command, having the `ctx` attribute will allow us to have access to the `Context` object of the command. 
@@ -176,6 +177,7 @@
     class Poll(commands.Cog):
         def __init__(self, bot): 
             self.bot = bot
+         @commands.command(aliases=["p"])
          async def init_poll(self, ctx, question, time, *options): 
             if len(options) > 3:
               await ctx.send("The number of options cannot exceed the allowed limit")
@@ -186,8 +188,14 @@
  * A reason why we cannot send back a string like what we previous did is because our poll have a lot of information like time, question, given options. Hence, it is gonna messy if we put all of them into a string. 
  * Instead, make use of `embed attribute`. To do that, we first need to create an Embed object as following: 
     ```
-    embed = discord.Embed(title = question,
-                          description= f'Poll will end in {time} seconds :alarm_clock:. There are {len(options)} options:')
+     class Poll(commands.Cog):
+        def __init__(self, bot): 
+            self.bot = bot
+         @commands.command(aliases=["p"])
+         async def init_poll(self, ctx, question, time, *options): 
+            if len(options) > 3:
+              await ctx.send("The number of options cannot exceed the allowed limit")
+            embed = discord.Embed(title = question, description= f'Poll will end in {time} seconds :alarm_clock:. There are {len(options)} options:')
     ```
 ### ✅ Task: Use emoji module to convert strings to emojis and add fields and footer
   * To generate a list of 3 emojis: 1️⃣, 2️⃣, 3️⃣ , we need to generate a list of string and convert them to emojis
@@ -195,6 +203,18 @@
     tmp = [':one:', ':two:', ':three:']
     emojis = [emoji.emojize(e, language='alias') for e in tmp]
     ```
+    ```
+     class Poll(commands.Cog):
+        def __init__(self, bot): 
+            self.bot = bot
+         @commands.command(aliases=["p"])
+         async def init_poll(self, ctx, question, time, *options): 
+            if len(options) > 3:
+              await ctx.send("The number of options cannot exceed the allowed limit")
+            embed = discord.Embed(title = question, description= f'Poll will end in {time} seconds :alarm_clock:. There are {len(options)} options:')
+            tmp = [':one:', ':two:', ':three:']
+            emojis = [emoji.emojize(e, language='alias') for e in tmp]
+      ```
   * Because 1️⃣, 2️⃣, 3️⃣ are recent emojis added to the emoji package. The old ones are usually faces: 😊, ☺️, etc . Hence DO NOT FORGET         `language='alias'` to convert strings to the package. 
   * Next, we want to add option fields. Run a for loop for it: 
     ```
