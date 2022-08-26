@@ -18,6 +18,7 @@
     - [✅ Task: Enable Privilege Gateway Intents](#-enable-privilege-gateway-intents)
 - [3. ✅ Task: Create a Cog for all your 'Poll' commands](#3-create-a-cog-for-all-your-poll-commands)
     - [📚 Outcome: What are we building for this task?](#-outcome-what-are-we-building-for-this-task)
+    - [✅ Task: Set up all the files](#-set-up-all-the-files)
     - [✅ Task: Import essential modules](#-task-import-essential-modules)
     - [✅ Task: Create a constructor for the Poll Cog](#-task-create-a-constructor-for-the-Poll-Cog)
     - [✅ Task: Get inputs from users before sending back the poll](#-task-get-inputs-from-users-before-sending-back-the-poll)
@@ -109,7 +110,14 @@
 ### 📚 Outcome: What are we building for this task?
     
    <img width="262" alt="Screen Shot 2022-08-18 at 11 41 38 pm" src="https://user-images.githubusercontent.com/80389972/185410733-fcaf554b-ad0f-42c4-ab50-1db2ac15dec6.png">
-
+### ✅ Task: Create a main2.py file where we set up our bot. 
+ * Import all the modules: asyncio, os, discord. 
+   ```
+    import discord
+    import asyncio
+    from discord.ext import commands
+    from dotenv import load_dotenv
+   ```
 ### ✅ Task: Import essential modules 
  * `discord`, `asyncio`, `matplotlib`, `numpy` are modules we want to use to create a Poll Cog. So please import them: 
     ```
