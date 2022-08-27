@@ -216,7 +216,7 @@
          async def init_poll(self, ctx, question, time, *options): 
             if len(options) > 3:
               await ctx.send("The number of options cannot exceed the allowed limit")
-             if not time.isdigit():
+            if not time.isdigit():
               await ctx.send("Time if of type number. Please provide a number.")
             embed = discord.Embed(title = question, description= f'Poll will end in {time} seconds :alarm_clock:. There are {len(options)} options:')
             tmp = [':one:', ':two:', ':three:']
@@ -237,7 +237,7 @@
          async def init_poll(self, ctx, question, time, *options): 
             if len(options) > 3:
               await ctx.send("The number of options cannot exceed the allowed limit")
-           if not time.isdigit():
+            if not time.isdigit():
               await ctx.send("Time if of type number. Please provide a number.")
             embed = discord.Embed(title = question, description= f'Poll will end in {time} seconds :alarm_clock:. There are {len(options)} options:')
             tmp = [':one:', ':two:', ':three:']
