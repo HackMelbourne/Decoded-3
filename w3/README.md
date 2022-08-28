@@ -24,32 +24,39 @@
 ## 0. What is Lavalink and setting it up
 
 <details>
-<summary><b>❓ What is Lavalink?</b></summary>
-Lavalink is a library that allows you to play music on discord using the [Lavalink]() library.
+<summary><b>❓ What is Wavelink and Lavalink?</b></summary>
+
+Wavelink is a library that allows you to play music with discord.py using
+the [Lavalink](https://github.com/freyacodes/Lavalink) library.
+
+Lavalink is a server application which allows you to search and stream audio directly between a source and a destination
+without too much overhead!
+
+</details>
 
 ## 1. Installing Modules
 
 * Before we begin creating the bot, we have to install a few modules
 
-* Install discord and dotenv
-  * Just simply type this in your terminal
+* Install wavelink
+    * Just simply type this in your terminal
   ```
-  pip install discord 
-  ```
-  ```
-  pip install dotenv
+  pip install wavelink
   ```
 
-* Now we need to start the bot by adding some import statement in our code. 
+We're hoping you already have a basic hello bot set up from the first workshop!
+
+* Now we need to start the bot by adding some import statement in our code.
+
 ```python
 import os
 import subprocess
 import time
+
 import discord
 import requests
 import wavelink
 from discord.ext import commands
-from dotenv import load_dotenv
 ```
 
 ## 2. Setting up the join and leave commands
@@ -58,13 +65,18 @@ from dotenv import load_dotenv
 
 ```python
 class MusicBot(commands.Cog):
-    def __init__(self, bot):
-        self.bot = bot
+    voice_clients = {}
 
+    def __init__(self, client):
+        self.client = client
 ```
 
-* We now need to make sure that when ever we run the code, we can see that our bot has successfully logged-in and also let us know if we didn't join the voice channel. For that
-  we can simply use this code.
+You may notice an extra `voice_clients` dictionary. This is where we will store all the active song sessions we're
+playing 🎵
+
+* The first step for a music bot is being able to join the current voice channel. Let's make a command called `join`
+  that does just that:
+
 ```python
 @commands.command()
 async def join(self, ctx: commands.Context):
@@ -79,7 +91,19 @@ async def join(self, ctx: commands.Context):
     await ctx.send(f'Joined {channel}')
 ```
 
-* We also need to make sure that our bot leave. So for that we can simple use this code.
+Let's break this down.
+The code does the following:
+
+1. First we check if we're currently connected to a voice channel. If we are, we gotta leave
+2. We then check if the author of the message is in a voice channel. If they aren't, we send a reminder to join and stop
+   there
+3. If all is good, we grab the channel they're in and join the party 🥳. It's important that we set wavelink as our audio
+   source here, as that's where our music is coming from.
+    1. Take note of how we store the audio client in the `voice_clients` dictionary. This will be important later.
+4. Finally, we text the user that we joined.
+
+* We also need to make sure that users can ask our bot to leave. We can do this with the following:
+
 ```python
 @commands.command()
 async def leave(self, ctx):
@@ -91,8 +115,16 @@ async def leave(self, ctx):
         await ctx.voice_client.disconnect()
 ```
 
+Let's break this down:
+
+1. Let's check if we're in the voice channel to begin with in this guild. If we are, let's stop our player and delete
+   our voice client.
+2. We can then disconnect and send a message saying that we left ;-;
+
 ## 3. Pausing and playing Music
-* Now we need our bot to pause and play the music. We can do that simply by using this code.
+
+Let's get to the fun part. Playing (and pausing) music!
+
 ```python
 # To play the music  
 @commands.command()
@@ -114,6 +146,7 @@ async def play(self, ctx, *, search: wavelink.YouTubeTrack):
     embed.set_image(url=voice.source.thumbnail)
     await ctx.send(embed=embed)
 
+
 # To stop the music
 @commands.command()
 async def stop(self, ctx):
@@ -123,6 +156,7 @@ async def stop(self, ctx):
     else:
         await ctx.send('Not in a voice channel')
 
+
 # To pause the music
 @commands.command()
 async def pause(self, ctx):
@@ -131,6 +165,7 @@ async def pause(self, ctx):
         await ctx.send('Paused')
     else:
         await ctx.send('Not in a voice channel')
+
 
 # To resume the music
 @commands.command()
@@ -142,8 +177,9 @@ async def resume(self, ctx):
         await ctx.send('Not in a voice channel')
 
 ```
-Now when ever you will add '!paused' in discord it will pause the music and when you will add '!resumed' it will resume the song again. 
 
+Now when ever you will add '!paused' in discord it will pause the music and when you will add '!resumed' it will resume
+the song again.
 
 ## 4. Starting the bot
 
@@ -181,13 +217,14 @@ async def on_ready(self):
 
     self.client.loop.create_task(connect_wavefront())
 
+
 @commands.Cog.listener()
 async def on_wavelink_node_ready(self, node: wavelink.Node):
     print(f'Connected to wavefront! ID: {node.identifier}')
 
 ```
 
-## 5. Adding token 
+## 5. Adding token
 
 * We are almost there, we just need to add the token of the bot before we start playing our favourite songs.
 

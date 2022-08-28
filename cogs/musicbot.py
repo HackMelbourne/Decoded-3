@@ -30,7 +30,7 @@ class MusicBot(commands.Cog):
         await ctx.send(f'Joined {channel}')
 
     @commands.command()
-    async def leave(self, ctx):
+    async def leave(self, ctx: commands.Context):
         if ctx.guild.id in self.voice_clients:
             await self.voice_clients[ctx.guild.id].stop()
             del self.voice_clients[ctx.guild.id]
@@ -39,7 +39,7 @@ class MusicBot(commands.Cog):
             await ctx.voice_client.disconnect()
 
     @commands.command()
-    async def play(self, ctx, *, search: wavelink.YouTubeTrack):
+    async def play(self, ctx: commands.Context, *, search: wavelink.YouTubeTrack):
         if ctx.guild.id not in self.voice_clients:
             # Join the user's voice channel
             await self.join(ctx)
@@ -58,7 +58,7 @@ class MusicBot(commands.Cog):
         await ctx.send(embed=embed)
 
     @commands.command()
-    async def stop(self, ctx):
+    async def stop(self, ctx: commands.Context):
         if ctx.guild.id in self.voice_clients:
             await self.voice_clients[ctx.guild.id].stop()
             await ctx.send('Stopped')
@@ -66,7 +66,7 @@ class MusicBot(commands.Cog):
             await ctx.send('Not in a voice channel')
 
     @commands.command()
-    async def pause(self, ctx):
+    async def pause(self, ctx: commands.Context):
         if ctx.guild.id in self.voice_clients:
             await self.voice_clients[ctx.guild.id].pause()
             await ctx.send('Paused')
@@ -74,7 +74,7 @@ class MusicBot(commands.Cog):
             await ctx.send('Not in a voice channel')
 
     @commands.command()
-    async def resume(self, ctx):
+    async def resume(self, ctx: commands.Context):
         if ctx.guild.id in self.voice_clients:
             await self.voice_clients[ctx.guild.id].resume()
             await ctx.send('Resumed')
