@@ -175,7 +175,7 @@ When a program is run, it may need information from the operating system to conf
 * Then we create an instance of [`Client`](https://discordpy.readthedocs.io/en/stable/api.html#discord.Client), which is out connection to discord, and run it
   ```python
   # ./main.py, after defining TOKEN
-  client = discord.Client() # creates the bot
+  client = discord.Client(intents=discord.Intents.all()) # creates the bot
 
   client.run(TOKEN) # runs the bot
   ```
@@ -198,7 +198,7 @@ When a program is run, it may need information from the operating system to conf
   ```python
   # ./main.py, in between defining the client and running it
   @client.event # 👈 this is a function decorator
-  def on_ready(): # 👈 on_ready() is a callback
+  async def on_ready(): # 👈 on_ready() is a callback
     # code in on_ready() will be run after the bot is done logging in and setting up
   ```
 
@@ -221,7 +221,7 @@ When a program is run, it may need information from the operating system to conf
   ```python
   # ./main.py, in between defining the client and running it
   @client.event
-  def on_message(msg):
+  async def on_message(msg):
     print(msg.content)
   ```
 * The message being sent is stored in the `msg` variable, which is of the [Message](https://discordpy.readthedocs.io/en/stable/api.html#discord.Message) class. 
@@ -303,7 +303,7 @@ When a program is run, it may need information from the operating system to conf
 * Instead of a Client instance, we will create a Bot instance instead
   ```python
   # ./main.py, replace `client = discord.Client()` with...
-  client = commands.Bot(command_prefix = "!") # instead of a client, we create a Bot instance
+  client = commands.Bot(command_prefix = "!", intents = discord.Intents.all()) # instead of a client, we create a Bot instance
   ```
 ### ✅ Task: Create a Hello Cog
 * create a folder called `cogs`, this is where you will store your cogs
@@ -354,18 +354,20 @@ When a program is run, it may need information from the operating system to conf
   * this function will be called in `main.py`
   ```python
   # ./cogs/hello.py, outside the Hello class
-  def setup(bot): # 👈 a extension must have a setup function
-      bot.add_cog(Hello(bot)) # 👈 adding the cog
+  async def setup(bot): # 👈 a extension must have a setup function
+      await bot.add_cog(Hello(bot)) # 👈 adding the cog
   ```
 
 ### ✅ Task: Refactor `main.py` to support Cogs (part 2)
 * Now, back in `main.py`, instead of having all of our bot's logic in the file, we have moved them into cogs that are located in the `./cogs` folder and now we should load up all of our cogs
   ```python
-  # ./main.py, after defining the client
+  # ./main.py, with imports
+  import asyncio
+
   # 👇 Looks inside the /cogs/ folder and loads up all of our cogs
   for filename in os.listdir("./cogs"):
       if filename.endswith(".py"):
-          client.load_extension("cogs." + filename[:-3])  # calls the cog's `setup()` function
+          asyncio.run(client.load_extension("cogs." + filename[:-3]))  # calls the cog's `setup()` function
 
   client.run(TOKEN)
   ```
