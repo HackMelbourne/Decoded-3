@@ -268,3 +268,9 @@
     ```
     await asyncio.sleep(int(time))
     ```
+
+
+### ✅ Task: Outputting a bar chart to show the result of the poll
+  * Import libraries
+  * Initialise the bar graph plot
+  * 
