@@ -181,6 +181,8 @@
          async def init_poll(self, ctx, question, time, *options): 
             if len(options) > 3:
               await ctx.send("The number of options cannot exceed the allowed limit")
+            if not time.isdigit():
+              await ctx.send("Time if of type number. Please provide a number.")
     ```
  * you can notice that we are making use of ctx attribute to send back a message to the server. The data type of what is returned from ctx.send(...) is discord.Message. Here is more information about discord.Message: https://discordpy.readthedocs.io/en/stable/api.html#discord.Message
 ### ✅ Task: Send back an Embed as a poll
@@ -193,8 +195,11 @@
             self.bot = bot
          @commands.command(aliases=["p"])
          async def init_poll(self, ctx, question, time, *options): 
+            
             if len(options) > 3:
               await ctx.send("The number of options cannot exceed the allowed limit")
+            if not time.isdigit():
+              await ctx.send("Time if of type number. Please provide a number.")
             embed = discord.Embed(title = question, description= f'Poll will end in {time} seconds :alarm_clock:. There are {len(options)} options:')
     ```
 ### ✅ Task: Use emoji module to convert strings to emojis and add fields and footer
@@ -211,6 +216,8 @@
          async def init_poll(self, ctx, question, time, *options): 
             if len(options) > 3:
               await ctx.send("The number of options cannot exceed the allowed limit")
+            if not time.isdigit():
+              await ctx.send("Time if of type number. Please provide a number.")
             embed = discord.Embed(title = question, description= f'Poll will end in {time} seconds :alarm_clock:. There are {len(options)} options:')
             tmp = [':one:', ':two:', ':three:']
             emojis = [emoji.emojize(e, language='alias') for e in tmp]
@@ -230,6 +237,8 @@
          async def init_poll(self, ctx, question, time, *options): 
             if len(options) > 3:
               await ctx.send("The number of options cannot exceed the allowed limit")
+            if not time.isdigit():
+              await ctx.send("Time if of type number. Please provide a number.")
             embed = discord.Embed(title = question, description= f'Poll will end in {time} seconds :alarm_clock:. There are {len(options)} options:')
             tmp = [':one:', ':two:', ':three:']
             emojis = [emoji.emojize(e, language='alias') for e in tmp]
@@ -247,6 +256,8 @@
          async def init_poll(self, ctx, question, time, *options): 
             if len(options) > 3:
               await ctx.send("The number of options cannot exceed the allowed limit")
+            if not time.isdigit():
+              await ctx.send("Time if of type number. Please provide a number.")
             embed = discord.Embed(title = question, description= f'Poll will end in {time} seconds :alarm_clock:. There are {len(options)} options:')
             tmp = [':one:', ':two:', ':three:']
             emojis = [emoji.emojize(e, language='alias') for e in tmp]
