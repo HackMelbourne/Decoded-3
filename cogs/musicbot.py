@@ -50,11 +50,11 @@ class MusicBot(commands.Cog):
         embed = discord.Embed(
             title=voice.source.title,
             url=voice.source.uri,
-            author=ctx.author,
             description=f"Playing {voice.source.title} in {voice.channel}"
-
         )
         embed.set_image(url=voice.source.thumbnail)
+        if hasattr(ctx.author, 'avatar'):
+            embed.set_author(name=ctx.author.name, icon_url=ctx.author.avatar.url)
         await ctx.send(embed=embed)
 
     @commands.command()
@@ -116,8 +116,8 @@ class MusicBot(commands.Cog):
         print(f'Connected to wavefront! ID: {node.identifier}')
 
 
-def setup(bot):
-    bot.add_cog(MusicBot(bot))
+async def setup(bot):
+    await bot.add_cog(MusicBot(bot))
 
 
 if __name__ == '__main__':
