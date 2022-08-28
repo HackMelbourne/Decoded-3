@@ -45,13 +45,13 @@
 ### ✅ Task: Create a Discord Account
   > 📝 NOTE: If you already have a Discord account, you can skip this task
   * You can register for a Discord account [here](https://discord.com/register).
-    * ![](2022-08-06-16-47-20.png)
+    * ![](./images/2022-08-06-16-47-20.png)
 ### ✅ Task: Create a Discord Server
   > 📝 NOTE: Discord servers are sometimes refered to as **'guilds'** in some documentation (because some people confuse the word 'server' with computer servers 🗄️ XD)
   * this server will be used for you to test your bot
   * Follow Discord's documentation on [How do I create a server?](https://support.discord.com/hc/en-us/articles/204849977-How-do-I-create-a-server-)
     1. Click on the "+" button at the bottom of the left hand column on Discord
-      * ![](2022-08-06-16-52-41.png)
+      * ![](./images/2022-08-06-16-52-41.png)
     2. Fill in the server details
       * You can follow these options: Create My Own > For me and my friends > Name your server > "Create"
 
@@ -63,22 +63,22 @@
 ### ✅ Task: Create a Discord Application and Bot, and copy your Token
   * Login to the [Developer Portal's Applications Page](https://discord.com/developers/applications)
   * Click on "New Application"
-    * ![](2022-08-06-16-57-29.png)
+    * ![](./images/2022-08-06-16-57-29.png)
   * Give the application a name and click "Create"
-    * ![](2022-08-06-16-57-47.png)
+    * ![](./images/2022-08-06-16-57-47.png)
   * Go to the "Bot" tab and then click "Add Bot" and "Yes, do it!"
-    * ![](2022-08-06-17-01-31.png)
+    * ![](./images/2022-08-06-17-01-31.png)
   * Now your bot has been created! Next step is to copy the token and paste it in a notepad or create a file called `.env` [(Environment Variables)](#environment-variables) and paste it in there for now
-     *  ![](2022-08-06-17-02-00.png)
+     *  ![](./images/2022-08-06-17-02-00.png)
     > 📝 NOTE: This token is your bot's password so don't share it with anybody. It could allow someone to log in to your bot and do all sorts of bad things.
     > 
     > You are only able to see this token once (on the creation of the bot) but you can regenerate the token if it accidentally gets shared.
 
 ### ✅ Task: Invite your bot to your server
   * Go to the "OAuth2 > URL Generator" tab. Then select "bot" under the "scopes" section
-    * ![](2022-08-06-17-11-00.png)
-  * Now choose the permissions you want for the bot. For now, you can give it minimal permissions as we are making a simple bot but you might have to add more permissions as you progress through the other workshops and add more features!
-    * ![](2022-08-06-17-11-30.png)
+    * ![](./images/2022-08-06-17-11-00.png)
+  * Now choose the permissions you want for the bot. You can either give it minimal permissions as we are making a simple bot for this workshop but might have to add more permissions as you progress through the other workshops and add more features or you could give it many permissions upfront and not have to worry about permissions later.
+    * ![](./images/2022-08-06-17-11-30.png)
   * Then copy the generated URL, open it in a new tab and add your bot to your server.
   > 📝 NOTE: Be careful when giving your bot "Administrator" permissions
 
@@ -95,7 +95,7 @@
   * There are 2 ways to access the terminal in VS Code:
     1. using the shortcut ```Ctrl + Shift + ` ```
     2. Terminal > New Terminal
-     * ![](vscode_access_terminal.gif)
+     * ![](./images/vscode_access_terminal.gif)
 
   </details>
 
@@ -126,7 +126,7 @@
 <details>
 <summary>🧩 Creating Files in VS Code</summary>
 
-* ![](vscode_create_main_and_env_files.gif)
+* ![](./images/vscode_create_main_and_env_files.gif)
 
 </details>
 
@@ -134,7 +134,9 @@
 <details>
 <summary><b>❓ What are environment variables?</b></summary>
 
-> When a program is run, it may need information from the operating system to configure its behaviour. This might include the operating system, current running folder, or more important things like passwords to various services (Discord here!). Basically, environment variables are variables/information about the environment its running on. They are a useful tool in providing information to your program, which is separate from your code. Developers commonly use `.env` files to specify these variables.
+When a program is run, it may need information from the operating system to configure its behaviour. This might include the operating system, current running folder, or more important things like passwords to various services (Discord here!). Basically, environment variables are variables/information about the environment its running on. They are a useful tool in providing information to your program, which is separate from your code. Developers commonly use `.env` files to specify these variables.
+
+![](./images/1_BIgXzxgolWVDBNq5F_eZpg.png)
 
 </details>
 
@@ -147,7 +149,7 @@
   TOKEN=example.token.abc123
   ```
 * [Replit] If you're using Replit to develop your bot, Replit does not let you create a `.env` file so go to the "Secrets" tab and create a key-value pair for your token
-  * ![](2022-08-06-17-17-49.png)
+  * ![](./images/2022-08-06-17-17-49.png)
 * Then in your code file:
   ```python
   # ./main.py
@@ -188,7 +190,7 @@
   <summary><b>🔍 What are <i>events</i> and <i>callbacks</i>?</b></summary>
 
   * **events**: actions or occurrences recognised by the program
-    * eg. when the bot is done setting up and is ready to operate, when the 
+    * eg. when the bot is done setting up and is ready to operate, when a message is sent, etc.
   * **callback**: a function that is called when an event happens
     * eg. the `on_ready()` event is called when the bot has finished logging in and setting things up
   * to register an event, we use a decorator, `@client.event` on the callback function's definition
@@ -241,8 +243,6 @@
 >     * `client.user.name`
 >     * `client.user.id`
 >     * try printing these `on_ready()`, what do these attributes store?
-> 
-> TODO "Navigating Documentation" (extra)
 
 ### Receiving Messages
 * As said before, there are many events that we can register and 'listen' to. You can check out [Discord Docs > Event Reference](https://discordpy.readthedocs.io/en/stable/api.html#event-reference) for more events.
@@ -273,7 +273,7 @@
       return
     await msg.channel.send("Good Morning!")
   ```
-* ❓ Question for participants: What is the `if` statement doing? Why do we need it? What happens if we remove it? (you might get a special prize if you answer this correctly!)
+* ❓ Question for participants: What is the `if` statement doing? Why do we need it? What happens if we remove it?
 
 ### ✅ Task: Respond to "!hello" with "Hello, {username}"
 * Given that we know how to receive and send messages, try amending/adding some code in the `on_message()` to make your bot send "Hello, {username}" to anyone who sends messages starting with `$hello` (but replace {username} with the actual sender's username).
@@ -285,8 +285,6 @@
 * note that `msg.content` is a string, what string methods do you know of? (🔗[Python String Methdos | w3schools](https://www.w3schools.com/python/python_ref_string.asp))
 
 </details>
-
-> 🙋 Don't hesitate to let us know you need any help!
 
 ---
 
@@ -389,16 +387,11 @@
 
 ## 7. [💡 Extension] Host your bot on Heroku
 > this allows your bot to run continuously without having to open VSCode or keep your repl.it tab running
-* Create a Heroku Account
-* 
-* ![](2022-07-27-20-48-43.png)
-* Choose an App name ()
-  * ![](2022-07-27-20-50-00.png)
-* Once you're in your app's page, go over to your settings, scroll down to **Buildpack** and add the **Python** buildpack
-  * ![](./deployment_add_buildpack.gif)
+
+* [Hosting your discord.py bot on Heroku](https://github.com/squid/discord-py-heroku)
+* [How to host a discord.py bot with Heroku and GitHub](https://medium.com/analytics-vidhya/how-to-host-a-discord-py-bot-on-heroku-and-github-d54a4d62a99e)
 
 ## Related Links:
 * [Creating a Bot Account | discord.py](https://discordpy.readthedocs.io/en/stable/discord.html)
 * [Python Discord Bot Tutorial – Code a Discord Bot And Host it for Free | freeCodeCamp](https://www.freecodecamp.org/news/create-a-discord-bot-with-python/)
-* [Hosting your discord.py bot on Heroku](https://github.com/squid/discord-py-heroku)
-* [How to host a discord.py bot with Heroku and GitHub](https://medium.com/analytics-vidhya/how-to-host-a-discord-py-bot-on-heroku-and-github-d54a4d62a99e)
+

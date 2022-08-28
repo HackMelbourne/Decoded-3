@@ -15,5 +15,5 @@ class Hello(commands.Cog):
         await ctx.send(f'Hi!')
 
 
-def setup(bot):  # a extension must have a setup function
-    bot.add_cog(Hello(bot))  # adding a cog
+async def setup(bot):  # a extension must have a setup function
+    await bot.add_cog(Hello(bot))  # adding a cog
