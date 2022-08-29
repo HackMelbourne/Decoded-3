@@ -3,5 +3,7 @@
 .idea/
 
 *.pyc
+/logs/
+
 
 chart.png
