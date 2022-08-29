@@ -14,19 +14,25 @@ class Poll(commands.Cog):
   async def create_bar_chart(self,options, reactions, question):
     totalVotes = 0
     votes = []
+
     #calculate the number of votes for each option
     for reaction in reactions:
-      v=0
+      # Start at -1 to exclude the vote of the bot
+      v = -1
+
       async for _ in reaction.users():
-        v+=1
+        v += 1
+
       totalVotes += v
       votes.append(v)
 
+    # Calculates percentage of votes for each option
     percentages = [round((vote/totalVotes)* 100, 2) for vote in votes]
+    
+    # Initialises the figure
     fig, ax = plt.subplots()
     y_pos = np.arange(len(options))
     error = np.random.rand(len(options))
-    ax.barh(y_pos, percentages, xerr=error, align='center')
     ax.set_yticks(y_pos, labels=options)
     ax.invert_yaxis()  # labels read top-to-bottom
     ax.set_xlabel('Votes (%)')
@@ -38,6 +44,7 @@ class Poll(commands.Cog):
   async def init_poll(self, ctx, question, time, *options):
     if len(options) > 3:
       await ctx.send("The number of options cannot exceed the allowed limit")
+
     embed = discord.Embed(title = question,
                           description= f'Poll will end in {time} seconds :alarm_clock:. There are {len(options)} options:')
     tmp = [':one:', ':two:', ':three:'][:len(options)]
