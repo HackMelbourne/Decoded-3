@@ -1,4 +1,4 @@
-DISCORD_TOKEN = <bot_token>
+TOKEN = <bot_token>
 DISCORD_GUILD = <server_name>
 DISCORD_COMMAND_ROOT = ;;
 BOT_NAME = random

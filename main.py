@@ -1,26 +1,17 @@
 import os
-
-import discord
 from dotenv import load_dotenv
+from discord.ext import commands
+import discord
+import asyncio
 
 load_dotenv()
 TOKEN = os.getenv('TOKEN')
 
-client = discord.Client()
+client = commands.Bot(command_prefix = "!", intents = discord.Intents.all()) # instead of a client, we create a Bot instance
 
-
-@client.event
-async def on_ready():
-    print(f'We have logged in as {client.user}')
-
-
-@client.event
-async def on_message(msg):
-    # print(msg.content)
-    if msg.author == client.user:
-        return
-    if msg.content.startswith('$hello'):
-        await msg.channel.send(f'Hello, {msg.author.name}!')
-
+# 👇 Looks inside the /cogs/ folder and loads up all of our cogs
+for filename in os.listdir("./cogs"):
+    if filename.endswith(".py"):
+        asyncio.run(client.load_extension("cogs." + filename[:-3]))  # calls the cog's `setup()` function
 
 client.run(TOKEN)
