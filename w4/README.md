@@ -283,5 +283,10 @@
 
 ### ✅ Task: Outputting a bar chart to show the result of the poll
   * Import libraries
-  * Initialise the bar graph plot
+    ```
+    import matplotlib.pyplot as plt
+    import numpy as np
+    ```
+  * Initialise the function to create bar chart
+  
   * 
