@@ -14,7 +14,6 @@ load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 GUILD = os.getenv('DISCORD_GUILD')
 COMMAND = os.getenv('DISCORD_COMMAND_ROOT')
-BOTNAME = os.getenv('BOT_NAME')
 API_ROOT = os.getenv('MEME_API_ROOT')
 MONGODB_URI = os.getenv('MONGODB_URI')
 DB = os.getenv('DB')
@@ -23,7 +22,8 @@ COLLECTION = os.getenv('COLLECTION')
 collection = MongoClient(MONGODB_URI)[DB][COLLECTION]
 
 # all commands that this bot will respond to will begin with ";;bot_name"
-bot = commands.Bot(command_prefix=COMMAND + BOTNAME, strip_after_prefix=True)
+bot = commands.Bot(command_prefix=COMMAND, strip_after_prefix=True,
+                   intents=discord.Intents(messages=True, message_content=True))
 
 
 def get_random_memes(count):
