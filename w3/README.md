@@ -8,9 +8,7 @@
 <details>
 <summary>Table of Contents</summary>
 
-- [0. what is Lavalink](#0-create-a-discord-account-and-discord-server)
-    - [For Windows](#create-a-discord-account)
-    - [For Mac](#create-a-discord-server)
+- [0. Cloning and setting up Lavalink](#0-Cloning-and-setting-up-Lavalink)
 - [1. Installing Modules: `youtube_dl`](#1-create-an-application)
 - [2. Setting up the join and leave commands](#2-installing-modules-discordpy-and-python-dotenv)
 - [3. Streaming audio to discord](#3-creating-a-bot-and-adding-it-to-your-server)
@@ -21,7 +19,12 @@
 
 ---
 
-## 0. What is Lavalink and setting it up
+## 0. Cloning and setting up Lavalink
+
+To get started with this lesson, you'll need the Hello foundations bot from the first workshop!
+Clone it from here: https://github.com/HackMelbourne/Decoded-3
+You can also download the repo as a zip and extract it to a folder.
+![image](1.png)
 
 <details>
 <summary><b>❓ What is Wavelink and Lavalink?</b></summary>
@@ -33,6 +36,21 @@ Lavalink is a server application which allows you to search and stream audio dir
 without too much overhead!
 
 </details>
+
+To run Lavalink, you need to have Java 13. Nothing newer or older (although I've tested OpenJDK 11 and that worked too).
+Download JDK 13 from this link: https://jdk.java.net/archive/
+
+Here are some links for your specific platform:
+
+* Windows: https://download.java.net/java/GA/jdk13.0.2/d4173c853231432d94f001e99d882ca7/8/GPL/openjdk-13.0.2_windows-x64_bin.zip
+* Mac: https://download.java.net/java/GA/jdk13.0.2/d4173c853231432d94f001e99d882ca7/8/GPL/openjdk-13.0.2_osx-x64_bin.tar.gz
+* Linux: https://download.java.net/java/GA/jdk13.0.2/d4173c853231432d94f001e99d882ca7/8/GPL/openjdk-13.0.2_linux-x64_bin.tar.gz
+
+Extract it into the same folder as the repo you just cloned.
+
+Then, download Lavalink from the following
+URL: https://github.com/freyacodes/Lavalink/releases/download/3.4/Lavalink.jar
+(Source: https://github.com/freyacodes/Lavalink/releases/tag/3.4)
 
 ## 1. Installing Modules
 
