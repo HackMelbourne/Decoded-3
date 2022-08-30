@@ -32,6 +32,7 @@ class Poll(commands.Cog):
     # Initialises the figure
     fig, ax = plt.subplots()
     y_pos = np.arange(len(options))
+    ax.barh(y_pos, percentages, align='center')
     ax.set_yticks(y_pos, labels=options)
     ax.invert_yaxis()  # labels read top-to-bottom
     ax.set_xlabel('Votes (%)')
@@ -41,8 +42,13 @@ class Poll(commands.Cog):
 
   @commands.command(aliases=["p"])
   async def init_poll(self, ctx, question, time, *options):
+    # Prevents user from inputting more than 3 options
     if len(options) > 3:
       await ctx.send("The number of options cannot exceed the allowed limit")
+      return
+    if not time.isdigit():
+      await ctx.send("Time has to be a digit")
+      return
 
     embed = discord.Embed(title = question,
                           description= f'Poll will end in {time} seconds :alarm_clock:. There are {len(options)} options:')
@@ -54,12 +60,15 @@ class Poll(commands.Cog):
     embed.add_field(name="Instructions", value="React to cast a vote", inline=False)
     embed.set_footer(text = f'This poll is created by {ctx.author.name}')
     poll = await ctx.send(embed = embed)
+
     # add emojis as reactions to the poll
     for emo in emojis:
       await poll.add_reaction(emo)
     await asyncio.sleep(int(time))
+
     #calculate the result of the poll
     message = await ctx.fetch_message(poll.id)
+
     # create a bar chart as a result
     await self.create_bar_chart(options, message.reactions, question)
     result = discord.Embed(title='Result', description = "Here are the vote results")
