@@ -288,5 +288,13 @@
     import numpy as np
     ```
   * Initialise the function to create bar chart
-  
+    ```
+    fig, ax = plt.subplots()
+    y_pos = np.arange(len(options))
+    ax.set_yticks(y_pos, labels=options)
+    ax.invert_yaxis()  # labels read top-to-bottom
+    ax.set_xlabel('Votes (%)')
+    ax.set_title(question)
+    plt.savefig('chart.png')
+    ```
   * 
