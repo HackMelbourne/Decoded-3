@@ -19,12 +19,12 @@ class MusicBot(commands.Cog):
 
     @commands.command()
     async def join(self, ctx: commands.Context):
-        # Leave current channel
-        if ctx.voice_client is not None:
-            await ctx.voice_client.disconnect()
         if not ctx.message.author.voice:
             await ctx.send('You are not in a voice channel')
             return
+        # Leave current channel
+        if ctx.voice_client is not None:
+            await ctx.voice_client.disconnect()
         channel = ctx.message.author.voice.channel
         self.voice_clients[ctx.guild.id] = await channel.connect(cls=wavelink.Player())
         await ctx.send(f'Joined {channel}')
@@ -88,7 +88,7 @@ class MusicBot(commands.Cog):
         print(self.client.user.name)
         print(self.client.user.id)
         print('------')
-        # Try start Lavafront server
+        # Try start Lavalink server
         subprocess.Popen(["./jdk-13.0.2/bin/java", "-jar", "Lavalink.jar"])
         # wait for port to open
         while True:
@@ -100,7 +100,7 @@ class MusicBot(commands.Cog):
                 time.sleep(1)
                 continue
 
-        async def connect_wavefront():
+        async def connect_wavelink():
             await self.client.wait_until_ready()
             await wavelink.NodePool.create_node(
                 bot=self.client,
@@ -109,7 +109,7 @@ class MusicBot(commands.Cog):
                 password='youshallnotpass'
             )
 
-        self.client.loop.create_task(connect_wavefront())
+        self.client.loop.create_task(connect_wavelink())
 
     @commands.Cog.listener()
     async def on_wavelink_node_ready(self, node: wavelink.Node):
