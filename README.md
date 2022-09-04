@@ -15,9 +15,9 @@
 - [About this repository](#about-this-repository)
 - [Workshop 1 - Introduction to Discord.py](#workshop-1---introduction-to-discordpy)
 - [Workshop 2 - Meme Bot](#workshop-2---meme-bot)
-- [Workshop 3 - Music Bot](#workshop-3---music-bot)
-- [Workshop 4 - Polling Bot](#workshop-4---polling-bot)
-- [Workshop 5 - Tic Tac Toe](#workshop-5---tic-tac-toe)
+- [Workshop 3 - Polling Bot](#workshop-4---polling-bot)
+- [Workshop 4 - Tic Tac Toe](#workshop-5---tic-tac-toe)
+- [Workshop 5 - Music Bot](#workshop-3---music-bot)
 
 </details>
 
@@ -30,13 +30,15 @@
 * We are also trying a new teaching style this year so let us know if you like it!
 ### Dates
 
+Get the latest details on [Notion](https://uneven-boa-710.notion.site/DecodED-3-3336c8bbd49a4df6a00b8b34af1980c6) (the below table may be outdated)
+
 Lesson | Location | People | Date
 | -- | -- | -- | -- |
 Foundations (Basic) | Alan Gilbert 101 and Zoom | Xin Yu | 2pm, Wednesday 24th August
 Meme bot (easy) | Zoom | Aly, Minh | Wednesday 31st August
-Music bot | Alan Gilbert 121 (Theatre) and Zoom | Aryan, Ryan | Wednesday 7th September
-Poll | Alan Gilbert G20 and Zoom | Jerry, Hoan | Wednesday 14th September
-TicTacToe bot | Alan Gilbert 103 and Zoom | Warren, Daniel | 2pm, Wednesday 21st September
+Poll | Alan Gilbert G20 and Zoom | Jerry, Hoan | Wednesday 7th September
+TicTacToe bot | Alan Gilbert 103 and Zoom | Warren, Daniel | 2pm, Wednesday 14th September
+Music bot | Alan Gilbert 121 (Theatre) and Zoom | Aryan, Ryan | Wednesday 21st September
 
 ### Zoom Link: https://unimelb.zoom.us/j/88528442813?pwd=WlYrQ3pHcm5xMXpGQkZZSllZZTNvQT09
 
@@ -60,7 +62,7 @@ Password: 323737
 > 
 > Hosted by Xin Yu
 
-* [📔Participant Workbook](https://github.com/HackMelbourne/Decoded-3/tree/foundations-bot)
+* [📔Participant Workbook](https://github.com/HackMelbourne/Decoded-3/tree/main/w1)
 * [Workshop Recording] Coming Soon!
 
 ## Workshop 2 - Meme Bot
@@ -71,10 +73,30 @@ Password: 323737
 > 
 > Hosted by Aly and Minh
 
-* [📔Participant Workbook](https://github.com/HackMelbourne/Decoded-3/tree/meme_bot)
+* [📔Participant Workbook](https://github.com/HackMelbourne/Decoded-3/tree/meme_bot/w2)
 * [Workshop Recording]
 
-## Workshop 3 - Music Bot
+## Workshop 3 - Polling Bot
+
+> Caught up in your server arguing why Minecraft is (definitively) the best game? Why not run a poll on your server and
+> prove your friends wrong? Learn to build your own polling bot to settle your arguments in style 😎
+> 
+> Jerry and Hoan
+
+* [📔Participant Workbook](https://github.com/HackMelbourne/Decoded-3/tree/poll_system/w3)
+* [Workshop Recording]
+
+## Workshop 4 - Tic Tac Toe
+
+> Fancy a game, but don’t want to leave your friends in discord? In this lesson, you’ll learn to implement a tic tac toe
+> game within the Discord bot so you can vs your friends whenever you wish!
+> 
+> Warren and Weng Jae (Daniel)
+
+* [📔Participant Workbook](https://github.com/HackMelbourne/Decoded-3/tree/tictactoe/w4)
+* [Workshop Recording]
+
+## Workshop 5 - Music Bot
 
 > Ever since YouTube banned music bots, discord servers have been desperately lacking some tunes. Impress your friends
 > by bringing them back by building your own bot with the ability to play music, plus additional music controls! Now you
@@ -82,25 +104,5 @@ Password: 323737
 > 
 > Hosted by Aryan and Ryan
 
-* [📔Participant Workbook](https://github.com/HackMelbourne/Decoded-3/tree/music-bot)
-* [Workshop Recording]
-
-## Workshop 4 - Polling Bot
-
-> Caught up in your server arguing why Minecraft is (definitively) the best game? Why not run a poll on your server and
-> prove your friends wrong? Learn to build your own polling bot to settle your arguments in style 😎
-> 
-> Jerry and Hoan
-
-* [📔Participant Workbook](https://github.com/HackMelbourne/Decoded-3/tree/poll_system)
-* [Workshop Recording]
-
-## Workshop 5 - Tic Tac Toe
-
-> Fancy a game, but don’t want to leave your friends in discord? In this lesson, you’ll learn to implement a tic tac toe
-> game within the Discord bot so you can vs your friends whenever you wish!
-> 
-> Warren and Weng Jae (Daniel)
-
-* [📔Participant Workbook](https://github.com/HackMelbourne/Decoded-3/tree/tictactoe)
+* [📔Participant Workbook](https://github.com/HackMelbourne/Decoded-3/tree/music-bot/w5)
 * [Workshop Recording]
