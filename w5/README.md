@@ -203,38 +203,68 @@ async def play(self, ctx, *, search: wavelink.YouTubeTrack):
     )
     embed.set_image(url=voice.source.thumbnail)
     await ctx.send(embed=embed)
+```
 
-
-# To stop the music
+3.1 We now need to make a function to stop the music
+We can simply do in few steps.
+```python 
 @commands.command()
 async def stop(self, ctx):
-    if ctx.guild.id in self.voice_clients:
-        await self.voice_clients[ctx.guild.id].stop()
-        await ctx.send('Stopped')
-    else:
+# Check if someone is in the voice channel and if some one is than stop the music and print a 'Stopped' text.
+# If no one is in the voice channel than print 'Not in a voice channel' 
+```
+Let's implement these steps one by one:
+   1. We need to check if the author of the message is in the voice channel. And if   they are in the voice channel than print 'Stopped'. 
+   ```python
+      if ctx.guild.id in self.voice_clients:
+         await self.voice_clients[ctx.guild.id].stop()
+         await ctx.send('Stopped')
+   ```
+   2. If no one is in the voice channel than just simply print 'Not in a voice     channel'
+   ```python
+       else:
         await ctx.send('Not in a voice channel')
-
-
-# To pause the music
+   ```
+3.2 We now need to make a function to pause the music
+We can simply do in few steps.
+```python 
 @commands.command()
 async def pause(self, ctx):
-    if ctx.guild.id in self.voice_clients:
-        await self.voice_clients[ctx.guild.id].pause()
-        await ctx.send('Paused')
-    else:
+# Check if someone is in the voice channel and if some one is than pause the music and print a 'Paused' text.
+# If no one is in the voice channel than print 'Not in a voice channel' 
+```
+Let's implement these steps one by one:
+   1. We need to check if the author of the message is in the voice channel. And if   they are in the voice channel than print 'Paused'. 
+   ```python
+      if ctx.guild.id in self.voice_clients:
+         await self.voice_clients[ctx.guild.id].pause()
+         await ctx.send('Paused')
+   ```
+   2. If no one is in the voice channel than just simply print 'Not in a voice     channel'
+   ```python
+       else:
         await ctx.send('Not in a voice channel')
-
-
-# To resume the music
+   ```
+3.3 We now need to make a function to resume the music
+We can simply do in few steps.
+```python 
 @commands.command()
 async def resume(self, ctx):
-    if ctx.guild.id in self.voice_clients:
-        await self.voice_clients[ctx.guild.id].resume()
-        await ctx.send('Resumed')
-    else:
-        await ctx.send('Not in a voice channel')
-
+# Check if someone is in the voice channel and if some one is than resume the music and print a 'Resume' text.
+# If no one is in the voice channel than print 'Not in a voice channel' 
 ```
+Let's implement these steps one by one:
+   1. We need to check if the author of the message is in the voice channel. And if   they are in the voice channel than print 'Resumed'. 
+   ```python
+      if ctx.guild.id in self.voice_clients:
+         await self.voice_clients[ctx.guild.id].resume()
+         await ctx.send('Resumed')
+   ```
+   2. If no one is in the voice channel than just simply print 'Not in a voice     channel'
+   ```python
+       else:
+        await ctx.send('Not in a voice channel')
+   ```
 
 Now when ever you will add '!paused' in discord it will pause the music and when you will add '!resumed' it will resume
 the song again.
