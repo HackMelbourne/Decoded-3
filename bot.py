@@ -14,8 +14,8 @@ GUILDS = [discord.Object(id=guild) for guild in GUILDS]
 
 class Bot(commands.Bot):
     def __init__(self):
-        super().__init__(command_prefix="!",
-                         intents=discord.Intents.all())
+        super().__init__(command_prefix="",
+                         intents=discord.Intents.default())
         self.GUILDS = GUILDS
         self.TOKEN = TOKEN
 

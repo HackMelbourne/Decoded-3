@@ -165,6 +165,13 @@ You can access the current state of the board by using `self.board`.
 <details>
 <summary>Hint #1</summary>
 Take the sum for a given row/column if its equal to size of the board then we know there is a winner
+
+```
+[[1,0,0],
+[0,1,0],
+[0,0,1]]
+```
+
 </details>
 
 <details> 
