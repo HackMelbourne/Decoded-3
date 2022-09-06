@@ -45,10 +45,6 @@ class TicTacToeButton(discord.ui.Button):
         elif winner == "tie":
             content = "No one won the game, it's a tie! Try again?"
 
-        # for child in self.view.children:
-        #     child.disabled = True
-        #     self.view.stop()
-
         await interaction.response.edit_message(content=content, view=self.view)
 
 
