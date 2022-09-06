@@ -161,7 +161,7 @@
             self.bot = bot
     ```
 ### ✅ Task: Get inputs from users before sending back the poll
- * We need to write a function `init_poll` allowing us to create a poll command. A way for us to set the command is using decorator @commands.command(aliases=["p"]) above declaration of the `init_poll` function. This means when a user type `!p` or `!init_poll` , we will have a poll command. 
+ * We need to write a function `init_poll` allowing us to create a poll command. A way for us to set the command is using decorator @commands.command(aliases=["p"]) above declaration of the `init_poll` function. This means when a user type `!p` or `!init_poll` , we will have a poll command. https://discordpy.readthedocs.io/en/stable/ext/commands/api.html#discord.ext.commands.Command
  * However, that's not enough as a user need to give a poll question, time for the poll and options for others to vote => give 3 more attributes for `init_poll` include question, time, *options. 
     ```
     class Poll(commands.Cog):
