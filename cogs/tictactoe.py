@@ -8,14 +8,16 @@ SIZE = 3
 
 class TicTacToeButton(discord.ui.Button):
     def __init__(self, row, col):
-        super().__init__(style=discord.ButtonStyle.secondary, label=" ", row=row)
+        super().__init__(style=discord.ButtonStyle.secondary, label=" ",
+                         row=row)
         self.row = row
         self.col = col
 
     async def callback(self, interaction):
         if self.view.current_player == self.view.player_1:
             if interaction.user != self.view.player_1:
-                await interaction.response.send_message("Its not your Turn!", ephemeral=True)
+                await interaction.response.send_message("Its not your Turn!",
+                                                        ephemeral=True)
                 return
 
             self.style = discord.ButtonStyle.danger
@@ -27,7 +29,8 @@ class TicTacToeButton(discord.ui.Button):
 
         else:
             if interaction.user != self.view.player_2:
-                await interaction.response.send_message("Its not your Turn!", ephemeral=True)
+                await interaction.response.send_message("Its not your Turn!",
+                                                        ephemeral=True)
                 return
 
             self.style = discord.ButtonStyle.success
@@ -92,30 +95,44 @@ class TicTacToeView(discord.ui.View):
 
 
 class TicTacToe(commands.Cog):
+    # constructor to store bot object
     def __init__(self, bot):
         self.bot = bot
 
+    # specify slash command name and description
     @app_commands.command(
         name="tictactoe",
         description="Play a game of TicTacToe"
     )
+    # specify slash command parameter description
     @app_commands.describe(
         opponent="User you want to play with"
     )
+    # function is run every time a slash command is issued
+    # specify that the slash command parameter will be a discord member
     async def tictactoe(self, interaction, opponent: discord.Member):
+        # player_1 is the user that issued the slash command
         player_1 = interaction.user
+        # player_2 is the opponent specified in the slash command
         player_2 = opponent
 
+        # make sure user does not challenger itself or the bot
         if player_1 == player_2 or player_2.bot:
-            await interaction.response.send_message("you cannot challenge that user")
-        else:
             await interaction.response.send_message(
-                f":game_die: `{player_1.display_name}` **VS** `{player_2.display_name}`\n\n{player_1.mention}, select your move:",
+                "you cannot challenge that user")
+        else:
+            # acknowledge command by responding with a message and sending a
+            # tictactoe board view
+            await interaction.response.send_message(
+                f":game_die: `{player_1.display_name}` **VS** `{player_2.display_name}`\n\n"
+                f"{player_1.mention}, select your move:",
                 view=TicTacToeView(player_1, player_2))
 
 
 async def setup(bot):
+    # add COG extension to calling bot
     await bot.add_cog(
         TicTacToe(bot),
+        # calling bot's guild list
         guilds=bot.guild_list
     )

@@ -39,5 +39,7 @@ class Bot(commands.Bot):
         print("ready...")
 
 
+# initialize bot with TOKEN and GUILDS from .env file
 bot = Bot(TOKEN, GUILDS)
+# run bot with its token
 bot.run(bot.token)
