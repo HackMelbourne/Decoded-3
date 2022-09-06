@@ -161,7 +161,7 @@
             self.bot = bot
     ```
 ### ✅ Task: Get inputs from users before sending back the poll
- * We need to write a function `init_poll` allowing us to create a poll command. A way for us to set the command is using decorator @commands.command(aliases=["p"]) above declaration of the `init_poll` function. This means when a user type `!p` or `!init_poll` , we will have a poll command. 
+ * We need to write a function `init_poll` allowing us to create a poll command. A way for us to set the command is using decorator @commands.command(aliases=["p"]) above declaration of the `init_poll` function. This means when a user type `!p` or `!init_poll` , we will have a poll command. https://discordpy.readthedocs.io/en/stable/ext/commands/api.html#discord.ext.commands.Command
  * However, that's not enough as a user need to give a poll question, time for the poll and options for others to vote => give 3 more attributes for `init_poll` include question, time, *options. 
     ```
     class Poll(commands.Cog):
@@ -170,7 +170,7 @@
          @commands.command(aliases=["p"])
          async def init_poll(self, ctx, question, time, *options): 
     ```
- * You can see we also need to have `self` and `ctx`. We need `self` because it is a function declared inside the class. We need `ctx` because when user type their `!p` command, having the `ctx` attribute will allow us to have access to the `Context` object of the command. 
+ * You can see we also need to have `self` and `ctx`. We need `self` because it is a function declared inside the class. We need `ctx` because when user type their `!p` command, having the `ctx` attribute will allow us to have access to the `Context` object of the command.https://discordpy.readthedocs.io/en/stable/ext/commands/api.html#context  
  * <img width="977" alt="Screen Shot 2022-08-17 at 8 14 25 pm" src="https://user-images.githubusercontent.com/80389972/185095123-422fab2b-f2b0-4aa8-be60-17b31d73e731.png">
  * Next, we need apply a condition for our poll. You can customise how many options permitted for a poll. In this tutorial, there are maximum 3 options allowed. 
     ```
