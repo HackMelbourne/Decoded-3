@@ -81,7 +81,7 @@
   
 ### ✅ Task: Install `matplotlib`
 
-* `matplotlib ` is a Python library used to create chart visualization[here](https://matplotlib.org/)
+* `matplotlib ` is a Python library used to create chart visualization [here](https://matplotlib.org/)
 * to install it, type this into your terminal:
   ```
   pip install -U matplotlib
