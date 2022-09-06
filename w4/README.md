@@ -200,9 +200,9 @@ You can access the current state of the board by using `self.board`.
 Take the sum for a given row/column if its equal to size of the board then we know there is a winner
 
 ```
-[[1,0,0],
-[0,1,0],
-[0,0,1]]
+[[1,1,1],
+[0,0,0],
+[0,0,0]]
 ```
 
 </details>
@@ -210,6 +210,12 @@ Take the sum for a given row/column if its equal to size of the board then we kn
 <details> 
 <summary>Hint #2</summary>
 We also have to check for diagonal winners using list indexing
+
+```
+[[0,0,1],
+[0,1,0],
+[1,0,0]]
+```
 </details>
 
 ## 6. Create Slash Commands
