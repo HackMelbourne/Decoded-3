@@ -2,104 +2,163 @@
 
 ---
 
-<h2>Table of Contents</h2>
+## Table of Contents
 
+- [Table of Contents](#table-of-contents)
 - [Object Oriented Concepts](#object-oriented-concepts)
   - [Class and Objects](#class-and-objects)
   - [Inheritance](#inheritance)
-- [Install Dependencies](#install-dependencies)
-- [1. Create Bot Object](#1-create-bot-object)
+- [0. Installing Dependencies](#0-installing-dependencies)
+  - [discord.py](#discordpy)
+  - [numpy](#numpy)
+  - [Installation](#installation)
+- [1. Creating Bot Object](#1-creating-bot-object)
+  - [How to obtain guild id?](#how-to-obtain-guild-id)
+  - [Create `.env` file](#create-env-file)
+  - [Create `bot.py`](#create-botpy)
+  - [Load envrionment variables](#load-envrionment-variables)
+  - [Bot class](#bot-class)
+    - [What is `self`?](#what-is-self)
+    - [What is `super()`?](#what-is-super)
 - [2. Create TicTacToe Button](#2-create-tictactoe-button)
 - [3. Create TicTacToe Board](#3-create-tictactoe-board)
 - [4. TicTacToe Buttons handle click](#4-tictactoe-buttons-handle-click)
 - [5. Game Logic](#5-game-logic)
 - [6. Create Slash Commands](#6-create-slash-commands)
 
+---
+
 ## Object Oriented Concepts
 
-### Class and Objects
+### Class and Objects  
 
-<img src="images/class.png" width="500"/>
+<br />
+<img src="images/class.png" width="500" />
 <br /><br />
 
 A class is an abstract blueprint used to create more specific objects. On the other hand, an object is an instance
 derived from a class.
 
+[learn more](https://realpython.com/python3-object-oriented-programming/)
+
 ### Inheritance
 
+<br />
 <img src="images/inheritance.png" width="500"/>
 <br /><br />
 
 Inheritance is one of the most important aspects of OOP. It allows classes to inherit features of other classes. Put
-another way, parent classes extend attributes and behaviors to child classes. Inheritance supports reusability.
+another way, parent classes extend attributes and behaviors to child classes. Inheritance supports code reusability.  
+
+[learn more](https://realpython.com/python3-object-oriented-programming/)
 
 ---
 
-For this workshop think of guilds as discord servers.
+## 0. Installing Dependencies
 
-## Install Dependencies
+### discord.py
+
+For this workshop we will be mainly working with the latest discord.py library which is a wrapper for discord's API. Basically a library which will allow us to control our bot with simple function calls.
+
+[documentation](https://discordpy.readthedocs.io/en/stable/index.html)
+
+### numpy
+
+We will also be using the numpy library which allows us to easily work with multidimensional arrays. A 2D-array will be the underlying data structure we use to represent a tictactoe board.
+
+[documentation](https://numpy.org/doc/stable/)
+
+### Installation
+
+We have simplified the process of installing the libraries needed for this workshop. Simply run the command bellow in your terminal shell.
 
 `pip install -r requirements.txt`
 
-## 1. Create Bot Object
+---
 
-To create our guild attribute and bot token, we first need to create an environment file (link) and within it, we need
-to include .
+## 1. Creating Bot Object
 
-discord slash commands take 1-2 hours to sync globally (since they are doing it for every guild). Therefore, we can pass
-in specific guilds where the commands we create will sync instantly.
+For this workshop, think of guilds as discord severs. Discord slash commands take 2-3 hours to sync globally across all guilds. To overcome this limitation, we need to specify specific guild ids where the commands we define will sync instantly.
 
-How to get guild id?
-enable developer mode on discord settings
-right click on guild icon
-select copy id
+### How to obtain guild id?
 
-paste this id into .env file.
+0. Enable developer mode on discord settings. This setting can be found under "Advanced".
+1. Right-click on the guild icon.
+2. Select "Copy ID".
 
+### Create `.env` file
+
+The `.env` file will contain our environment variables. The `.env` file should have the following format.
 
 ```
 TOKEN=bot token here
-GUILDS=[list of guild ids here]
+GUILDS=[guild ids here separated by commas]
 ```
 
-First, we need to define a `Bot` class. The `Bot` class we define inherits methods and attributes defined by
-the `commands.Bot` class provided by the library. We then add our bot token and guilds to the class. We also need to
-define a `setup_hook()` method to intitialize the COG extension which contains the tictactoe game engine.
+### Create `bot.py`
+
+Create a file named `bot.py`. This file will contain our bot object. We also need to import a couple of libraries.
+
+```python
+import json
+import os
+
+import discord
+from discord.ext import commands
+from dotenv import load_dotenv
+```
+
+### Load environment variables
+
+Load `TOKEN` and `GUILDS` environment variables.
+
+```python
+load_dotenv()
+# load environment variables
+TOKEN = os.getenv("TOKEN")
+GUILDS = os.getenv("GUILDS")
+# convert guilds from .env file to discord.py guild objects
+GUILDS = json.loads(GUILDS)
+GUILDS = [discord.Object(id=guild) for guild in GUILDS]
+```
+
+### Bot class
+
+The `Bot` class we define inherits methods and attributes defined by the `commands.Bot` class provided by the discord.py library. We are essentially extending the functionality of the class provided by the libraries by adding our own attributes and methods. We also need to define a `setup_hook()` method to load the COG extension which contains the tictactoe game engine. This method will also sync the slash commands to each guild specified in `.env` file.
 
 ```Python
 class Bot(commands.Bot):
-    def __init__(self):
+    # constructor to initialize object
+    def __init__(self, token, guild_list):
+        # call parent constructor
         super().__init__(command_prefix="",
-                        intents=discord.Intents.default())
-        self.GUILDS = GUILDS
-        self.TOKEN = TOKEN
+                         intents=discord.Intents.default())
+        # store bot token
+        self.token = token
+        # store guild list
+        self.guild_list = guild_list
 
+    # load tictactoe game engine COG extension
     async def setup_hook(self):
-        await self.load_extension(f"tictactoe")
-        for guild in self.GUILDS:
+        await self.load_extension(f"cogs.tictactoe")
+
+        # manually sync slash commands to each guild specified in .env file
+        for guild in self.guilds:
             await self.tree.sync(guild=guild)
 
+    # print message when the bot is finished initializing and is
+    # ready to be used
     async def on_ready(self):
         print("ready...")
 ```
 
-<details>
-<summary>What is self?</summary>
+#### What is `self`?
 
-`self` is simply a keyword used to represent an instance (object) of the given class
+`self` is simply a keyword used to represent an instance (object) of the given class.
 
-</details>
+#### What is `super()`?
 
-<details>
-<summary>What is super()?</summary>
-
-`super()` is a reference to superclass (parent) objects
-
-</details>
-
-
-insert tictactoe board picture
-
+`super()` is a reference to superclass (parent) objects.
 
 ## 2. Create TicTacToe Button
 
@@ -255,12 +314,3 @@ class Commands(commands.Cog):
               f":game_die: `{player_1.display_name}` **VS** `{player_2.display_name}`\n\n{player_1.mention}, select your move:",
               view=TicTacToe(player_1, player_2))
 ```
-
-sources
-
-- https://adrian-td96.medium.com/oop-for-dummies-3e6007c8e7f4#:~:text=Inheritance%20is%20one%20of%20the,Inheritance%20supports%20reusability
-  .
-- https://www.programiz.com/cpp-programming/inheritance
-- https://javatutorial.net/java-oop/
-
-[docs](https://gist.github.com/lykn/bac99b06d45ff8eed34c2220d86b6bf4)
