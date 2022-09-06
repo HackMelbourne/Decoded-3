@@ -7,6 +7,7 @@
 - [Object Oriented Concepts](#object-oriented-concepts)
   - [Class and Objects](#class-and-objects)
   - [Inheritance](#inheritance)
+- [Install Dependencies](#install-dependencies)
 - [1. Create Bot Object](#1-create-bot-object)
 - [2. Create TicTacToe Button](#2-create-tictactoe-button)
 - [3. Create TicTacToe Board](#3-create-tictactoe-board)
@@ -34,6 +35,12 @@ another way, parent classes extend attributes and behaviors to child classes. In
 
 ---
 
+For this workshop think of guilds as discord servers.
+
+## Install Dependencies
+
+`pip install -r requirements.txt`
+
 ## 1. Create Bot Object
 
 To create our guild attribute and bot token, we first need to create an environment file (link) and within it, we need
@@ -42,6 +49,19 @@ to include .
 discord slash commands take 1-2 hours to sync globally (since they are doing it for every guild). Therefore, we can pass
 in specific guilds where the commands we create will sync instantly.
 
+How to get guild id?
+enable developer mode on discord settings
+right click on guild icon
+select copy id
+
+paste this id into .env file.
+
+
+```
+TOKEN=bot token here
+GUILDS=[list of guild ids here]
+```
+
 First, we need to define a `Bot` class. The `Bot` class we define inherits methods and attributes defined by
 the `commands.Bot` class provided by the library. We then add our bot token and guilds to the class. We also need to
 define a `setup_hook()` method to intitialize the COG extension which contains the tictactoe game engine.
@@ -49,8 +69,8 @@ define a `setup_hook()` method to intitialize the COG extension which contains t
 ```Python
 class Bot(commands.Bot):
     def __init__(self):
-        super().__init__(command_prefix=" ",
-                        intents=discord.Intents.all())
+        super().__init__(command_prefix="",
+                        intents=discord.Intents.default())
         self.GUILDS = GUILDS
         self.TOKEN = TOKEN
 
@@ -78,12 +98,21 @@ class Bot(commands.Bot):
 </details>
 
 
+insert tictactoe board picture
+
+
 ## 2. Create TicTacToe Button
 
 We wil now create our `TicTacToeButton` class. The objects from this class will represent the clickable buttons of the
 TicTacToe board. The class will inherit the `discord.ui.Button` class from the discord.py library.
 
 We will first initialise the style and position of the button:
+
+create our button class
+```python
+class TicTacToeButton(discord.ui.Button):
+
+```
 
 ```python
 def __init__(self, row, col):
@@ -99,6 +128,10 @@ found [here](https://user-images.githubusercontent.com/88476243/141746269-aaea9f
 
 The `TicTacToe` class represents the TicTacToe board users play on. It inherits the `discord.ui.View` class from the
 discord.py library.
+
+insert tictoeboard class
+```python3
+```
 
 The TicTacToe board will need to store state of the board:
 
