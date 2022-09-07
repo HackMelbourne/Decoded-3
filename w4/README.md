@@ -25,6 +25,7 @@
     - [✅ Task: Send back an Embed as a poll](#-task-send-back-an-embed-as-a-poll)
     - [✅ Task: Use emoji module to convert strings to emojis and add fields and footer](#-task-use-emoji-module-to-convert-strings-to-emojis-and-add-fields-and-footer)
     - [✅ Task: Add emojis to complete the poll and set time for users to vote](#-task-add-emojis-to-complete-the-poll-and-set-time-for-users-to-vote)
+    - [✅ Task: Output a bar chart to show the result of the poll](#-task-output-a-bar-chart-to-show-the-result-of-the-poll)
 - [2. [💡 Extension] implement web scrapping with Selenium to customise your poll](#2--extension-implement-web-scrapping-to-customise-your-poll)
 - [Related Links:](#related-links)
 
@@ -281,7 +282,7 @@
     ```
 
 
-### ✅ Task: Outputting a bar chart to show the result of the poll
+### ✅ Task: Output a bar chart to show the result of the poll
   * Import libraries
     ```
     import matplotlib.pyplot as plt
@@ -317,4 +318,3 @@
     ax.set_title(question)
     plt.savefig('chart.png')
     ```
-  * 
