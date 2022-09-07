@@ -287,6 +287,25 @@
     import matplotlib.pyplot as plt
     import numpy as np
     ```
+  * Tally the reactions to the poll
+    ```
+    totalVotes = 0
+    votes = []
+
+    #calculate the number of votes for each option
+    for reaction in reactions:
+      # Start at -1 to exclude the vote of the bot
+      v = -1
+
+      async for _ in reaction.users():
+        v += 1
+
+      totalVotes += v
+      votes.append(v)
+
+    # Calculates percentage of votes for each option
+    percentages = [round((vote/totalVotes)* 100, 2) for vote in votes]
+    ```
   * Initialise the function to create bar chart
     ```
     fig, ax = plt.subplots()
