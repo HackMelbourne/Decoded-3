@@ -39,30 +39,30 @@ without too much overhead!
 
 ### 0.1 Downloading Java 13 ☕
 To run Lavalink, you need to have Java 13. Nothing newer or older (although I've tested OpenJDK 11 and that worked too).
-Download JDK 13 from this link: https://jdk.java.net/archive/
+Download JDK 13 from this [link](https://jdk.java.net/archive/).
 
 Here are some links for your specific platform:
 
-* Windows: https://download.java.net/java/GA/jdk13.0.2/d4173c853231432d94f001e99d882ca7/8/GPL/openjdk-13.0.2_windows-x64_bin.zip
-* Mac: https://download.java.net/java/GA/jdk13.0.2/d4173c853231432d94f001e99d882ca7/8/GPL/openjdk-13.0.2_osx-x64_bin.tar.gz
-* Linux: https://download.java.net/java/GA/jdk13.0.2/d4173c853231432d94f001e99d882ca7/8/GPL/openjdk-13.0.2_linux-x64_bin.tar.gz
+* [Windows](https://download.java.net/java/GA/jdk13.0.2/d4173c853231432d94f001e99d882ca7/8/GPL/openjdk-13.0.2_windows-x64_bin.zip)
+* [Mac](https://download.java.net/java/GA/jdk13.0.2/d4173c853231432d94f001e99d882ca7/8/GPL/openjdk-13.0.2_osx-x64_bin.tar.gz)
+* [Linux](https://download.java.net/java/GA/jdk13.0.2/d4173c853231432d94f001e99d882ca7/8/GPL/openjdk-13.0.2_linux-x64_bin.tar.gz)
 
 Extract it into the same folder as the repo you just cloned.
 
 ### 0.2 Downloading Lavalink ⏬
 
 Then, download Lavalink from the following
-URL: https://github.com/freyacodes/Lavalink/releases/download/3.4/Lavalink.jar
-(Source: https://github.com/freyacodes/Lavalink/releases/tag/3.4)
+URL: [Lavalink](https://github.com/freyacodes/Lavalink/releases/download/3.4/Lavalink.jar)
+([Source](https://github.com/freyacodes/Lavalink/releases/tag/3.4))
 
-You can also grab it from: https://github.com/HackMelbourne/Decoded-3/raw/music-bot/Lavalink.jar
+You can also grab it from: [Here](https://github.com/HackMelbourne/Decoded-3/raw/music-bot/Lavalink.jar)
 
 ### 0.3 Downloading application.yml ⚙
 
 Finally, you'll need to grab an `application.yml` file, which will configure all the needed settings for Lavalink to
 work.
 
-Grab a copy of ours from here: https://github.com/HackMelbourne/Decoded-3/blob/music-bot/application.yml
+Grab a copy of ours from here: [Forms](https://github.com/HackMelbourne/Decoded-3/blob/music-bot/application.yml)
 and place it in the same folder as your Lavalink jar file.
 
 ### 0.4 Running Lavalink 🌋
@@ -214,13 +214,13 @@ async def stop(self, ctx):
 # If no one is in the voice channel than print 'Not in a voice channel' 
 ```
 Let's implement these steps one by one:
-   1. We need to check if the author of the message is in the voice channel. And if   they are in the voice channel than print 'Stopped'. 
+   1. We need to check if the author of the message is in the voice channel. And if they are in the voice channel than print 'Stopped'. 
    ```python
       if ctx.guild.id in self.voice_clients:
          await self.voice_clients[ctx.guild.id].stop()
          await ctx.send('Stopped')
    ```
-   2. If no one is in the voice channel than just simply print 'Not in a voice     channel'
+   2. If no one is in the voice channel than just simply print 'Not in a voice channel'
    ```python
        else:
         await ctx.send('Not in a voice channel')
@@ -234,13 +234,13 @@ async def pause(self, ctx):
 # If no one is in the voice channel than print 'Not in a voice channel' 
 ```
 Let's implement these steps one by one:
-   1. We need to check if the author of the message is in the voice channel. And if   they are in the voice channel than print 'Paused'. 
+   1. We need to check if the author of the message is in the voice channel. And if they are in the voice channel than print 'Paused'. 
    ```python
       if ctx.guild.id in self.voice_clients:
          await self.voice_clients[ctx.guild.id].pause()
          await ctx.send('Paused')
    ```
-   2. If no one is in the voice channel than just simply print 'Not in a voice     channel'
+   2. If no one is in the voice channel than just simply print 'Not in a voice channel'
    ```python
        else:
         await ctx.send('Not in a voice channel')
@@ -254,13 +254,13 @@ async def resume(self, ctx):
 # If no one is in the voice channel than print 'Not in a voice channel' 
 ```
 Let's implement these steps one by one:
-   1. We need to check if the author of the message is in the voice channel. And if   they are in the voice channel than print 'Resumed'. 
+   1. We need to check if the author of the message is in the voice channel. And if they are in the voice channel than print 'Resumed'. 
    ```python
       if ctx.guild.id in self.voice_clients:
          await self.voice_clients[ctx.guild.id].resume()
          await ctx.send('Resumed')
    ```
-   2. If no one is in the voice channel than just simply print 'Not in a voice     channel'
+   2. If no one is in the voice channel than just simply print 'Not in a voice channel'
    ```python
        else:
         await ctx.send('Not in a voice channel')
