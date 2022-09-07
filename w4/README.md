@@ -4,27 +4,15 @@
 
 ## Table of Contents
 
-- [Table of Contents](#table-of-contents)
 - [Object Oriented Concepts](#object-oriented-concepts)
-    - [Class and Objects](#class-and-objects)
-    - [Inheritance](#inheritance)
 - [0. Installing Dependencies](#0-installing-dependencies)
-    - [discord.py](#discordpy)
-    - [numpy](#numpy)
-    - [Installation](#installation)
 - [1. Creating Bot Object](#1-creating-bot-object)
-    - [How to obtain guild id?](#how-to-obtain-guild-id)
-    - [Create `.env` file](#create-env-file)
-    - [Create `bot.py`](#create-botpy)
-    - [Load environment variables](#load-environment-variables)
-    - [Bot class](#bot-class)
-        - [What is `self`?](#what-is-self)
-        - [What is `super()`?](#what-is-super)
 - [2. Create TicTacToe Button](#2-create-tictactoe-button)
 - [3. Create TicTacToe Board](#3-create-tictactoe-board)
 - [4. TicTacToe Buttons handle click](#4-tictactoe-buttons-handle-click)
 - [5. Game Logic](#5-game-logic)
 - [6. Create Slash Commands](#6-create-slash-commands)
+- [7. Run the Bot](#7-run-the-bot)
 
 ---
 
@@ -348,7 +336,7 @@ async def setup(bot):
     )
 ```
 
-## 7. Run the bot
+## 7. Run the Bot
 
 Now back to the `bot.py` file we previously created, we can now instantiate a bot with the TOKEN and GUILDS we have
 specified in the .env file. After that we can simply run the bot.
