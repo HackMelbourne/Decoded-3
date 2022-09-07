@@ -6,13 +6,13 @@
 <summary>Table of Contents</summary>
 
 ---
-- [1. Installing Modules: `discord.py` and `python-dotenv`, `asyncio`, `matplotlib`, `numpy`, `os`, `emoji`](#1-installing-modules)
+- [1. Installing Modules: `discord.py` and `python-dotenv`, `asyncio`, `matplotlib`, `numpy`, `emoji`](#1-installing-modules)
     - [✅ Task: Install `discord.py 2.0 version`](#-task-install-discordpy)
     - [✅ Task: Install `python-dotenv`](#-task-install-python-dotenv)
     - [✅ Task: Install `asyncio`](#-task-install-asyncio)
     - [✅ Task: Install `matplotlib`](#-task-install-matplotlib)
     - [✅ Task: Install `numpy`](#-task-install-numpy)
-    - [✅ Task: Install `os`](#-task-install-os)
+
     - [✅ Task: Install `emoji`](#-task-install-emoji)
 - [2. Enable Privilege Gateway Intents](#2-enable-privilege-gateway-intents)
     - [✅ Task: Enable Privilege Gateway Intents](#-enable-privilege-gateway-intents)
