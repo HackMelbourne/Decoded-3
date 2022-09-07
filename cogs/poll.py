@@ -11,7 +11,7 @@ class Poll(commands.Cog):
   def __init__(self, bot):
     self.bot = bot
 
-  async def create_bar_chart(self,options, reactions, question):
+  async def create_bar_chart(self, options, reactions, question):
     totalVotes = 0
     votes = []
 
