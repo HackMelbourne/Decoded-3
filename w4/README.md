@@ -61,7 +61,7 @@ the underlying data structure we use to represent a tictactoe board.
 ### Installation
 
 We have simplified the process of installing the libraries needed for this workshop. Simply run the command bellow in
-your terminal shell.
+your terminal shell. [requirements.txt](https://github.com/HackMelbourne/Decoded-3/blob/tictactoe/requirements.txt)
 
 `pip install -r requirements.txt`
 
