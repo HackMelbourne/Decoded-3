@@ -175,12 +175,60 @@ async def leave(self, ctx):
 Let's break this down:
 
 1. Let's check if we're in the voice channel to begin with in this guild. If we are, let's stop our player and delete
-   our voice client.
-2. We can then disconnect and send a message saying that we left.
+   our voice client
+    * We also send a message to let the user know we left.
+2. In case the bot was restarted, and the dictionary is empty, we do a simple disconnect as well.
 
-## 3. Pausing and playing Music
+## 3. Connecting to Lavalink
 
-// TODO expand notebook from here on out
+* There are quite a few steps to get our bot going. These include:
+
+1. A logline to confirm that we've started up
+2. Start the Lavalink server
+3. Wait for the Lavalink server to be ready
+4. Connect to the server using wavelink
+
+```python
+
+# Start the bot
+@commands.Cog.listener()
+async def on_ready(self):
+    print('Logged in as')
+    print(self.client.user.name)
+    print(self.client.user.id)
+    print('------')
+    # Try start Lavafront server
+    subprocess.Popen(["java", "-jar", "Lavalink.jar"])
+    # wait for port to open
+    while True:
+        try:
+            r = requests.get('http://localhost:2333')
+            break
+        except requests.exceptions.ConnectionError:
+            print("Waiting for lavalink to go live...")
+            time.sleep(1)
+            continue
+
+    async def connect_wavefront():
+        await self.client.wait_until_ready()
+        await wavelink.NodePool.create_node(
+            bot=self.client,
+            host='localhost',
+            port=2333,
+            password='youshallnotpass'
+        )
+
+    self.client.loop.create_task(connect_wavefront())
+
+
+@commands.Cog.listener()
+async def on_wavelink_node_ready(self, node: wavelink.Node):
+    print(f'Connected to wavefront! ID: {node.identifier}')
+
+```
+
+## 4. Pausing and playing Music
+
 Let's get to the fun part. Playing (and pausing) music!
 
 ```python
@@ -269,50 +317,3 @@ Let's implement these steps one by one:
 Now when ever you will add '!paused' in discord it will pause the music and when you will add '!resumed' it will resume
 the song again.
 
-## 4. Starting the bot
-
-* There are quite a few steps to get our bot going. These include:
-
-1. A logline to confirm that we've started up
-2. Start the Lavalink server
-3. Wait for the Lavalink server to be ready
-4. Connect to the server using wavelink
-
-```python
-
-# Start the bot
-@commands.Cog.listener()
-async def on_ready(self):
-    print('Logged in as')
-    print(self.client.user.name)
-    print(self.client.user.id)
-    print('------')
-    # Try start Lavafront server
-    subprocess.Popen(["java", "-jar", "Lavalink.jar"])
-    # wait for port to open
-    while True:
-        try:
-            r = requests.get('http://localhost:2333')
-            break
-        except requests.exceptions.ConnectionError:
-            print("Waiting for lavalink to go live...")
-            time.sleep(1)
-            continue
-
-    async def connect_wavefront():
-        await self.client.wait_until_ready()
-        await wavelink.NodePool.create_node(
-            bot=self.client,
-            host='localhost',
-            port=2333,
-            password='youshallnotpass'
-        )
-
-    self.client.loop.create_task(connect_wavefront())
-
-
-@commands.Cog.listener()
-async def on_wavelink_node_ready(self, node: wavelink.Node):
-    print(f'Connected to wavefront! ID: {node.identifier}')
-
-```
