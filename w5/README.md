@@ -188,8 +188,9 @@ Let's break this down:
 3. Wait for the Lavalink server to be ready
 4. Connect to the server using wavelink
 
-```python
+Let's begin with the first step
 
+```python
 # Start the bot
 @commands.Cog.listener()
 async def on_ready(self):
@@ -197,6 +198,11 @@ async def on_ready(self):
     print(self.client.user.name)
     print(self.client.user.id)
     print('------')
+```
+For our bot to work, we need to start up the Lavalink server, so let's do that.
+Notice how we also wait in a loop until the server is ready, as we can't do anything without it.
+Make sure you use the correct Java command to start Lavalink (either using Java on your machine, or the one you downloaded).
+```python
     # Try start Lavafront server
     subprocess.Popen(["java", "-jar", "Lavalink.jar"])
     # wait for port to open
@@ -208,7 +214,9 @@ async def on_ready(self):
             print("Waiting for lavalink to go live...")
             time.sleep(1)
             continue
-
+```
+Once the server is live, we can make an attempt to connect to it
+```python
     async def connect_wavefront():
         await self.client.wait_until_ready()
         await wavelink.NodePool.create_node(
@@ -219,8 +227,9 @@ async def on_ready(self):
         )
 
     self.client.loop.create_task(connect_wavefront())
-
-
+```
+A final touch is notifying the user once we've connected and all is ready!
+```python
 @commands.Cog.listener()
 async def on_wavelink_node_ready(self, node: wavelink.Node):
     print(f'Connected to wavefront! ID: {node.identifier}')
@@ -245,13 +254,21 @@ async def play(self, ctx, *, search: wavelink.YouTubeTrack):
     embed = discord.Embed(
         title=voice.source.title,
         url=voice.source.uri,
-        author=ctx.author,
         description=f"Playing {voice.source.title} in {voice.channel}"
 
     )
     embed.set_image(url=voice.source.thumbnail)
+    if hasattr(ctx.author, 'avatar'):
+        embed.set_author(name=ctx.author.name, icon_url=ctx.author.avatar.url)
     await ctx.send(embed=embed)
 ```
+
+We do the following here:
+1. If we're not in the same voice channel, we join the user's voice channel
+2. If this fails, we return (relying on the join command to send the correct error message)
+3. Otherwise, we grab the user's channel, and tell Wavelink to play the youtube track the user requested
+4. We also prepare a nice embed to show the user what's playing.
+5. We need to make sure the user has an avatar before setting the author (otherwise we get an error)
 
 ## 5.1 Stopping the music
 We can simply do in few steps.
