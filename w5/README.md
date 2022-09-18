@@ -227,9 +227,9 @@ async def on_wavelink_node_ready(self, node: wavelink.Node):
 
 ```
 
-## 4. Pausing and playing Music
+## 4. Playing music from a search query
 
-Let's get to the fun part. Playing (and pausing) music!
+Let's get to the fun part. Playing music from user input!
 
 ```python
 # To play the music  
@@ -253,7 +253,7 @@ async def play(self, ctx, *, search: wavelink.YouTubeTrack):
     await ctx.send(embed=embed)
 ```
 
-3.1 We now need to make a function to stop the music
+## 5.1 Stopping the music
 We can simply do in few steps.
 ```python 
 @commands.command()
@@ -273,7 +273,8 @@ Let's implement these steps one by one:
        else:
         await ctx.send('Not in a voice channel')
    ```
-3.2 We now need to make a function to pause the music
+
+## 5.2 Pausing the music
 We can simply do in few steps.
 ```python 
 @commands.command()
@@ -293,7 +294,8 @@ Let's implement these steps one by one:
        else:
         await ctx.send('Not in a voice channel')
    ```
-3.3 We now need to make a function to resume the music
+
+## 5.3 Resuming the music
 We can simply do in few steps.
 ```python 
 @commands.command()
