@@ -217,7 +217,7 @@ Make sure you use the correct Java command to start Lavalink (either using Java 
 ```
 Once the server is live, we can make an attempt to connect to it
 ```python
-    async def connect_wavefront():
+    async def connect_wavelink():
         await self.client.wait_until_ready()
         await wavelink.NodePool.create_node(
             bot=self.client,
@@ -226,13 +226,13 @@ Once the server is live, we can make an attempt to connect to it
             password='youshallnotpass'
         )
 
-    self.client.loop.create_task(connect_wavefront())
+    self.client.loop.create_task(connect_wavelink())
 ```
 A final touch is notifying the user once we've connected and all is ready!
 ```python
 @commands.Cog.listener()
 async def on_wavelink_node_ready(self, node: wavelink.Node):
-    print(f'Connected to wavefront! ID: {node.identifier}')
+    print(f'Connected to wavelink! ID: {node.identifier}')
 
 ```
 
