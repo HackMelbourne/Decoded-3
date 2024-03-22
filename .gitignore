@@ -4,3 +4,9 @@
 
 *.pyc
 /logs/
+
+
+__pycache__/
+
+jdk-13.0.2/
+.DS_Store

@@ -1,6 +1,7 @@
 <h1 align="center">DecodED 3</h1>
 
-> 👋 Hello and welcome to DecodED 3! Over the next 5 weeks, we will be creating a discord bot with [Discord.py](https://discordpy.readthedocs.io/en/stable/index.html)
+> 👋 Hello and welcome to DecodED 3! Over the next 5 weeks, we will be creating a discord bot
+> with [Discord.py](https://discordpy.readthedocs.io/en/stable/index.html)
 
 ---
 
@@ -25,9 +26,8 @@
 ## About DecodED
 
 * DecodED is a series of workshops run every year by HackMelbourne to help students/teach students with introductory
-  programming background to create some cool things with code. In past years, we created full-stack websites and a Space Invaders game. This year, we will be creating a Discord bot!
+  programming background tocreate some cool things with code. In past years, we created full-stack websites and a Space Invaders game. This year, we will be creating a Discord bot!
 * We are also trying a new teaching style this year so let us know if you like it!
-
 ### Dates
 
 Get the latest details on [Notion](https://uneven-boa-710.notion.site/DecodED-3-3336c8bbd49a4df6a00b8b34af1980c6) (the below table may be outdated)
@@ -41,14 +41,17 @@ TicTacToe bot | Alan Gilbert 103 and Zoom | Warren, Daniel | 2pm, Wednesday 14th
 Music bot | Alan Gilbert 121 (Theatre) and Zoom | Aryan, Ryan | Wednesday 21st September
 
 ### Zoom Link: https://unimelb.zoom.us/j/88528442813?pwd=WlYrQ3pHcm5xMXpGQkZZSllZZTNvQT09
+
 Password: 323737
 
 ## About this repository
+
 * This repository contains:
   * Participant Workbook
     * each workbook is made up of multiple Parts which are then made up of multiple **✅ Tasks** that the participant
       should complete, with **🧩 Hints** that help guide them in completing the Task, and **💡 Extensions** that are
       optional tasks that can be done if the participant has completed the Task ahead of schedule
+    
   * Workshop Recordings
   * Code for the Discord Bot being created
 
@@ -66,6 +69,7 @@ Password: 323737
 
 > Who doesn’t love a good meme? Join us and create the functionality to meme on your friends so hard that they wished
 > they had their own meme bot.
+
 > 
 > Hosted by Aly and Minh
 
